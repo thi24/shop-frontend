@@ -1,9 +1,7 @@
 <template>
-    <footer class="bg-white rounded-lg shadow-sm dark:bg-gray-800 bottom-0">
+    <footer class="bg-white rounded-lg bg-amber-50 object-bottom">
         
-            
-    
-          <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+          <ul class="flex flex-wrap items-center mt-3 text-sm font-medium font-black sm:mt-0">
               <li>
                   <a href="#" class="hover:underline me-4 md:me-6">About</a>
               </li>
