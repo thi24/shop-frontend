@@ -1,5 +1,5 @@
 <template>
-    <div class="p-6 flex-items-stretch">
+    <div class="p-6 flex-items-stretch border-solid border-2 border-sky-500">
         <div class="event__body">
             <label for="number-input" class="block mb-2 text-sm font-medium text-black">{{ ticketType.name }}</label>
             <label for="number-input" class="block mb-2 text-sm font-medium text-black">{{ ticketType.price }}</label>
