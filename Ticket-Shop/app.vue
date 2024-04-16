@@ -3,7 +3,7 @@
 <template>
   <div>
     <HeaderComponent/>
-    <NuxtPage/>
-    <FooterComponent/>
+    <NuxtPage  class="h-screen"/>
+    <FooterComponent class="object-bottom"/>
   </div>
 </template>

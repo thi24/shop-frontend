@@ -4,6 +4,7 @@
         <div class="mb-4">
             <TicketTypeComponent v-for="ticketType in tickettypes" :ticketType="ticketType" :key="ticketType.id"></TicketTypeComponent>
         </div>
+        <button>Hier bezahlen</button>
     </div>
 
 </template>

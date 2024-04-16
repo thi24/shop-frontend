@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-white rounded-lg shadow-sm dark:bg-gray-800 bottom-0">
+    <footer class="bg-white rounded-lg bg-amber-50 object-bottom">
         
             
     
