@@ -1,9 +1,7 @@
-
-
 <template>
   <div>
-    <HeaderComponent/>
-    <NuxtPage  class="h-screen"/>
-    <FooterComponent class="object-bottom"/>
+    <HeaderComponent />
+    <NuxtPage class="h-screen" />
+    <FooterComponent class="object-bottom" />
   </div>
 </template>

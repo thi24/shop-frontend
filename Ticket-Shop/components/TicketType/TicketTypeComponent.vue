@@ -1,21 +1,26 @@
 <template>
-    <div class="p-6 flex-items-stretch border-solid border-2 border-sky-500">
-        <div class="event__body">
-            <label for="number-input" class="block mb-2 text-sm font-medium text-black">{{ ticketType.name }}</label>
-            <label for="number-input" class="block mb-2 text-sm font-medium text-black">{{ ticketType.price }}</label>
-            <input  type="number" min="1" max="999" value="1" class="w-16 py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-        </div>
-    </div>
-    
+  <div class="p-8 border-solid border rounded border-black flex">
+    <label :for="'number-input-' + ticketType.id" class="flex-1 p-1">{{
+      ticketType.name
+    }}</label>
+    <label :for="'number-input-' + ticketType.id" class="flex-1 p-1"
+      >{{ ticketType.price }}€</label
+    >
+    <input
+      :id="'number-input-' + ticketType.id"
+      type="number"
+      min="0"
+      max="999"
+      value="0"
+      class="w-10 p-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-
-import type { TicketType } from '~/classes/TicketType';
+import type { TicketType } from "~/classes/TicketType";
 
 defineProps<{
-    ticketType: TicketType;
-    
-}>()
+  ticketType: TicketType;
+}>();
 </script>
-
