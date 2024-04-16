@@ -1,7 +1,7 @@
 <template>
-    <div class="page">
+    <div class="bg-orange-100">
         <div class="narrow">
-            <h1 class="page__heading">Veranstaltungen</h1>
+            <h1 class="font-black">Veranstaltungen</h1>
             <div class="flex items-stretch">
                 <EventComponent v-for="event in events" :event="event"></EventComponent>
             </div>
