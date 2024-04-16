@@ -1,14 +1,14 @@
     <template>
-        <header class="shadow-sm bg-white">
-            <div class="pl-3 font-black text-3xl">
-                <h1>Benevolo-Shop</h1>
+        <header class="bg-white shadow-sm">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-lm font-semibold leading-6 text-gray-900">Benevolo-Shop</h1>
             </div>
-            <div class="p-4 pl-6 flex justify-between">
+            <div class="p-4 pl-6 flex justify-center">
                 <div class="nav-bar">
                     <div class="flex gap-4">
-                        <NuxtLink class="header-link" to="">Overview</NuxtLink>
-                        <NuxtLink class="header-link" to="">About Us</NuxtLink>
-                        <NuxtLink class="header-link" to="">Support</NuxtLink>
+                        <NuxtLink class="text-sm font-semibold leading-6 text-gray-900" to="">Overview</NuxtLink>
+                        <NuxtLink class="text-sm font-semibold leading-6 text-gray-900" to="">About Us</NuxtLink>
+                        <NuxtLink class="text-sm font-semibold leading-6 text-gray-900" to="">Support</NuxtLink>
                     </div>
     
                 </div>
