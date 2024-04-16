@@ -5,7 +5,12 @@
       :ticketType="ticketType"
       :key="ticketType.id"
     ></TicketTypeComponent>
-    <button @click="logUserInputs">Eingaben ausgeben</button>
+    <button
+      class="mt-4 px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 transition-colors"
+      @click="logUserInputs"
+    >
+      Hier bezahlen
+    </button>
   </div>
 </template>
 
