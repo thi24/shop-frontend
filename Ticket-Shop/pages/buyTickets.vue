@@ -11,14 +11,28 @@
     >
       Hier bezahlen
     </button>
+    <button @click="togglePopup">Open Popup</button>
+    <Popup v-if="popupTriggers.buttonTrigger" :togglePopup="togglePopup" :selectedTickets="selectedTickets">
+      <ul>
+        <li v-for="ticket in selectedTickets" :key="ticket.id">
+          {{ ticket.name }}: {{ ticket.quantity }}
+        </li>
+      </ul>
+    </Popup>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref, type Ref } from "vue";
+import Popup from "../components/PaymentPopup/Popup.vue";
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 
 const tickettypes: Ref<TicketType[]> = ref(getTicketTypes());
+const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
+  buttonTrigger: false,
+});
+const selectedTickets = ref<{ id: any; name: any; quantity: number }[]>([]);
 
 function getTicketTypes(): TicketType[] {
   const results: TicketType[] = [];
@@ -45,13 +59,31 @@ function getTicketTypes(): TicketType[] {
 }
 
 function logUserInputs() {
+  selectedTickets.value = [];
+
+  // Iterieren durch die Tickettypen und speichern der ausgewählten Tickets
   tickettypes.value.forEach((ticketType) => {
+   
     const inputElement = document.querySelector(
       `#number-input-${ticketType.id}`
     ) as HTMLInputElement;
-    if (inputElement) {
-      console.log(`Ticket '${ticketType.name}': ${inputElement.value}`);
+    if (inputElement && parseInt(inputElement.value) != 0) {
+      
+      selectedTickets.value.push({
+        id: ticketType.id,
+        name: ticketType.name,
+        quantity: parseInt(inputElement.value),
+      });
     }
   });
+
+  // Popup anzeigen, wenn Tickets ausgewählt wurden
+  if (selectedTickets.value.length != 0) {
+    togglePopup();
+  }
+}
+
+function togglePopup() {
+  popupTriggers.value.buttonTrigger = !popupTriggers.value.buttonTrigger;
 }
 </script>
