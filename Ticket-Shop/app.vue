@@ -1,13 +1,19 @@
+
 <template>
-  <div>
-<<<<<<< HEAD
-    <HeaderComponent/>
-    <NuxtPage />
-    <FooterComponent/>
-=======
-    <HeaderComponent />
-    <NuxtPage class="h-screen" />
-    <FooterComponent class="object-bottom" />
->>>>>>> main
+  <div class="flex flex-col min-h-screen">
+
+    <header class="">
+      <HeaderComponent />
+    </header>
+    
+
+    <main class="flex-grow ">
+      <NuxtPage />
+    </main>
+    
+  
+    <footer class="">
+      <FooterComponent />
+    </footer>
   </div>
 </template>
