@@ -1,5 +1,5 @@
 <template>
-  <div class=" bg-stone-100 w-full max-w-md p-4">
+  <div class=" w-full max-w-md p-4">
     <div class="mx-auto">
     <TicketTypeComponent
       v-for="ticketType in ticketTypes"

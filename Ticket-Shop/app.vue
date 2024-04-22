@@ -7,7 +7,7 @@
     </header>
     
 
-    <main class="flex-grow ">
+    <main class="flex-grow bg-stone-100">
       <NuxtPage />
     </main>
     
