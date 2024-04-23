@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 m-3 border-solid border rounded border-gray-300 flex">
+  <div class="  p-3 m-3 border-solid border rounded border-gray-300 flex">
     <label :for="'number-input-' + ticketType.id" class="flex-1">{{
       ticketType.name
     }}</label>
@@ -12,15 +12,19 @@
       min="0"
       max="999"
       value="0"
-      class="p-1 w-15 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+      class="p-1 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { TicketType } from "~/classes/TicketType";
+
 
 defineProps<{
   ticketType: TicketType;
 }>();
+
+import { TicketType } from "~/classes/TicketType";
+
+
 </script>
