@@ -12,7 +12,7 @@
       min="0"
       max="999"
       value="0"
-      class="p-1 w-15 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+      class="p-1 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
     />
   </div>
 </template>
@@ -28,4 +28,3 @@ import { TicketType } from "~/classes/TicketType";
 
 
 </script>
-

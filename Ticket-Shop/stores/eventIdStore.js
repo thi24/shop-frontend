@@ -8,5 +8,5 @@ export const useEventStore = defineStore('event', {
       setEventId(id) {
         this.eventId = id;
       }
-    },
+    },  
   });

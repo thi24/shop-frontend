@@ -1,54 +1,75 @@
 <template>
-  <div class=" w-full max-w-md p-4">
-    <div class="mx-auto">
-    <TicketTypeComponent
-      v-for="ticketType in ticketTypes"
-      :ticketType="ticketType"
-      :key="ticketType.id"
-    ></TicketTypeComponent>
-    <button
-      class="mt-4 px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 transition-colors"
-      @click="logUserInputs"
-    >
-      jetzt bezahlen
-    </button>
-  </div>
-</div>
+  <div class="max-w-9xl mx-auto px-1 py-1 lg:px-3 lg:py-3">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg">
+    
+      <div class=" p-1 rounded-lg">
+        <EventsEventBuyComponent />
+      </div>
+      
 
+      <div class=" p-5 lg:pt-10">
+        <div class="bg-white p-1 lg:rounded-lg rounded-lg lg:shadow-lg shadow-lg px-1 
+
+        ">
+        <div v-for="ticketType in tickettypes" :key="ticketType.id" class=" last:mb-0">
+          <TicketTypeComponent :ticketType="ticketType" />
+        </div>
+      
+        <div class="flex justify-center mt-4 pb-4">
+          <button
+            class="w-1/2 item-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded shadow"
+            @click="logUserInputs"
+          >
+            Jetzt bezahlen
+          </button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-
-
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
-import { useEventStore } from '~/stores/eventIdStore';
-import TicketTypeComponent from '~/components/TicketType/TicketTypeComponent.vue';
-import type { TicketType } from '~/classes/TicketType';
 
-const eventStore = useEventStore();
+import { ref, type Ref } from "vue";
+import EventBuyComponent  from "~/components/Events/EventBuyComponent";
+import { TicketType } from "~/classes/TicketType";
+import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 
-const ticketTypes = ref<TicketType[]>([]);
+const tickettypes: Ref<TicketType[]> = ref(getTicketTypes());
 
-onMounted(async () => {
-  const token = import.meta.env.VITE_AUTH_TOKEN;
-  const eventId = eventStore.eventId;
-
-  if (eventId) {
-    try {
-      const options = {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      };
-      ticketTypes.value = await fetch(`https://dev.benevolo.de/api/event-service/ticket-types?eventId=${eventId}`, options).then(res => res.json());
-    } catch (error) {
-      console.error('Failed to load ticket types:', error);
-    }
-  }
+const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
+  buttonTrigger: false,
 });
 
+
+
+function getTicketTypes(): TicketType[] {
+  const results: TicketType[] = [];
+
+  const tickettype1 = new TicketType();
+  tickettype1.id = "01575dfb-eb8c-43bd-9182-376d2a7c5123";
+  tickettype1.name = "Freitag Ticket";
+  tickettype1.price = 19.99;
+  results.push(tickettype1);
+
+  const tickettype2 = new TicketType();
+  tickettype2.id = "01575dfb-eb8c-43bd-9182-376d2a7c5124";
+  tickettype2.name = "Samstag Ticket";
+  tickettype2.price = 24.99;
+  results.push(tickettype2);
+
+  const tickettype3 = new TicketType();
+  tickettype3.id = "01575dfb-eb8c-43bd-9182-376d2a7c5125";
+  tickettype3.name = "Wochenend Ticket";
+  tickettype3.price = 39.99;
+  results.push(tickettype3);
+
+  return results;
+}
+
 function logUserInputs() {
-  ticketTypes.value.forEach((ticketType) => {
+  tickettypes.value.forEach((ticketType) => {
     const inputElement = document.querySelector(
       `#number-input-${ticketType.id}`
     ) as HTMLInputElement;
