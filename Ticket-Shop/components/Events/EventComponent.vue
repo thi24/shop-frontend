@@ -1,20 +1,31 @@
 <template>
-    <div class="p-6 flex-items-stretch">
-        <img class="object-cover h-48 w-96" :src="event.thumbnail" alt="">
-        <div class="event__body">
-            <h3 class="event__heading">{{ event.eventName }}</h3>
-            <p class="event__description">{{ event.description }}</p>
-            <button class="event__view" @click="() => useRouter().push('/event-dashboard/' + event.id)" icon="navigate_next" :reverse="true">Ansehen</button>
-        </div>
+  <div
+    class=" bg-slate-100 flex flex-col items-center rounded-lg overflow-hidden shadow-xl  m-4 cursor-pointer"
+    @click="navigateToBuyTickets(event.id)"
+  >
+    <img class="w-full h-48 " :src="event.thumbnail" alt="">
+    <div class="p-4 rounded-md hover:from-gray-300 hover:to-gray-200 active:shadow-none">
+      <h3 class="text-lg font-sans ">{{ event.eventName }}</h3>
+
     </div>
+
+</div>
 </template>
 
 <script setup lang="ts">
-
+import { useRouter } from 'vue-router';
 import type { Event } from '~/classes/Event';
+import { useEventStore } from '~/stores/eventIdStore';
 
 defineProps<{
-    event: Event
+  event: Event
 }>()
-</script>
 
+const router = useRouter();
+const eventStore = useEventStore();
+
+function navigateToBuyTickets(eventId: string) {
+  eventStore.setEventId(eventId);
+  router.push('/buyTickets');
+}
+</script>

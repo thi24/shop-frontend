@@ -8,6 +8,8 @@ export default {
     },
     config: {},
     viewer: true,
+
+    
   }
 }
 
