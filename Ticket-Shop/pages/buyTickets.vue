@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg">
     
       <div class=" p-1 rounded-lg">
-        <EventsEventBuyComponent />
+        <EventBuyComponent />
       </div>
       
 
@@ -41,9 +41,7 @@ import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 
 const tickettypes: Ref<TicketType[]> = ref(getTicketTypes());
-const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
-  buttonTrigger: false,
-});
+
 const selectedTickets = ref<{ id: any; name: any; quantity: number }[]>([]);
 
 const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
@@ -79,7 +77,7 @@ function getTicketTypes(): TicketType[] {
 function logUserInputs() {
   selectedTickets.value = [];
 
-  // Iterieren durch die Tickettypen und speichern der ausgewählten Tickets
+
   tickettypes.value.forEach((ticketType) => {
    
     const inputElement = document.querySelector(
