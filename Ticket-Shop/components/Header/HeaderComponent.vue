@@ -1,11 +1,11 @@
     <template>
 
-        <header class="bg-green-500 shadow py-2 fixed: top-0 start-0">
+        <header class="bg-white bg-[radial-gradient(ellipse_100%_100%_at_10%_10%,rgba(0,152,228,0.42),rgba(255,255,255,0))] shadow py-2 fixed: top-0 start-0">
             <div class="flex flex-wrap justify-between items-center mx-auto ">
                 <div class="flex items-center space-x-1">
                 <h1 class=" px-10 text-4xl font-bold leading-6">Benevolo-Shop</h1>
                 </div>
-            <div class="p-4 pl-6 flex justify-center">
+            <div class="p-4 flex justify-center ">
                 <form class="max-w-md mx-auto">   
                     <label for="search-events" class=" mb-2text-sm font-medium text-black sr-only dark:text-white">Search-Bar</label>
                     <div class="relative ">

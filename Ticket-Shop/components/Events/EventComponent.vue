@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center rounded-lg overflow-hidden shadow-xl  m-4 cursor-pointer"
+    class=" bg-slate-100 flex flex-col items-center rounded-lg overflow-hidden shadow-xl  m-4 cursor-pointer"
     @click="navigateToBuyTickets(event.id)"
   >
     <img class="w-full h-48 " :src="event.thumbnail" alt="">

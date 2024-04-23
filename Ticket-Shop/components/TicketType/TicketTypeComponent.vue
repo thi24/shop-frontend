@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 m-3 border-solid border rounded border-gray-300 flex">
+  <div class="  p-3 m-3 border-solid border rounded border-gray-300 flex">
     <label :for="'number-input-' + ticketType.id" class="flex-1">{{
       ticketType.name
     }}</label>

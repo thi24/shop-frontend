@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 py-6">
-    <div class="bg-white shadow-lg rounded-lg">
+    <div class="bg-slate-100 shadow-lg rounded-lg">
 
       <div class="h-64 bg-cover bg-center rounded-t-lg" :style="{ backgroundImage: 'url(' + event.thumbnail + ')' }"></div>
 

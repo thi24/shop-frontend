@@ -8,7 +8,7 @@
       
 
       <div class=" p-5 lg:pt-10">
-        <div class="bg-white p-1 lg:rounded-lg rounded-lg lg:shadow-lg shadow-lg px-1 
+        <div class="bg-slate-100 p-1 lg:rounded-lg rounded-lg lg:shadow-lg shadow-lg px-1 
 
         ">
         <div v-for="ticketType in tickettypes" :key="ticketType.id" class=" last:mb-0">
