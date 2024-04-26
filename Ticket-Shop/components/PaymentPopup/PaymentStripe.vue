@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { type Stripe, type StripeElements, loadStripe } from "@stripe/stripe-js";
+import {
+  type Stripe,
+  type StripeElements,
+  loadStripe,
+} from "@stripe/stripe-js";
 
 const router = useRouter();
 const config = useRuntimeConfig();
@@ -10,8 +14,10 @@ let loading = ref(true);
 let elements: StripeElements;
 
 onMounted(async () => {
-  stripe = await loadStripe(config.public.STRIPE_KEY);
-//wichtig das die elements laden !!!
+  stripe = await loadStripe(
+    "pk_test_51P3MkWCzSI00rA1V0QfsOEhJFA0tx8eRTSVTnciAW2wgK9cr9Zk1Ra8oU4xwvJubsf1he4EbEvDfi33Gi5QS2prh00AGzSJTcW"
+  );
+  //wichtig das die elements laden !!!
   elements = stripe!.elements({
     mode: "payment",
     amount: 1999,
@@ -54,8 +60,8 @@ const handleSubmit = async (e: Event) => {
       clientSecret,
       confirmParams: {
         receipt_email: email as string,
-        return_url: "http://localhost:3000"
-      }
+        return_url: "http://localhost:3000",
+      },
     });
 
     loading.value = false;

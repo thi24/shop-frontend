@@ -1,56 +1,53 @@
 <template>
-
   <div class="max-w-9xl mx-auto px-1 py-1 lg:px-3 lg:py-3">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg">
-    
-      <div class=" p-1 rounded-lg">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg"
+    >
+      <div class="p-1 rounded-lg">
         <EventBuyComponent />
       </div>
-      
 
-      <div class=" p-5 lg:pt-10">
-        <div class="bg-slate-100 p-1 lg:rounded-lg rounded-lg lg:shadow-lg shadow-lg px-1 
-
-        ">
-        <div v-for="ticketType in tickettypes" :key="ticketType.id" class=" last:mb-0">
-          <TicketTypeComponent :ticketType="ticketType" />
-        </div>
-      
-        <div class="flex justify-center mt-4 pb-4">
-          <button
-            class="relative z-0 h-12 rounded-full bg-blue-500 px-6 text-neutral-50 after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:rounded-full after:bg-blue-500 hover:after:scale-x-125 hover:after:scale-y-150 hover:after:opacity-0 hover:after:transition hover:after:duration-500"
-            @click="logUserInputs"
+      <div class="p-5 lg:pt-10">
+        <div
+          class="bg-slate-100 p-1 lg:rounded-lg rounded-lg lg:shadow-lg shadow-lg px-1"
+        >
+          <div
+            v-for="ticketType in tickettypes"
+            :key="ticketType.id"
+            class="last:mb-0"
           >
-            Jetzt bezahlen
-          </button>
+            <TicketTypeComponent :ticketType="ticketType" />
+          </div>
+
+          <div class="flex justify-center mt-4 pb-4">
+            <button
+              class="relative z-0 h-12 rounded-full bg-blue-500 px-6 text-neutral-50 after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:rounded-full after:bg-blue-500 hover:after:scale-x-125 hover:after:scale-y-150 hover:after:opacity-0 hover:after:transition hover:after:duration-500"
+              @click="paymentPopup.open()"
+            >
+              Jetzt bezahlen
+            </button>
+          </div>
+
+          <PaymentPopup ref="paymentPopup"> </PaymentPopup>
         </div>
-        <PaymentStripe/>
-      </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-
 import { ref, type Ref } from "vue";
-import Popup from "../components/PaymentPopup/Popup.vue";
-
-import EventBuyComponent  from "~/components/Events/EventBuyComponent";
+import PaymentPopup from "../components/PaymentPopup/PaymentPopup.vue";
+import EventBuyComponent from "~/components/Events/EventBuyComponent";
 import PaymentStripe from "~/components/PaymentPopup/PaymentStripe.vue";
-
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
+
+const paymentPopup = ref();
 
 const tickettypes: Ref<TicketType[]> = ref(getTicketTypes());
 
 const selectedTickets = ref<{ id: any; name: any; quantity: number }[]>([]);
-
-const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
-  buttonTrigger: false,
-});
-
-
 
 function getTicketTypes(): TicketType[] {
   const results: TicketType[] = [];
@@ -79,14 +76,11 @@ function getTicketTypes(): TicketType[] {
 function logUserInputs() {
   selectedTickets.value = [];
 
-
   tickettypes.value.forEach((ticketType) => {
-   
     const inputElement = document.querySelector(
       `#number-input-${ticketType.id}`
     ) as HTMLInputElement;
     if (inputElement && parseInt(inputElement.value) != 0) {
-      
       selectedTickets.value.push({
         id: ticketType.id,
         name: ticketType.name,
@@ -97,12 +91,6 @@ function logUserInputs() {
 
   // Popup anzeigen, wenn Tickets ausgewählt wurden
   if (selectedTickets.value.length != 0) {
-    togglePopup();
   }
 }
-
-function togglePopup() {
-  popupTriggers.value.buttonTrigger = !popupTriggers.value.buttonTrigger;
-}
-
 </script>

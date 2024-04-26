@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.21",
     "@pinia/nuxt": "^0.5.1",
     "@types/node": "^20.12.7",
     "@unlok-co/nuxt-stripe": "^3.0.0",
