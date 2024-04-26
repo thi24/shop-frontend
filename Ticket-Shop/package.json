@@ -12,6 +12,7 @@
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
     "@types/node": "^20.12.7",
+    "@unlok-co/nuxt-stripe": "^3.0.0",
     "nuxt": "^3.11.2",
     "ohmyfetch": "^0.4.21",
     "pinia": "^2.1.7",

@@ -24,6 +24,7 @@
             Jetzt bezahlen
           </button>
         </div>
+        <PaymentStripe/>
       </div>
       </div>
     </div>
@@ -36,6 +37,7 @@ import { ref, type Ref } from "vue";
 import Popup from "../components/PaymentPopup/Popup.vue";
 
 import EventBuyComponent  from "~/components/Events/EventBuyComponent";
+import PaymentStripe from "~/components/PaymentPopup/PaymentStripe.vue";
 
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
