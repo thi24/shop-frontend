@@ -69,7 +69,7 @@ onMounted(async () => {
       options
     );
   } catch (error) {
-    console.error("Failed to load events:", error);
+    console.error("Failed to load ticket types:", error);
   }
 });
 
