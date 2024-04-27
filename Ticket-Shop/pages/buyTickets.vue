@@ -22,13 +22,12 @@
           <div class="flex justify-center mt-4 pb-4">
             <button
               class="relative z-0 h-12 rounded-full bg-blue-500 px-6 text-neutral-50 after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:rounded-full after:bg-blue-500 hover:after:scale-x-125 hover:after:scale-y-150 hover:after:opacity-0 hover:after:transition hover:after:duration-500"
-              @click="paymentPopup.open()"
+              @click="paymentPopup.openPopup()"
             >
               Jetzt bezahlen
             </button>
           </div>
-
-          <PaymentPopup ref="paymentPopup"> </PaymentPopup>
+          <PaymentPopup ref="paymentPopup" />
         </div>
       </div>
     </div>
@@ -37,9 +36,9 @@
 
 <script lang="ts" setup>
 import { ref, type Ref } from "vue";
+
 import PaymentPopup from "../components/PaymentPopup/PaymentPopup.vue";
 import EventBuyComponent from "~/components/Events/EventBuyComponent";
-import PaymentStripe from "~/components/PaymentPopup/PaymentStripe.vue";
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 
@@ -106,5 +105,6 @@ function calculateAmount() {
       amount +
       selectedTickets.value[i].price * selectedTickets.value[i].quantity;
   }
+  return amount;
 }
 </script>
