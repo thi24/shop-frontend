@@ -47,7 +47,9 @@ const paymentPopup = ref();
 
 const tickettypes: Ref<TicketType[]> = ref(getTicketTypes());
 
-const selectedTickets = ref<{ id: any; name: any; quantity: number }[]>([]);
+const selectedTickets = ref<
+  { id: any; name: any; quantity: number; price: any }[]
+>([]);
 
 function getTicketTypes(): TicketType[] {
   const results: TicketType[] = [];
@@ -73,7 +75,7 @@ function getTicketTypes(): TicketType[] {
   return results;
 }
 
-function logUserInputs() {
+function getUserInputs() {
   selectedTickets.value = [];
 
   tickettypes.value.forEach((ticketType) => {
@@ -84,6 +86,7 @@ function logUserInputs() {
       selectedTickets.value.push({
         id: ticketType.id,
         name: ticketType.name,
+        price: ticketType.price,
         quantity: parseInt(inputElement.value),
       });
     }
@@ -91,6 +94,17 @@ function logUserInputs() {
 
   // Popup anzeigen, wenn Tickets ausgewählt wurden
   if (selectedTickets.value.length != 0) {
+  }
+}
+
+function calculateAmount() {
+  getUserInputs();
+
+  var amount = 0;
+  for (let i = 0; i < selectedTickets.value.length; i++) {
+    amount =
+      amount +
+      selectedTickets.value[i].price * selectedTickets.value[i].quantity;
   }
 }
 </script>
