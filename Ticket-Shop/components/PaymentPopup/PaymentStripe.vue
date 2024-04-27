@@ -42,12 +42,23 @@ const handleSubmit = async (e: Event) => {
 
   // Create payment intents first and grab secret
   try {
-    const response: Response = await $fetch("/api/stripePurchase", {
-      method: "POST",
-    });
-    const { clientSecret } = await response.json();
-    console.log("secret", clientSecret);
-
+    const response = await fetch(
+      "http://localhost:8080/hello/create-payment-intent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: 1000, // Setzen Sie den Betrag entsprechend Ihrer Anforderung
+          currency: "usd", // Setzen Sie die Währung entsprechend Ihrer Anforderung
+          product: "Beschreibung des Produkts", // Setzen Sie die Produktbeschreibung entsprechend Ihrer Anforderung
+        }),
+      }
+    );
+    const jsonResponse = await response.json();
+    console.log(jsonResponse.client_secret);
+    const clientSecret = jsonResponse.client_secret;
     const { error: submitError } = await elements.submit();
     if (submitError) {
       console.log("error submit");
