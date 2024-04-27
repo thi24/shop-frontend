@@ -43,7 +43,9 @@ import EventBuyComponent from "~/components/Events/EventBuyComponent";
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 
-const selectedTickets = ref<{ id: any; name: any; quantity: number }[]>([]);
+const selectedTickets = ref<
+  { id: any; name: any; quantity: number; price: any }[]
+>([]);
 
 const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
   buttonTrigger: false,
@@ -56,7 +58,6 @@ const eventStore = useEventStore();
 onMounted(async () => {
   const token = import.meta.env.VITE_AUTH_TOKEN;
   var eventId = eventStore.eventId;
-  console.log(eventId);
 
   try {
     const options = {
@@ -84,10 +85,20 @@ function logUserInputs() {
       selectedTickets.value.push({
         id: ticketType.id,
         name: ticketType.name,
+        price: ticketType.price,
         quantity: parseInt(inputElement.value),
       });
     }
   });
+
+  let amount = 0;
+  for (let i = 0; i < selectedTickets.value.length; i++) {
+    amount =
+      amount +
+      selectedTickets.value[i].price * selectedTickets.value[i].quantity;
+  }
+
+  console.log(amount);
 
   // Popup anzeigen, wenn Tickets ausgewählt wurden
   if (selectedTickets.value.length != 0) {
