@@ -8,20 +8,24 @@ import {
 
 const router = useRouter();
 const config = useRuntimeConfig();
-
+const props = defineProps({
+  amount: Number,
+});
 let stripe: Stripe | null;
 let loading = ref(true);
 let elements: StripeElements;
+let paymentAmount = Math.ceil(props.amount * 100);
 
 onMounted(async () => {
   stripe = await loadStripe(
     "pk_test_51P3MkWCzSI00rA1V0QfsOEhJFA0tx8eRTSVTnciAW2wgK9cr9Zk1Ra8oU4xwvJubsf1he4EbEvDfi33Gi5QS2prh00AGzSJTcW"
   );
+  console.log(paymentAmount);
   //wichtig das die elements laden !!!
   elements = stripe!.elements({
     mode: "payment",
     amount: 1999,
-    currency: "usd",
+    currency: "eur",
   });
   const paymentElement = elements.create("payment");
   paymentElement.mount("#payment-element");
@@ -50,8 +54,8 @@ const handleSubmit = async (e: Event) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 1000, // Setzen Sie den Betrag entsprechend Ihrer Anforderung
-          currency: "usd", // Setzen Sie die Währung entsprechend Ihrer Anforderung
+          amount: paymentAmount, // Setzen Sie den Betrag entsprechend Ihrer Anforderung
+          currency: "eur", // Setzen Sie die Währung entsprechend Ihrer Anforderung
           product: "Beschreibung des Produkts", // Setzen Sie die Produktbeschreibung entsprechend Ihrer Anforderung
         }),
       }
@@ -91,26 +95,12 @@ const handleSubmit = async (e: Event) => {
 
 <template>
   <section class="showcase">
-    <div class="nes-container with-title">
-      <h3>Donkey Kong Country SNES $19.99</h3>
-      <div class="img"></div>
-    </div>
+    <div class="nes-container with-title"></div>
   </section>
 
   <div class="nes-container with-title is-centered">
     <form @submit.prevent="handleSubmit">
       <fieldset :class="{ dis: loading }" class="fields">
-        <div class="nes-field">
-          <label for="name_field">Name</label>
-          <input
-            placeholder="Jane Doe"
-            type="text"
-            name="name"
-            id="name_field"
-            class="nes-input"
-          />
-        </div>
-
         <div class="nes-field">
           <label for="email_field">Email</label>
           <input
@@ -122,19 +112,19 @@ const handleSubmit = async (e: Event) => {
           />
         </div>
 
-        <div class="nes-field">
+        <div class="Hier kann die Farbe des Stripe elements angepasst werden">
           <label for="payment-element">Credit Card</label>
           <div id="payment-element" class="nes-input"></div>
         </div>
       </fieldset>
 
-      <div class="nes-field">
+      <div class="">
+        <p>Summe: {{ props.amount }}</p>
         <button
           type="submit"
-          class="nes-btn is-primary"
-          :class="{ dis: loading }"
+          class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
         >
-          {{ loading ? "Loading..." : "Pay $19.99" }}
+          {{ loading ? "Loading..." : "Hier Bezahlen!" }}
         </button>
       </div>
     </form>

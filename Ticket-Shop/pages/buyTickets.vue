@@ -22,12 +22,14 @@
           <div class="flex justify-center mt-4 pb-4">
             <button
               class="relative z-0 h-12 rounded-full bg-blue-500 px-6 text-neutral-50 after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:rounded-full after:bg-blue-500 hover:after:scale-x-125 hover:after:scale-y-150 hover:after:opacity-0 hover:after:transition hover:after:duration-500"
-              @click="paymentPopup.openPopup()"
+              @click="
+                paymentPopup.openPopup(calculateAmount(), selectedTickets)
+              "
             >
               Jetzt bezahlen
             </button>
           </div>
-          <PaymentPopup ref="paymentPopup" />
+          <PaymentPopup ref="paymentPopup" :selectedTickets="selectedTickets" />
         </div>
       </div>
     </div>
@@ -38,13 +40,14 @@
 import { ref, type Ref } from "vue";
 
 import PaymentPopup from "../components/PaymentPopup/PaymentPopup.vue";
-import EventBuyComponent from "~/components/Events/EventBuyComponent";
+import EventBuyComponent from "../components/Events/EventBuyComponent.vue";
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 
 const paymentPopup = ref();
 
 const tickettypes: Ref<TicketType[]> = ref(getTicketTypes());
+let amount = ref(0);
 
 const selectedTickets = ref<
   { id: any; name: any; quantity: number; price: any }[]
@@ -98,11 +101,10 @@ function getUserInputs() {
 
 function calculateAmount() {
   getUserInputs();
-
-  var amount = 0;
+  amount.value = 0;
   for (let i = 0; i < selectedTickets.value.length; i++) {
-    amount =
-      amount +
+    amount.value =
+      amount.value +
       selectedTickets.value[i].price * selectedTickets.value[i].quantity;
   }
   return amount;
