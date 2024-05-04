@@ -9,9 +9,5 @@ services:
       dockerfile: dockerfile
     container_name: benevolo-shop-frontend
     image: ghcr.io/thi24/shop-frontend:latest
-    networks:
-      - nginx-proxy-manager
-
-networks:
-  nginx-proxy-manager:
-    external: true
+    ports:
+      - "8080:3000"
