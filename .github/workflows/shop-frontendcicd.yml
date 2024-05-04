@@ -1,0 +1,40 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: shop-frontend ci/cd
+
+on:
+  push:
+    branches: [ "main" ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Log in to the Container registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.OWNER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./Ticket-Shop
+        file: ./Ticket-Shop/Dockerfile
+        push: true
+        tags: ghcr.io/thi24/shop-frontend:latest
+
+    - name: Call a webhook for Portainer
+      uses: distributhor/workflow-webhook@v3
+      env:
+        webhook_type: 'json'
+        webhook_url: ${{ secrets.PORTAINER_WEBHOOK_URL }}
