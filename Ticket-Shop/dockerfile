@@ -1,8 +1,5 @@
 FROM node:20-slim AS base
 
-ARG PK_STRIPE_KEY
-ENV VITE_STRIPE_KEY $PK_STRIPE_KEY
-
 # create destination directory
 RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app
