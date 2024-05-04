@@ -7,8 +7,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        - VITE_STRIPE_KEY=${PK_STRIPE_KEY}
     networks:
       - nginx-proxy-manager
 
