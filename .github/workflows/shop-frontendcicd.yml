@@ -32,6 +32,7 @@ jobs:
         file: ./Ticket-Shop/dockerfile
         push: true
         tags: ghcr.io/thi24/shop-frontend:latest
+        build-args: VITE_STRIPE_KEY=${{ secrets.PK_STRIPE_KEY }}
 
     - name: Call a webhook for Portainer
       uses: distributhor/workflow-webhook@v3
