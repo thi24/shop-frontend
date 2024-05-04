@@ -52,7 +52,10 @@
                       </li>
                     </ul>
                     <div class="mt-2">
-                      <PaymentStripe :amount="popUpAmount" />
+                      <PaymentStripe
+                        :amount="popUpAmount"
+                        :products="props.selectedTickets"
+                      />
                     </div>
                   </div>
                 </div>
@@ -97,7 +100,6 @@ const open = ref(false);
 const openPopup = (amount) => {
   popUpAmount = amount;
   open.value = true;
-  console.log(props.selectedTickets[1]);
 };
 defineExpose({
   openPopup,

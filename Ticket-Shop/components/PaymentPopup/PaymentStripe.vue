@@ -5,26 +5,30 @@ import {
   type StripeElements,
   loadStripe,
 } from "@stripe/stripe-js";
-
+import { Sale } from "~/classes/Sale";
+import { Booking } from "~/classes/Booking";
+import { Customer } from "~/classes/Customer";
 const router = useRouter();
 const config = useRuntimeConfig();
 const props = defineProps({
-  amount: Number,
+  amount: { type: Number, required: true },
+  products: { type: Array, required: true },
 });
+
 let stripe: Stripe | null;
 let loading = ref(true);
 let elements: StripeElements;
 let paymentAmount = Math.ceil(props.amount * 100);
+console.log(props.products);
 
 onMounted(async () => {
   stripe = await loadStripe(
     "pk_test_51P3MkWCzSI00rA1V0QfsOEhJFA0tx8eRTSVTnciAW2wgK9cr9Zk1Ra8oU4xwvJubsf1he4EbEvDfi33Gi5QS2prh00AGzSJTcW"
   );
-  console.log(paymentAmount);
   //wichtig das die elements laden !!!
   elements = stripe!.elements({
     mode: "payment",
-    amount: 1999,
+    amount: paymentAmount,
     currency: "eur",
   });
   const paymentElement = elements.create("payment");
@@ -40,9 +44,15 @@ const handleSubmit = async (e: Event) => {
     return;
   }
   loading.value = true;
-  const { name, email } = Object.fromEntries(
+  const formData = Object.fromEntries(
     new FormData(e.target as HTMLFormElement)
   );
+  const email = formData.email.toString();
+  const bookingItems: Sale[] = [];
+  props.products.forEach((item: any) => {
+    const ticket = new Sale(item.id, item.quantity);
+    bookingItems.push(ticket);
+  });
 
   // Create payment intents first and grab secret
   try {
@@ -56,13 +66,16 @@ const handleSubmit = async (e: Event) => {
         body: JSON.stringify({
           amount: paymentAmount, // Setzen Sie den Betrag entsprechend Ihrer Anforderung
           currency: "eur", // Setzen Sie die Währung entsprechend Ihrer Anforderung
-          product: "Beschreibung des Produkts", // Setzen Sie die Produktbeschreibung entsprechend Ihrer Anforderung
+          product: "Test", // Setzen Sie die Produktbeschreibung entsprechend Ihrer Anforderung
         }),
       }
     );
-    const jsonResponse = await response.json();
-    console.log(jsonResponse.client_secret);
-    const clientSecret = jsonResponse.client_secret;
+    const paymentIntent = await response.json();
+
+    console.log(paymentIntent.id);
+    const customer = new Customer(email, undefined, paymentIntent.id);
+    const clientSecret = paymentIntent.client_secret;
+    const bookings = new Booking(customer, bookingItems, paymentIntent.Id);
     const { error: submitError } = await elements.submit();
     if (submitError) {
       console.log("error submit");
@@ -83,7 +96,13 @@ const handleSubmit = async (e: Event) => {
     if (error?.type === "card_error" || error?.type === "validation_error") {
       router.push("/error");
     } else {
-      console.log("great");
+      const response = await fetch("pea.benevolo.de", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: bookings.toJSON(),
+      });
     }
   } catch (error) {
     console.log("error", error);
@@ -104,7 +123,7 @@ const handleSubmit = async (e: Event) => {
         <div class="nes-field">
           <label for="email_field">Email</label>
           <input
-            placeholder="jane.doe@example.com"
+            placeholder="Ihre e-Mail"
             type="email"
             name="email"
             id="email_field"
