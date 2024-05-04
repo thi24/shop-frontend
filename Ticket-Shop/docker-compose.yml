@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+
+  shop-frontend:
+    image: ghcr.io/thi24/shop-frontend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_STRIPE_KEY=${PK_STRIPE_KEY}
+    networks:
+      - nginx-proxy-manager
+
+networks:
+  nginx-proxy-manager:
+    external: true
