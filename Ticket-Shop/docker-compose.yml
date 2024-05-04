@@ -3,10 +3,12 @@ version: '3'
 services:
 
   shop-frontend:
-    image: ghcr.io/thi24/shop-frontend:latest
+    
     build:
       context: .
       dockerfile: dockerfile
+    container_name: benevolo-shop-frontend
+    image: ghcr.io/thi24/shop-frontend:latest
     networks:
       - nginx-proxy-manager
 
