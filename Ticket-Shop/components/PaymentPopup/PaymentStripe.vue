@@ -19,7 +19,6 @@ let stripe: Stripe | null;
 let loading = ref(true);
 let elements: StripeElements;
 let paymentAmount = Math.ceil(props.amount * 100);
-console.log(props.products);
 
 onMounted(async () => {
   stripe = await loadStripe(
@@ -48,6 +47,7 @@ const handleSubmit = async (e: Event) => {
     new FormData(e.target as HTMLFormElement)
   );
   const email = formData.email.toString();
+  //Array fuer Booking Klasse erstellen
   const bookingItems: Sale[] = [];
   props.products.forEach((item: any) => {
     const ticket = new Sale(item.id, item.quantity);
@@ -57,7 +57,7 @@ const handleSubmit = async (e: Event) => {
   // Create payment intents first and grab secret
   try {
     const response = await fetch(
-      "http://localhost:8080/hello/create-payment-intent",
+      "http://localhost:8080/payment/create-payment-intent",
       {
         method: "POST",
         headers: {
@@ -72,7 +72,6 @@ const handleSubmit = async (e: Event) => {
     );
     const paymentIntent = await response.json();
 
-    console.log(paymentIntent.id);
     const customer = new Customer(email, undefined, paymentIntent.id);
     const clientSecret = paymentIntent.client_secret;
     const bookings = new Booking(customer, bookingItems, paymentIntent.Id);
@@ -82,8 +81,16 @@ const handleSubmit = async (e: Event) => {
       loading.value = false;
       return;
     }
-
-    const { error } = await stripe!.confirmPayment({
+    const processResponse = await fetch("https:///pea.benevolo.de", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: bookings.toJSON(),
+    });
+    alert("pause");
+    console.log(processResponse);
+    const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
       confirmParams: {
@@ -93,16 +100,10 @@ const handleSubmit = async (e: Event) => {
     });
 
     loading.value = false;
+
     if (error?.type === "card_error" || error?.type === "validation_error") {
       router.push("/error");
     } else {
-      const response = await fetch("pea.benevolo.de", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: bookings.toJSON(),
-      });
     }
   } catch (error) {
     console.log("error", error);
