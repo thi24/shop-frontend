@@ -16,11 +16,16 @@ let loading = ref(true);
 let elements: StripeElements;
 let paymentAmount = Math.ceil(props.amount * 100);
 
+
 onMounted(async () => {
-  stripe = await loadStripe(
-    "pk_test_51P3MkWCzSI00rA1V0QfsOEhJFA0tx8eRTSVTnciAW2wgK9cr9Zk1Ra8oU4xwvJubsf1he4EbEvDfi33Gi5QS2prh00AGzSJTcW"
-  );
+  const apiKey = import.meta.env.VITE_STRIPE_KEY;
+  if (!apiKey) {
+    console.error('Stripe key is missing!');
+    return;
+  }
+  stripe = await loadStripe(apiKey);
   console.log(paymentAmount);
+  
   //wichtig das die elements laden !!!
   elements = stripe!.elements({
     mode: "payment",
