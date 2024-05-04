@@ -6,7 +6,7 @@ services:
     image: ghcr.io/thi24/shop-frontend:latest
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     networks:
       - nginx-proxy-manager
 
