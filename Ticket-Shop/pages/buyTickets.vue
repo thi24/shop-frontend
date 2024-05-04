@@ -26,7 +26,7 @@
                 paymentPopup.openPopup(calculateAmount(), selectedTickets)
               "
             >
-              Jetzt bezahlennn
+              Jetzt bezahlen
             </button>
           </div>
           <PaymentPopup ref="paymentPopup" :selectedTickets="selectedTickets" />
