@@ -81,7 +81,7 @@ const handleSubmit = async (e: Event) => {
       loading.value = false;
       return;
     }
-    const processResponse = await fetch("https:///pea.benevolo.de", {
+    const processResponse = await fetch("https://engnine.pea.benevolo.de/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
