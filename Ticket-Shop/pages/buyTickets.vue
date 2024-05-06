@@ -4,7 +4,7 @@
       class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg"
     >
       <div class="p-1 rounded-lg">
-        <EventBuyComponent />
+        <EventBuyComponent :event="event" />
       </div>
 
       <div class="p-5 lg:pt-10">
@@ -19,14 +19,7 @@
             <TicketTypeComponent :ticketType="ticketType" />
           </div>
 
-          <div class="flex justify-center mt-4 pb-4">
-            <button
-              class="relative z-0 h-12 rounded-full bg-blue-500 px-6 text-neutral-50 after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:rounded-full after:bg-blue-500 hover:after:scale-x-125 hover:after:scale-y-150 hover:after:opacity-0 hover:after:transition hover:after:duration-500"
-              @click="logUserInputs"
-            >
-              Jetzt bezahlen
-            </button>
-          </div>
+          <div class="flex justify-center mt-4 pb-4"></div>
         </div>
       </div>
     </div>
@@ -52,12 +45,13 @@ const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
 });
 
 const tickettypes = ref<TicketType[]>([]);
+var event = ref<Event>();
 
 const eventStore = useEventStore();
 
 onMounted(async () => {
   const token = import.meta.env.VITE_AUTH_TOKEN;
-  var eventId = eventStore.eventId;
+  const eventId = eventStore.eventId;
 
   try {
     const options = {
@@ -66,45 +60,18 @@ onMounted(async () => {
       },
     };
     tickettypes.value = await $fetch(
-      "https://dev.benevolo.de/api/event-service/ticket-types?eventId=383f700f-5449-4e40-b509-bee0b5d139d6",
+      "https://dev.benevolo.de/api/event-service/ticket-types?eventId=" +
+        eventId,
+      options
+    );
+    event = await $fetch(
+      "https://dev.benevolo.de/api/event-service/events/" + eventId,
       options
     );
   } catch (error) {
     console.error("Failed to load ticket types:", error);
   }
 });
-
-function logUserInputs() {
-  selectedTickets.value = [];
-
-  tickettypes.value.forEach((ticketType) => {
-    const inputElement = document.querySelector(
-      `#number-input-${ticketType.id}`
-    ) as HTMLInputElement;
-    if (inputElement && parseInt(inputElement.value) != 0) {
-      selectedTickets.value.push({
-        id: ticketType.id,
-        name: ticketType.name,
-        price: ticketType.price,
-        quantity: parseInt(inputElement.value),
-      });
-    }
-  });
-
-  let amount = 0;
-  for (let i = 0; i < selectedTickets.value.length; i++) {
-    amount =
-      amount +
-      selectedTickets.value[i].price * selectedTickets.value[i].quantity;
-  }
-
-  console.log(amount);
-
-  // Popup anzeigen, wenn Tickets ausgewählt wurden
-  if (selectedTickets.value.length != 0) {
-    togglePopup();
-  }
-}
 
 function togglePopup() {
   popupTriggers.value.buttonTrigger = !popupTriggers.value.buttonTrigger;
