@@ -3,7 +3,7 @@
     <div
       class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg"
     >
-      <div class="p-1 rounded-lg">
+      <div v-if="event" class="p-1 rounded-lg">
         <EventBuyComponent :event="event" />
       </div>
 
@@ -31,8 +31,8 @@ import { ref, type Ref } from "vue";
 
 import { useEventStore } from "~/stores/eventIdStore";
 
-import EventBuyComponent from "~/components/Events/EventBuyComponent";
-
+import EventBuyComponent from "~/components/Events/EventBuyComponent.vue";
+import { Event } from "~/classes/Event";
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 
@@ -45,7 +45,8 @@ const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
 });
 
 const tickettypes = ref<TicketType[]>([]);
-var event = ref<Event>();
+
+const event = ref<Event | null>(null);
 
 const eventStore = useEventStore();
 
@@ -64,7 +65,7 @@ onMounted(async () => {
         eventId,
       options
     );
-    event = await $fetch(
+    event.value = await $fetch(
       "https://dev.benevolo.de/api/event-service/events/" + eventId,
       options
     );

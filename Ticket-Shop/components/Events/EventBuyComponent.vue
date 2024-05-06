@@ -1,12 +1,13 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 py-6">
     <div class="bg-slate-100 shadow-lg rounded-lg">
-      <!--<div
+      
+      <div
         class="h-64 bg-cover bg-center rounded-t-lg"
         :style="{ backgroundImage: 'url(' + event.thumbnail + ')' }"
-      ></div>-->
+      ></div>
 
-      <!--<div class="p-4">
+      <div class="p-4">
         <h2 class="text-2xl font-bold mb-2">{{ event.eventName }}</h2>
         <p class="text-gray-700 mb-4">{{ event.description }}</p>
         <div class="mb-4">
@@ -17,16 +18,16 @@
           <p>{{ event.address.street }}</p>
           <p>{{ event.address.street }}, {{ event.address.zip }}</p>
         </div>
-      </div>-->
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref } from "vue";
+
 import { Event } from "~/classes/Event";
-import { Address } from "~/classes/Address";
-import type { AddressMode } from "@stripe/stripe-js";
+
+
 
 defineProps<{
   event: Event;
