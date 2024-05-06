@@ -93,13 +93,19 @@ import {
 
 const props = defineProps({
   selectedTickets: Array,
+  eventId: String,
 });
 
 let popUpAmount = ref(0);
 const open = ref(false);
+
 const openPopup = (amount) => {
   popUpAmount = amount;
-  open.value = true;
+  if (amount.value > 0) {
+    open.value = true;
+  } else {
+    alert("Bitte treffen Sie eine Auswahl!");
+  }
 };
 defineExpose({
   openPopup,
