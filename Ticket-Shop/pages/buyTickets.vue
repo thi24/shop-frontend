@@ -4,7 +4,7 @@
       class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg"
     >
       <div v-if="event" class="p-1 rounded-lg">
-        <EventBuyComponent :event="event" />
+        <EventBuyComponent :event="event" :thumbnail="thumbnail" />
       </div>
 
       <div class="p-5 lg:pt-10">
@@ -49,6 +49,7 @@ const tickettypes = ref<TicketType[]>([]);
 const event = ref<Event | null>(null);
 
 const eventStore = useEventStore();
+const thumbnail = eventStore.thumbnail;
 
 onMounted(async () => {
   const token = import.meta.env.VITE_AUTH_TOKEN;
