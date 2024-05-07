@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+  shop-frontend:
+    
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: benevolo-shop-frontend
+    image: ghcr.io/thi24/shop-frontend:latest
+    ports:
+      - "8080:3000"
+    environment:
+      - TZ=Europe/Berlin
+    networks:
+      - nginx-proxy-manager
+networks:
+  nginx-proxy-manager:
+    external: true

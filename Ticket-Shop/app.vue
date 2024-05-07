@@ -1,10 +1,10 @@
 
 <template>
-  <div>
+  <div class="flex flex-col h-screen overflow-hidden">
     <HeaderComponent />
 
-    <NuxtPage class="h-svh" />
+    <NuxtPage class="flex-1 overflow-y-scroll" />
 
-    <FooterComponent class="fixed inset-x-0 bottom-0" />
+    <FooterComponent class="mt-auto" />
   </div>
 </template>
