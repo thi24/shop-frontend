@@ -5,7 +5,11 @@
         class="h-64 bg-cover bg-center rounded-t-lg"
         :style="{ backgroundImage: 'url(' + event.thumbnail + ')' }"
       >
-        <img class="w-full h-48" :src="thumbnail" alt="Thumbnail" />
+        <img
+          class="object-scale-down max-h-full rounded-md m-auto"
+          :src="thumbnail"
+          alt="Thumbnail"
+        />
       </div>
 
       <div class="p-4">
