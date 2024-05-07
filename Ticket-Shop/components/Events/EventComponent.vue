@@ -3,7 +3,7 @@
     class="bg-slate-100 flex flex-col items-center rounded-lg overflow-hidden shadow-xl m-4 cursor-pointer"
     @click="navigateToBuyTickets(event.id)"
   >
-    <img class="w-full h-48" :src="event.thumbnail" alt="" />
+    <img class="w-full h-48" :src="event.thumbnail" alt="test" />
     <div
       class="p-4 rounded-md hover:from-gray-300 hover:to-gray-200 active:shadow-none"
     >
