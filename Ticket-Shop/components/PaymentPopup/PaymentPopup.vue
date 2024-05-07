@@ -52,7 +52,10 @@
                       </li>
                     </ul>
                     <div class="mt-2">
-                      <PaymentStripe :amount="popUpAmount" />
+                      <PaymentStripe
+                        :amount="popUpAmount"
+                        :products="props.selectedTickets"
+                      />
                     </div>
                   </div>
                 </div>
@@ -90,14 +93,19 @@ import {
 
 const props = defineProps({
   selectedTickets: Array,
+  eventId: String,
 });
 
 let popUpAmount = ref(0);
 const open = ref(false);
+
 const openPopup = (amount) => {
   popUpAmount = amount;
-  open.value = true;
-  console.log(props.selectedTickets[1]);
+  if (amount.value > 0) {
+    open.value = true;
+  } else {
+    alert("Bitte treffen Sie eine Auswahl!");
+  }
 };
 defineExpose({
   openPopup,
