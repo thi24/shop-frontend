@@ -35,7 +35,6 @@
 </template>
 
 <script lang="ts" setup>
-
 import { ref, type Ref } from "vue";
 import { useEventStore } from "~/stores/eventIdStore";
 import EventBuyComponent from "~/components/Events/EventBuyComponent.vue";
@@ -82,6 +81,8 @@ onMounted(async () => {
     );
   } catch (error) {
     console.error("Failed to load ticket types:", error);
+  }
+});
 
 function getUserInputs() {
   selectedTickets.value = [];
@@ -99,12 +100,7 @@ function getUserInputs() {
       });
     }
   });
-
-  // Popup anzeigen, wenn Tickets ausgewählt wurden
-  if (selectedTickets.value.length != 0) {
-
-  }
-});
+}
 
 function calculateAmount() {
   getUserInputs();
