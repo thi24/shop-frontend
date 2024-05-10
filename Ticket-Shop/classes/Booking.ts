@@ -12,11 +12,9 @@ export class Booking {
   }
   toJSON() {
     return JSON.stringify({
-      payload: {
-        eventId: this.eventId,
-        customer: this.customer,
-        bookingItems: this.bookingItems,
-      },
+      eventId: this.eventId,
+      customer: this.customer,
+      bookingItems: this.bookingItems,
     });
   }
 }
