@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia';
 
+
 export const useEventStore = defineStore('event', {
     state: () => ({
       eventId: '',
       thumbnail: "",
     }),
+    persist: true,
     actions: {
       setEventId(id) {
         this.eventId = id;
@@ -14,5 +16,7 @@ export const useEventStore = defineStore('event', {
       }
     },  
   });
+
+
 
   
