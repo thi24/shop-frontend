@@ -19,7 +19,7 @@ import { compileScript } from "vue/compiler-sfc";
 const events: Ref<Event[]> = ref(getEvents());
 onMounted(async () => {
   const url = window.location.href;
-  if (window.location.href == "http://localhost:3000/") {
+  if (window.location.href == useRuntimeConfig().public.returnUrl) {
     return;
   }
   const redirectStatus = getParameterByName("redirect_status", url);
@@ -37,13 +37,12 @@ onMounted(async () => {
 
     try {
       const response = await fetch(
-        "https://engine.pe.benevolo.de/atlas_engine/api/v1/process_models/g220a903d-0191-4af7-996f-5961b83b85ad_Process/start",
+        useRuntimeConfig().public.processEngineStart,
         {
           method: "POST",
           headers: {
             accept: "application/json",
-            Authorization:
-              "Bearer ZwZjA2yArALFjvW21DJiOMsYPSmSVad1eAhbpmEmhdWkAoKrxvZMvTOliWFZ7huRfoVcgOXuYcvi5KFcCqHTovDuJ3EkWPjURo6IsM8A",
+            Authorization: "Bearer" + useRuntimeConfig().public.processToken,
             "Content-Type": "application/json",
           },
           body: newData,
