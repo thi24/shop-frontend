@@ -42,7 +42,7 @@ onMounted(async () => {
           method: "POST",
           headers: {
             accept: "application/json",
-            Authorization: "Bearer" + useRuntimeConfig().public.processToken,
+            Authorization: "Bearer " + useRuntimeConfig().public.processToken,
             "Content-Type": "application/json",
           },
           body: newData,
