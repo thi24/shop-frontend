@@ -62,20 +62,17 @@ const handleSubmit = async (e: Event) => {
 
   // Create payment intents first and grab secret
   try {
-    const response = await fetch(
-      "http://localhost:8080/payment/create-payment-intent",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amount: paymentAmount, // Setzen Sie den Betrag entsprechend Ihrer Anforderung
-          currency: "eur", // Setzen Sie die Währung entsprechend Ihrer Anforderung
-          product: productString, // Setzen Sie die Produktbeschreibung entsprechend Ihrer Anforderung
-        }),
-      }
-    );
+    const response = await fetch(useRuntimeConfig().public.apiPaymentIntent, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount: paymentAmount, // Setzen Sie den Betrag entsprechend Ihrer Anforderung
+        currency: "eur", // Setzen Sie die Währung entsprechend Ihrer Anforderung
+        product: productString, // Setzen Sie die Produktbeschreibung entsprechend Ihrer Anforderung
+      }),
+    });
     const paymentIntent = await response.json();
 
     const customer = new Customer(email, undefined, paymentIntent.id);
