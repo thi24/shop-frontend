@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div 
     class="bg-slate-100 flex flex-col items-center rounded-lg overflow-hidden shadow-xl m-4 cursor-pointer"
     @click="navigateToBuyTickets(event.id, thumbnail)"
   >
@@ -17,6 +17,7 @@ import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import type { Event } from "~/classes/Event";
 import { useEventStore } from "~/stores/eventIdStore";
+import { fetchEventImage } from '~/services/eventService';
 
 const props = defineProps<{
   event: Event;
@@ -25,25 +26,13 @@ const props = defineProps<{
 const thumbnail = ref<string | undefined>(undefined);
 
 onMounted(async () => {
-  const token = import.meta.env.VITE_AUTH_TOKEN;
   try {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const response = await fetch(
-      "https://dev.benevolo.de/api/event-service/events/" +
-        props.event.id +
-        "/image",
-      options
-    );
-    const blob = await response.blob();
-    thumbnail.value = URL.createObjectURL(blob);
+    thumbnail.value = await fetchEventImage(props.event.id);
   } catch (error) {
     console.error("Failed to load event image:", error);
   }
 });
+
 const router = useRouter();
 const eventStore = useEventStore();
 

@@ -14,23 +14,16 @@
 import { onMounted, ref } from "vue";
 import EventComponent from "~/components/Events/EventComponent.vue";
 import { Event } from "~/classes/Event";
+import { fetchEvents } from '~/services/eventService';
 
 const events = ref<Event[]>([]);
 
 onMounted(async () => {
-  const token = import.meta.env.VITE_AUTH_TOKEN;
   try {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    events.value = await $fetch(
-      "https://dev.benevolo.de/api/event-service/events",
-      options
-    );
+    events.value = await fetchEvents(); 
   } catch (error) {
     console.error("Failed to load events:", error);
   }
 });
+
 </script>

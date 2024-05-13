@@ -41,6 +41,7 @@ import EventBuyComponent from "~/components/Events/EventBuyComponent.vue";
 import { Event } from "~/classes/Event";
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
+import { fetchTicketTypesByEventId, fetchEventById } from '~/services/eventService';
 
 const selectedTickets = ref<
   { id: any; name: any; quantity: number; price: any }[]
@@ -60,27 +61,14 @@ const paymentPopup = ref();
 
 let amount = ref(0);
 
-onMounted(async () => {
-  const token = import.meta.env.VITE_AUTH_TOKEN;
-  const eventId = eventStore.eventId;
 
+onMounted(async () => {
+  const eventId = eventStore.eventId;
   try {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    tickettypes.value = await $fetch(
-      "https://dev.benevolo.de/api/event-service/ticket-types?eventId=" +
-        eventId,
-      options
-    );
-    event.value = await $fetch(
-      "https://dev.benevolo.de/api/event-service/events/" + eventId,
-      options
-    );
+    tickettypes.value = await fetchTicketTypesByEventId(eventId);
+    event.value = await fetchEventById(eventId);
   } catch (error) {
-    console.error("Failed to load ticket types:", error);
+    console.error("Failed to load data:", error);
   }
 });
 
