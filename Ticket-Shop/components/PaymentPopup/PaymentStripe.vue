@@ -126,6 +126,7 @@ const handleSubmit = async (e: Event) => {
             name="email"
             id="email_field"
             class="nes-input"
+            required
           />
         </div>
 

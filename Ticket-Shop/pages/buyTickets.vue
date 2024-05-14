@@ -3,8 +3,8 @@
     <div
       class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg"
     >
-      <div class="p-1 rounded-lg">
-        <EventBuyComponent />
+      <div v-if="event" class="p-1 rounded-lg">
+        <EventBuyComponent :event="event"  />
       </div>
 
       <div class="p-5 lg:pt-10">
@@ -36,44 +36,54 @@
 
 <script lang="ts" setup>
 import { ref, type Ref } from "vue";
-
-import PaymentPopup from "../components/PaymentPopup/PaymentPopup.vue";
-import EventBuyComponent from "../components/Events/EventBuyComponent.vue";
+import { useEventStore } from "~/stores/eventIdStore";
+import EventBuyComponent from "~/components/Events/EventBuyComponent.vue";
+import { Event } from "~/classes/Event";
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
-
-const paymentPopup = ref();
-
-const tickettypes: Ref<TicketType[]> = ref(getTicketTypes());
-let amount = ref(0);
+import { fetchTicketTypesByEventId, fetchEventById, fetchEventImage } from '~/services/eventService';
 
 const selectedTickets = ref<
   { id: any; name: any; quantity: number; price: any }[]
 >([]);
 
-function getTicketTypes(): TicketType[] {
-  const results: TicketType[] = [];
+const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
+  buttonTrigger: false,
+});
 
-  const tickettype1 = new TicketType();
-  tickettype1.id = "01575dfb-eb8c-43bd-9182-376d2a7c5123";
-  tickettype1.name = "Freitag Ticket";
-  tickettype1.price = 19.99;
-  results.push(tickettype1);
+const tickettypes = ref<TicketType[]>([]);
 
-  const tickettype2 = new TicketType();
-  tickettype2.id = "01575dfb-eb8c-43bd-9182-376d2a7c5124";
-  tickettype2.name = "Samstag Ticket";
-  tickettype2.price = 24.99;
-  results.push(tickettype2);
+const event = ref<Event | null>(null);
 
-  const tickettype3 = new TicketType();
-  tickettype3.id = "01575dfb-eb8c-43bd-9182-376d2a7c5125";
-  tickettype3.name = "Wochenend Ticket";
-  tickettype3.price = 39.99;
-  results.push(tickettype3);
+const eventStore = useEventStore();
+const paymentPopup = ref();
 
-  return results;
-}
+let amount = ref(0);
+
+
+onMounted(async () => {
+  const eventId = eventStore.eventId;
+  if (!eventId) {
+    console.error("No event ID found in store");
+    return;
+  }
+  try {
+  
+  try {
+    tickettypes.value = await fetchTicketTypesByEventId(eventId);
+  } catch (error) {
+    console.error("Failed to load ticket types:", error);
+  }
+  try {
+    event.value = await fetchEventById(eventId);
+  } catch (error) {
+    console.error("Failed to load singleEvent:", error);
+  }
+
+  } catch (error) {
+    console.error("Failed to load data:", error);
+  }
+});
 
 function getUserInputs() {
   selectedTickets.value = [];
@@ -91,10 +101,6 @@ function getUserInputs() {
       });
     }
   });
-
-  // Popup anzeigen, wenn Tickets ausgewählt wurden
-  if (selectedTickets.value.length != 0) {
-  }
 }
 
 function calculateAmount() {
