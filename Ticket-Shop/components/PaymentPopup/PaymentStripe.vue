@@ -80,7 +80,7 @@ const handleSubmit = async (e: Event) => {
     const bookings = new Booking(customer, bookingItems, paymentIntent.Id);
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
-    const returnUrl = `http://localhost:3000?${queryString}`;
+    const returnUrl = useRuntimeConfig().public.returnUrl + `${queryString}`;
     if (submitError) {
       console.log("error submit");
       loading.value = false;
