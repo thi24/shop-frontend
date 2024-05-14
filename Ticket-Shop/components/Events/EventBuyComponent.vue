@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { Event } from "~/classes/Event";
 import { fetchEventImage } from '~/services/eventService';
+import noImage from '~/assets/Image/no_image.png';
 
 const props = defineProps<{
   event: Event;
@@ -46,11 +47,14 @@ const props = defineProps<{
 const loading = ref<boolean>(true);
 const thumbnail = ref<string | undefined>(undefined);
 
+
 onMounted(async () => {
   try {
     thumbnail.value = await fetchEventImage(props.event.id);
   } catch (error) {
     console.error("Failed to load event image:", error);
+    console.error("kommt hier ein error test:", error);
+    thumbnail.value = noImage;
   } finally {
     loading.value = false;
   }
