@@ -4,7 +4,7 @@
       class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg"
     >
       <div v-if="event" class="p-1 rounded-lg">
-        <EventBuyComponent :event="event" :thumbnail="thumbnail" />
+        <EventBuyComponent :event="event"  />
       </div>
 
       <div class="p-5 lg:pt-10">
@@ -41,7 +41,7 @@ import EventBuyComponent from "~/components/Events/EventBuyComponent.vue";
 import { Event } from "~/classes/Event";
 import { TicketType } from "~/classes/TicketType";
 import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
-import { fetchTicketTypesByEventId, fetchEventById } from '~/services/eventService';
+import { fetchTicketTypesByEventId, fetchEventById, fetchEventImage } from '~/services/eventService';
 
 const selectedTickets = ref<
   { id: any; name: any; quantity: number; price: any }[]
@@ -56,7 +56,6 @@ const tickettypes = ref<TicketType[]>([]);
 const event = ref<Event | null>(null);
 
 const eventStore = useEventStore();
-const thumbnail = eventStore.thumbnail;
 const paymentPopup = ref();
 
 let amount = ref(0);
@@ -64,9 +63,23 @@ let amount = ref(0);
 
 onMounted(async () => {
   const eventId = eventStore.eventId;
+  if (!eventId) {
+    console.error("No event ID found in store");
+    return;
+  }
+  try {
+  
   try {
     tickettypes.value = await fetchTicketTypesByEventId(eventId);
+  } catch (error) {
+    console.error("Failed to load ticket types:", error);
+  }
+  try {
     event.value = await fetchEventById(eventId);
+  } catch (error) {
+    console.error("Failed to load singleEvent:", error);
+  }
+
   } catch (error) {
     console.error("Failed to load data:", error);
   }
