@@ -36,6 +36,10 @@ jobs:
           VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}
           VITE_AUTH_TOKEN=${{ secrets.VITE_AUTH_TOKEN }}
           VITE_STRIPE_KEY=${{ secrets.PK_STRIPE_KEY }}
+          API_PAYMENT_INTENT=${{ secrets.API_PAYMENT_INTENT }}
+          PROCESS_ENGINE_START=${{ secrets.PROCESS_ENGINE_START }}
+          PROCESS_TOKEN=${{ secrets.PROCESS_TOKEN }}
+          INDEX_URL=${{ secrets.INDEX_URL }}
           
     - name: Call a webhook for Portainer
       uses: distributhor/workflow-webhook@v3

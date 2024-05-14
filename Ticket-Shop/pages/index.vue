@@ -27,7 +27,6 @@ onMounted(async () => {
   } catch (error) {
     console.error("Failed to load events:", error);
   }
-});
   if (window.location.href == useRuntimeConfig().public.returnUrl) {
     return;
   }
@@ -56,7 +55,7 @@ onMounted(async () => {
           },
           body: newData,
         }
-      );
+      ); 
 
       const data = await response.json();
       console.log(data);
@@ -68,6 +67,7 @@ onMounted(async () => {
     console.error("Zahlung fehlgeschlagen oder Redirect-Status ungültig.");
   }
 });
+
 function getParameterByName(name: string, url: string) {
   name = name.replace(/[\[\]]/g, "\\$&");
   const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
@@ -76,7 +76,6 @@ function getParameterByName(name: string, url: string) {
   if (!results[2]) return "";
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
 
 
 
