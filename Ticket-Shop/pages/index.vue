@@ -40,7 +40,7 @@ onMounted(async () => {
       returnOn: 1,
       initialToken: parsedData,
     });
-    console.log(newData);
+    
     window.history.replaceState({}, document.title, window.location.pathname);
 
     try {
