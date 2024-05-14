@@ -45,8 +45,15 @@ export const fetchEventImage = async (eventId: string) => {
       const response = await fetch(
         `${API_BASE_URL}/events/${eventId}/image`, options
       );
+      if (!response.ok) {
+        throw new Error('Image not found');
+      }
       const blob = await response.blob();
+      if (blob.size === 0) {
+        throw new Error('Empty image blob');
+      }
       return URL.createObjectURL(blob);
+
     } catch (error) {
       console.error('Failed to load event image:', error);
       throw error;

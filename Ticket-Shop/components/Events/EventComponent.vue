@@ -27,6 +27,7 @@ import { useRouter } from "vue-router";
 import type { Event } from "~/classes/Event";
 import { useEventStore } from "~/stores/eventIdStore";
 import { fetchEventImage } from '~/services/eventService';
+import noImage from '~/assets/Image/no_image.png';
 
 const props = defineProps<{
   event: Event;
@@ -39,6 +40,7 @@ onMounted(async () => {
     thumbnail.value = await fetchEventImage(props.event.id);
   } catch (error) {
     console.error("Failed to load event image:", error);
+    thumbnail.value = noImage;
   } finally {
     loading.value = false;
   }
