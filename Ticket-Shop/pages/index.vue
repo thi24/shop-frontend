@@ -15,7 +15,7 @@ import { onMounted, ref } from "vue";
 import EventComponent from "~/components/Events/EventComponent.vue";
 import { Event } from "~/classes/Event";
 import { fetchEvents } from '~/services/eventService';
-import { compileScript } from "vue/compiler-sfc";
+
 
 const events = ref<Event[]>([]);
 
