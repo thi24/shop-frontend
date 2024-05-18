@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Da ist was schief gelaufen :(</h1>
-  </div>
+    <p> Test</p>  </div>
 </template>
 
 <script lang="ts" setup>
