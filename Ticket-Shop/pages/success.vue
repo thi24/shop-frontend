@@ -36,46 +36,51 @@ const config = useRuntimeConfig();
 
 onMounted(async () => {
     const url = window.location.href;
+
+    if (window.location.href == useRuntimeConfig().public.returnUrl) {
+        return;
+    }
     const redirectStatus = getParameterByName("redirect_status", url);
     if (redirectStatus === "succeeded") {
-        const jsonString = getParameterByName("data", url);
-        if (jsonString) {
-            try {
-                const parsedData = JSON.parse(decodeURIComponent(jsonString));
-                const newData = JSON.stringify({
-                    returnOn: 1,
-                    initialToken: parsedData,
-                });
+        const jsonString = url.split("?")[1].split("=")[0];
+        //Muss noch aufgeraeumt werden
+        const replacedString = decodeURIComponent(jsonString);
+        const parsedData = JSON.parse(replacedString);
+        const newData = JSON.stringify({
+            returnOn: 1,
+            initialToken: parsedData,
+        });
+        console.log(newData);
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname,
+        );
 
-                window.history.replaceState(
-                    {},
-                    document.title,
-                    window.location.pathname,
-                );
-
-                const response = await fetch(config.public.processEngineStart, {
+        try {
+            const response = await fetch(
+                useRuntimeConfig().public.processEngineStart,
+                {
                     method: "POST",
                     headers: {
                         accept: "application/json",
-                        Authorization: "Bearer " + config.public.processToken,
+                        Authorization:
+                            "Bearer " + useRuntimeConfig().public.processToken,
                         "Content-Type": "application/json",
                     },
                     body: newData,
-                });
+                },
+            );
 
-                const data = await response.json();
-                console.log(data);
-                return data;
-            } catch (error) {
-                console.error("Error:", error);
-                router.push("error");
-            }
-        } else {
-            console.error("Fehlende Daten im URL-Parameter.");
-            router.push("error");
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error:", error);
+            router.push("../error");
         }
     } else {
         console.error("Zahlung fehlgeschlagen oder Redirect-Status ungültig.");
+        router.push("/error");
     }
 });
 
