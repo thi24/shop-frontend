@@ -6,7 +6,7 @@
         <p>Text für wenn Prozess fehschlägt</p>
         <p></p>
     </div>
-    <div v-if="paymentError">
+    <div v-else>
         <p>Text für wenn Zahlung fehschlägt</p>
         <p></p>
     </div>
@@ -14,4 +14,11 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
+export default {
+    data() {
+        return {
+            processError: true, // Hier kannst du den initialen Wert setzen
+        };
+    },
+};
 </script>
