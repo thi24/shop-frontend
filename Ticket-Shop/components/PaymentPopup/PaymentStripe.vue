@@ -101,7 +101,8 @@ const handleSubmit = async (e: Event) => {
         loading.value = true;
 
         if (error) {
-            router.push("/error");
+            const paymentError = true;
+            router.push(`/error/?${paymentError}`);
         } else {
             console.log("test");
         }
