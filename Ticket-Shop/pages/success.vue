@@ -12,9 +12,12 @@
             <div class="mt-6">
                 <h2 class="text-xl font-semibold">Bestelldetails</h2>
                 <ul class="mt-2 text-left text-gray-700">
-                    <li><strong>Bestellnummer:</strong> #123456</li>
-                    <li><strong>Datum:</strong> 19. Mai 2024</li>
-                    <li><strong>Betrag:</strong> €50,00</li>
+                    <li>
+                        <strong>Bestellnummer:</strong>
+                        newData.customer.stripeId
+                    </li>
+                    <li><strong>Event:</strong></li>
+                    <li><strong>Betrag:</strong></li>
                 </ul>
             </div>
             <button
@@ -33,6 +36,7 @@ import { onMounted } from "vue";
 
 const router = useRouter();
 const config = useRuntimeConfig();
+const order = ref(null);
 
 onMounted(async () => {
     const url = window.location.href;
@@ -50,7 +54,6 @@ onMounted(async () => {
             returnOn: 1,
             initialToken: parsedData,
         });
-        console.log(newData);
         window.history.replaceState(
             {},
             document.title,
@@ -71,7 +74,7 @@ onMounted(async () => {
                     body: newData,
                 },
             );
-
+            order.value = newData;
             const data = await response.json();
             return data;
         } catch (error) {
@@ -80,7 +83,7 @@ onMounted(async () => {
         }
     } else {
         console.error("Zahlung fehlgeschlagen oder Redirect-Status ungültig.");
-        router.push("/error");
+        router.push("../error");
     }
 });
 
