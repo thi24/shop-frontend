@@ -17,19 +17,39 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const bookingId = ref(0);
 onMounted(() => {
-    fetchTickets();
+    parseURL();
+    //fetchTickets();
 });
 const tickets = ref([]);
 const fetchTickets = async () => {
-    const response = await fetch("http://localhost:3000/tickets");
+    const response = await fetch(
+        `http://benevolo.de/api/ticket-service/bookings/${bookingId}`,
+    );
     const data = await response.json();
     tickets.value = data;
 };
 const refundTicket = async (ticketId: number) => {
-    await fetch(`http://localhost:3000/tickets/${ticketId}`, {
-        method: "DELETE",
+    await fetch(`http://benevolo.de/api/ticket-service/refund/${ticketId}`, {
+        method: "UPDATE",
     });
     fetchTickets();
+};
+const parseURL = () => {
+    const url = window.location.href;
+    const regex = /\$\{bookingId: ([^\}]+)\}/;
+    const match = url.match(regex);
+    if (match && match[1]) {
+        const bookingId = match[1];
+        console.log("Extracted bookingId:", bookingId);
+        return bookingId;
+    } else {
+        console.log("bookingId not found in the URL");
+
+        return null;
+    }
 };
 </script>
