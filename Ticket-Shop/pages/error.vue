@@ -35,6 +35,7 @@ const error = ref(false);
 onMounted(async () => {
   const url = window.location.href;
   if (url.includes("true")) {
+    error.value = true;
   } else {
     toggleError();
   }
