@@ -1,43 +1,57 @@
 <template>
-    <div
-        class="min-h-screen flex flex-col items-center justify-center bg-gray-100"
-    >
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-            <h1 class="text-2xl font-bold text-green-600">
-                Zahlung erfolgreich!
-            </h1>
-            <p class="mt-4 text-gray-600">
-                Vielen Dank für Ihre Bestellung. Ihre Zahlung war erfolgreich.
-            </p>
-            <div class="mt-6">
-        <h2 class="text-xl font-semibold">Bestelldetails</h2>
-        <ul class="mt-2 text-left text-gray-700">
-          <li>
-            <strong>Bestellnummer: </strong>
-            {{ orderNumber }}
-          </li>
-          <li><strong>Event: </strong> {{ eventName }}</li>
-          <li>
-            <strong>Tickets:</strong>
-            <ul>
-              <li v-for="product in products" :key="product.id" class="flex justify-between">
-                <span>{{ product.quantity }} x {{ product.name }}</span>
-                <span>{{ (product.price * product.quantity).toFixed(2) }} €</span>
-              </li>
-            </ul>
-          </li>
-          <li><strong>Betrag: </strong> {{ amount.toFixed(2) }} €</li>
-        </ul>
-      </div>
-            <button
-                @click="goToHome"
-                class="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-            >
-                Zur Startseite
-            </button>
+    <div class="flex h-screen w-full items-center justify-center">
+        <div class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded bg-gray-50 px-6 pt-12 pb-8 shadow-lg">
+        <div class="text-center">
+          <h1 class="text-2xl font-bold text-green-600">Zahlung erfolgreich!</h1>
+          <p class="mt-2 text-gray-600 text-sm">
+            Vielen Dank für Ihre Bestellung. Ihre Zahlung war erfolgreich.
+          </p>
         </div>
+        <div class="flex flex-col gap-3 border-b py-6 text-xs mt-4">
+          <p class="flex justify-between">
+            <span class="text-gray-400">Bestellnummer:</span>
+            <span>{{ orderNumber }}</span>
+          </p>
+          <p class="flex justify-between">
+            <span class="text-gray-400">Event:</span>
+            <span>{{ eventName }}</span>
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 pb-6 pt-2 text-xs">
+          <table class="w-full text-left table-fixed">
+            <thead>
+              <tr >
+                <th class="w-1/2 py-2">Tickets</th>
+                <th class="w-1/4 py-2 text-right">Menge</th>
+                <th class="w-1/4  py-2 text-right">Gesamt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="product in products" :key="product.id">
+                <td class="py-1">{{ product.name }}</td>
+                <td class="py-1 text-right">{{ product.quantity }}</td>
+                <td class="py-1 text-right">{{ (product.price * product.quantity).toFixed(2) }} €</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="border-b border border-dashed"></div>
+          <p class="flex justify-between">
+            <span >Bezahlt:</span>
+            <span>{{ amount.toFixed(2) }} €</span>
+          </p>
+          <div class="py-4 flex justify-center items-center flex-col gap-2">
+            <button
+              @click="goToHome"
+              class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+            >
+              Zur Startseite
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-</template>
+  </template>
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
