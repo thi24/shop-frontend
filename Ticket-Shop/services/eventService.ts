@@ -5,13 +5,8 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;;
 
 export const fetchEvents = async () => {
   try {
-    const token = import.meta.env.VITE_AUTH_TOKEN;
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    return await $fetch(`${API_BASE_URL}/events`, options);
+
+    return await $fetch(`${API_BASE_URL}/events/public`);
   } catch (error) {
     console.error('Failed to load events:', error);
     throw error; 
@@ -20,13 +15,8 @@ export const fetchEvents = async () => {
 
 export const fetchEventById = async (eventId: string) => {
   try {
-    const token = import.meta.env.VITE_AUTH_TOKEN;
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    return await $fetch(`${API_BASE_URL}/events/${eventId}`, options);
+
+    return await $fetch(`${API_BASE_URL}/events/public/${eventId}`);
   } catch (error) {
     console.error('Failed to load event details:', error);
     throw error;
@@ -35,15 +25,9 @@ export const fetchEventById = async (eventId: string) => {
 };
 
 export const fetchEventImage = async (eventId: string) => {
-    const token = import.meta.env.VITE_AUTH_TOKEN;
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
     try {
       const response = await fetch(
-        `${API_BASE_URL}/events/${eventId}/image`, options
+        `${API_BASE_URL}/events/public/${eventId}/image`
       );
       if (!response.ok) {
         throw new Error('Image not found');
@@ -61,13 +45,7 @@ export const fetchEventImage = async (eventId: string) => {
   };
 export const fetchTicketTypesByEventId = async (eventId: string) => {
     try {
-        const token = import.meta.env.VITE_AUTH_TOKEN;
-        const options = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-      return await $fetch(`${API_BASE_URL}/ticket-types?eventId=${eventId}`, options);
+      return await $fetch(`${API_BASE_URL}/ticket-types/public/?eventId=${eventId}`);
     } catch (error) {
       console.error('Failed to load ticket types:', error);
       throw error;
