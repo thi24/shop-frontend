@@ -1,12 +1,12 @@
 <template>
     <header
-        class="bg-white bg-[radial-gradient(ellipse_100%_100%_at_10%_10%,rgba(0,152,228,0.42),rgba(255,255,255,0))] shadow py-2 fixed: top-0 start-0"
+        class="bg-white bg-[radial-gradient(ellipse_100%_100%_at_50%_30%,rgba(112,145,230,0.700),rgba(255,255,255,0))] shadow py-2 fixed: top-0 start-0"
     >
         <div class="flex flex-wrap justify-between items-center mx-auto">
             <nuxt-link to="/">
                 <div class="flex items-center space-x-1">
 
-                    <h1 class="px-10 text-4xl font-bold leading-6">
+                    <h1 class="px-10 text-4xl font-bold leading-6 ">
                         Benevolo-Shop new 2.0
                     </h1>
                 </div>
