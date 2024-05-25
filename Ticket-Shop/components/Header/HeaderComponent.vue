@@ -5,6 +5,7 @@
         <div class="flex flex-wrap justify-between items-center mx-auto">
             <nuxt-link to="/">
                 <div class="flex items-center space-x-1">
+
                     <h1 class="px-10 text-4xl font-bold leading-6">
                         Benevolo-Shop new 2.0
                     </h1>

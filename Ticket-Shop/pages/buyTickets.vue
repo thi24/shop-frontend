@@ -44,7 +44,7 @@ import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue
 import { fetchTicketTypesByEventId, fetchEventById, fetchEventImage } from '~/services/eventService';
 
 const selectedTickets = ref<
-  { id: any; name: any; quantity: number; price: any }[]
+  { id: any; name: any; quantity: number; price: any; eventName: string}[]
 >([]);
 
 const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
@@ -98,6 +98,7 @@ function getUserInputs() {
         name: ticketType.name,
         price: ticketType.price,
         quantity: parseInt(inputElement.value),
+        eventName: event.value!.eventName,
       });
     }
   });
