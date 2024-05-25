@@ -48,7 +48,7 @@
                         :key="index"
                       >
                         {{ ticket.quantity }}x "{{ ticket.name }}" á
-                        {{ ticket.price }}€
+                        {{ ticket.price }}€ 
                       </li>
                     </ul>
                     <div class="mt-2">
