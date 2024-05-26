@@ -47,7 +47,7 @@
                         v-for="(ticket, index) in selectedTickets"
                         :key="index"
                       >
-                        {{ ticket.quantity }}x "{{ ticket.name }}" á
+                        {{ ticket.quantity }}x {{ ticket.name }} 
                         {{ ticket.price }}€ 
                       </li>
                     </ul>

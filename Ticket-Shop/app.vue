@@ -4,7 +4,7 @@
     <HeaderComponent />
 
 
-    <NuxtPage class="flex-1 overflow-y-auto scrollbar-hide" />
+    <NuxtPage class="flex-1 overflow-y-auto scrollbar-hide " />
 
     <FooterComponent class="mt-auto" />
   </div>

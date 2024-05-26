@@ -23,7 +23,7 @@
     </div>
   </div>
   <div v-else>
-    <p>Text für wenn Zahlung fehschlägt</p>
+
   </div>
 </template>
 
