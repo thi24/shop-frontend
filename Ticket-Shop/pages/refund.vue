@@ -20,7 +20,7 @@
         <div class="text-center">
           <h1 class="text-2xl font-bold text-blue-600">Rückerstattung</h1>
           <p class="mt-2 text-gray-600 text-sm">
-            Welche Tickets möchten Sie rückerstatten lassen?
+            Bitte wählen Sie die Tickets aus, die Sie stornieren möchten.
           </p>
         </div>
         <div class="flex flex-col gap-3 py-6 text-xs mt-4">
@@ -28,13 +28,13 @@
             <thead>
               <tr>
                 <th class="w-3/4 py-2">Tickets</th>
-                <th class="w-1/4 py-2 text-center"></th>
+                <th class="w-1/4 py-2 text-center">test</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="ticket in tickets" :key="ticket.id">
-                <td class="py-1">{{ ticket.name }}</td>
-                <td class="py-1 text-center">
+                <td class=" py-1 ">{{ ticket.name }}</td>
+                <td class=" py-1 text-center">
                   <input type="checkbox" v-model="selectedTickets" :value="ticket.id" />
                 </td>
               </tr>
@@ -53,7 +53,7 @@
               @click="validateAndProcessRefund"
               class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
             >
-              Rückerstatten
+              Stornieren
             </button>
           </div>
         </div>
@@ -100,6 +100,9 @@ const processRefund = () => {
 const validateAndProcessRefund = () => {
   if (selectedTickets.value.length === 0) {
     errorMessage.value = "Bitte wählen Sie mindestens ein Ticket aus.";
+    setTimeout(() => {
+      errorMessage.value = null;
+    }, 3000);
   } else {
     errorMessage.value = null;
     processRefund();
