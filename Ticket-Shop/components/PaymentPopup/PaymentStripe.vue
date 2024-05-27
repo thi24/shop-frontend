@@ -86,7 +86,7 @@ const handleSubmit = async (e: Event) => {
     const bookings = new Booking(customer, bookingItems, paymentIntent.id);
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
-    const returnUrl = `http://localhost:3000/success/?${queryString}`;
+    const returnUrl = `${useRuntimeConfig().public.returnUrl}/success/?${queryString}`;
 
     // Save the payment details in the store
     paymentStore.setPaymentDetails(paymentIntent.id, eventName, props.amount, props.products);
