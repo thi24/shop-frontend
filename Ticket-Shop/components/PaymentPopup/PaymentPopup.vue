@@ -55,6 +55,7 @@
                       <PaymentStripe
                         :amount="popUpAmount"
                         :products="props.selectedTickets"
+                        :eventId="selectedTickets[0].eventId"
                       />
                     </div>
                   </div>
@@ -93,8 +94,9 @@ import {
 
 const props = defineProps({
   selectedTickets: Array,
-  eventId: String,
+  //eventId: String,
 });
+
 
 let popUpAmount = ref(0);
 const open = ref(false);
