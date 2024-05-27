@@ -16,6 +16,7 @@ const config = useRuntimeConfig();
 const props = defineProps({
   amount: { type: Number, required: true },
   products: { type: Array, required: true },
+  eventId: { type: String, required: true },
 });
 
 let stripe: Stripe | null;
@@ -83,11 +84,15 @@ const handleSubmit = async (e: Event) => {
 
     const customer = new Customer(email, undefined, paymentIntent.id);
     const clientSecret = paymentIntent.client_secret;
-    const bookings = new Booking(customer, bookingItems, paymentIntent.id);
+
+    //const eventId = "testEventId";
+    const bookings = new Booking(customer, bookingItems, props.eventId);
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
-    
+    // für online
     const returnUrl = `${useRuntimeConfig().public.returnUrl}/success?${queryString}`;
+    //für lokal testen
+    //const returnUrl = `http://localhost:3000/success/?${queryString}`;
 
     // Save the payment details in the store
     paymentStore.setPaymentDetails(paymentIntent.id, eventName, props.amount, props.products);

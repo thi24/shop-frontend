@@ -9,7 +9,7 @@
 
       <div class="p-5 lg:pt-10">
         <div
-          class="p-1 lg:rounded-lg rounded-lg lg:shadow-lg shadow-lg px-1"
+          class=" bg-slate-100 p-1 lg:rounded-lg rounded-lg lg:shadow-lg shadow-lg px-1"
         >
           <div
             v-for="ticketType in tickettypes"
@@ -44,7 +44,7 @@ import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue
 import { fetchTicketTypesByEventId, fetchEventById, fetchEventImage } from '~/services/eventService';
 
 const selectedTickets = ref<
-  { id: any; name: any; quantity: number; price: any; eventName: string}[]
+  { id: any; name: any; quantity: number; price: any; eventName: string; eventId: any}[]
 >([]);
 
 const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
@@ -99,6 +99,7 @@ function getUserInputs() {
         price: ticketType.price,
         quantity: parseInt(inputElement.value),
         eventName: event.value!.eventName,
+        eventId: ticketType.event!.id,
       });
     }
   });

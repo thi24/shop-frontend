@@ -67,7 +67,8 @@ const { orderNumber, eventName, amount, products } = storeToRefs(paymentStore);
 onMounted(async () => {
     const url = window.location.href;
     const processEngineCalled = localStorage.getItem('processEngineCalled');
-    console.log("processEngineCalled:", processEngineCalled);
+
+
     if (window.location.href == useRuntimeConfig().public.returnUrl) {
         return;
     }
@@ -76,9 +77,12 @@ onMounted(async () => {
 
     if (redirectStatus === "succeeded" ) {
         const jsonString = url.split("?")[1].split("=")[0];
+
         //Muss noch aufgeraeumt werden
         const replacedString = decodeURIComponent(jsonString);
         const parsedData = JSON.parse(replacedString);
+
+
         const newData = JSON.stringify({
             returnOn: 1,
             initialToken: parsedData,
