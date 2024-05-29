@@ -80,9 +80,6 @@ onMounted(async () => {
         `https://dev.benevolo.de/api/analytics-service/events/${eventId}/event-views`,
         {
             method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
         },
     );
     if (!eventId) {
