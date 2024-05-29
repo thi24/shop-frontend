@@ -14,7 +14,7 @@
             </div>
             <div class="flex flex-col gap-3 border-b py-6 text-xs mt-4">
                 <p class="flex justify-between">
-                    <span class="text-gray-400">Bestellnummer:</span>
+                    <span class="text-gray-400">Kundennummer:</span>
                     <span>{{ orderNumber }}</span>
                 </p>
                 <p class="flex justify-between">
