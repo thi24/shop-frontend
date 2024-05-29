@@ -85,7 +85,6 @@ onMounted(async () => {
             },
         },
     );
-    console.log(response);
     if (!eventId) {
         console.error("No event ID found in store");
         return;
