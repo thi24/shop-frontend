@@ -90,9 +90,10 @@ const handleSubmit = async (e: Event) => {
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
     // für online
-    const returnUrl = `${useRuntimeConfig().public.returnUrl}/success?${queryString}`;
+    //const returnUrl = `${useRuntimeConfig().public.returnUrl}/success?${queryString}`;
     //für lokal testen
-    //const returnUrl = `http://localhost:3000/success/?${queryString}`;
+    const returnUrl = `http://localhost:3000/success/?${queryString}`;
+    
 
     // Save the payment details in the store
     paymentStore.setPaymentDetails(paymentIntent.id, eventName, props.amount, props.products);

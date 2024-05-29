@@ -96,10 +96,7 @@ onMounted(async () => {
             const replacedString = decodeURIComponent(jsonString);
             const parsedData = JSON.parse(replacedString);
             //Die bereinigten Daten für die Engine aufbereitet
-            const newData = JSON.stringify({
-                returnOn: 1,
-                initialToken: parsedData,
-            });
+            const newData = JSON.stringify(parsedData);
             //Window Title bereinigen
             window.history.replaceState(
                 {},
@@ -122,9 +119,9 @@ onMounted(async () => {
                         body: newData,
                     },
                 );
-                const data = await response.json();
+                // bekommen wir nicht mehr zurück
                 localStorage.setItem("processEngineCalled", "true");
-                return data;
+
             } catch (error) {
                 console.error("Error:", error);
                 router.push("../error");
