@@ -1,6 +1,7 @@
 <template>
+
   <div 
-    class="bg-slate-100 flex flex-col items-center rounded-lg overflow-hidden shadow-xl m-4 cursor-pointer"
+    class="bg-white flex flex-col items-center rounded-lg overflow-hidden shadow-xl m-4 cursor-pointer "
     @click="navigateToBuyTickets(event.id)"
   >
   <div v-if="loading" class="flex justify-center items-center w-full h-48">
@@ -12,7 +13,7 @@
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <img v-else class="w-full h-48" :src="thumbnail" alt="test" />
+    <img v-else class="w-full h-48 object-cover" :src="thumbnail" alt="test" />
     <div
       class="p-4 rounded-md hover:from-gray-300 hover:to-gray-200 active:shadow-none"
     >

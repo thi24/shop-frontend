@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-stone-100">
+  
         <div class="mx-auto">
             <div
                 class="pt-4 px-4 hover:rounded-lg rounded-3xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
@@ -8,9 +8,10 @@
                     v-for="event in events"
                     :event="event"
                 ></EventComponent>
+
             </div>
         </div>
-    </div>
+
 </template>
 
 <script lang="ts" setup>

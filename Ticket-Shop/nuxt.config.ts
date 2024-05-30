@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "@unlok-co/nuxt-stripe",
   ],
+
   runtimeConfig: {
     public: {
       apiPaymentIntent: process.env.API_PAYMENT_INTENT,

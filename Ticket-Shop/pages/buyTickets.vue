@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-9xl mx-auto px-1 py-1 lg:px-3 lg:py-3">
+
         <div
             class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg"
         >
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 </template>
 
 <script lang="ts" setup>

@@ -1,8 +1,7 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-6">
     <div class="bg-slate-100 shadow-lg rounded-lg">
       <div
-        class="h-64 bg-cover bg-center rounded-t-lg"
+        class="h-64 bg-cover bg-center rounded-lg"
       >
       <div v-if="loading" class="flex justify-center items-center w-full h-48">
       <div role="status">
@@ -32,12 +31,11 @@
           <span class="text-gray-700">{{ formatTime(new Date(event.startsAt)) }}</span>
         </div>
         <div class="text-sm text-gray-600">
-          <p>{{ event.address.street }}</p>
+
           <p>{{ event.address.street }}, {{ event.address.zip }}</p>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
