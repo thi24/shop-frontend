@@ -1,6 +1,6 @@
 <template>
     <header
-        class="bg-white bg-[radial-gradient(ellipse_100%_100%_at_50%_30%,rgba(112,145,230,0.700),rgba(255,255,255,0))] shadow py-2 fixed: top-0 start-0"
+        class="bg-blue bg-[radial-gradient(ellipse_100%_100%_at_20%_30%,rgba(112,145,230,0.700),rgba(255,255,255,0))] shadow py-2 fixed: top-0 start-0"
     >
         <div class="flex flex-wrap justify-between items-center mx-auto">
             <nuxt-link to="/">
