@@ -40,7 +40,7 @@ onMounted(async () => {
   try {
     thumbnail.value = await fetchEventImage(props.event.id);
   } catch (error) {
-    console.error("Failed to load event image:", error);
+    //console.error("Failed to load event image:", error);
     thumbnail.value = noImage;
   } finally {
     loading.value = false;
