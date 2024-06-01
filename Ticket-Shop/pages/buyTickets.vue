@@ -1,40 +1,41 @@
 <template>
-
-        <div
-            class="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-2 hover:rounded-lg"
-        >
+    <div class="flex flex-wrap ">
+        <!-- ab hier EventBuyComponent -->
+        <div class="w-full rounded-lg lg:w-1/2 p-1 mt-2 mr-4 ml-2 sm:ml-6 sm:mr-6 md:mr-8 md:ml-8 lg:ml-12 lg:mr-12 xl:mr-20 xl:ml-20 2xl:mr-30 2xl:ml-30">
             <div v-if="event" class="p-1 rounded-lg">
                 <EventBuyComponent :event="event" />
             </div>
+        </div>
 
-            <div class="p-5 lg:pt-10">
+            <!-- ab hier Ticket auswahl Component -->
+            <div class="w-full rounded-lg lg:w-1/3">
+            <div
+                class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md border border-blue-gray-100 mt-4 mr-4 ml-4 sm:ml-6 sm:mr-6 md:mr-8 md:ml-8 lg:ml-12 lg:mr-12 xl:mr-10 xl:ml-10 2xl:mr-30 2xl:ml-20">
                 <div
-                    class="bg-slate-100 p-1 lg:rounded-lg rounded-lg lg:shadow-lg shadow-lg px-1"
-                >
-                    <div
-                        v-for="ticketType in tickettypes"
-                        :key="ticketType.id"
-                        class="last:mb-0"
-                    >
-                        <TicketTypeComponent :ticketType="ticketType" />
+                    class="relative bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-transparent text-gray-700 shadow-none !m-0 p-6">
+                    <h5
+                        class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 capitalize">
+                        Tickets</h5>
+                </div>
+                <div class="p-6 border-t border-blue-gray-50">
+                    <div v-for="ticketType in tickettypes" :key="ticketType.id" class="p-3 m-3 flex bg-white border-b">
+                        <label :for="'number-input-' + ticketType.id" class="flex-1">{{ ticketType.name }}</label>
+                        <label :for="'number-input-' + ticketType.id" class="flex-1">{{ ticketType.price }}€</label>
+                        <input :id="'number-input-' + ticketType.id" type="number" min="0" max="999" value="0" 
+                            class="p-1 rounded-lg focus:outline-none w-18 placeholder-gray-400 border-gray-300 border [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" />
                     </div>
-
-                    <div class="flex justify-center mt-4 pb-4">
+                    <div class="flex justify-center">
                         <button
-                            class="relative z-0 h-12 rounded-full bg-blue-500 px-6 text-neutral-50 after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:rounded-full after:bg-blue-500 hover:after:scale-x-125 hover:after:scale-y-150 hover:after:opacity-0 hover:after:transition hover:after:duration-500"
-                            @click="paymentPopup.openPopup(calculateAmount())"
-                        >
+                            class="w-1/2 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg border border-green-500 text-green-500 hover:opacity-75 focus:ring focus:ring-green-200 active:opacity-[0.85]"
+                            @click="paymentPopup.openPopup(calculateAmount())">
                             Jetzt bezahlen
                         </button>
                     </div>
-                    <PaymentPopup
-                        ref="paymentPopup"
-                        :selectedTickets="selectedTickets"
-                    />
                 </div>
             </div>
+            <PaymentPopup ref="paymentPopup" :selectedTickets="selectedTickets" />
         </div>
-
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -43,7 +44,7 @@ import { useEventStore } from "~/stores/eventIdStore";
 import EventBuyComponent from "~/components/Events/EventBuyComponent.vue";
 import { Event } from "~/classes/Event";
 import { TicketType } from "~/classes/TicketType";
-import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
+//import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 import {
     fetchTicketTypesByEventId,
     fetchEventById,
