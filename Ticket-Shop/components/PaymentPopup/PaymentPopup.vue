@@ -106,7 +106,7 @@ const openPopup = (amount) => {
   if (amount.value > 0) {
     open.value = true;
   } else {
-    alert("Bitte treffen Sie eine Auswahl!");
+    //alert("Bitte treffen Sie eine Auswahl!");
   }
 };
 defineExpose({

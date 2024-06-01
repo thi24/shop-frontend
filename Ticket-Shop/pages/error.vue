@@ -1,29 +1,25 @@
 <template>
-  <div class="flex flex-col justify-center items-center" v-if="error">
+  <div class="relative flex h-screen w-full items-start justify-center pt-10" v-if="error">
     <div
-      class="bg-slate-100 flex flex-col items-center rounded-lg overflow-hidden shadow-xl m-4 cursor-pointer w-1/2 p-4"
-    >
-      <img class="w-24 h-24" src="../utils/pictures/error.png" />
-      <h1
-        class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-3xl"
-      >
-        Die Zahlung ist fehlgeschlagen
+      class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-slate-100 flex flex-col items-center rounded-lg overflow-hidden shadow-xl p-6 m-4">
+      <img class="w-24 h-24 mb-4" src="../utils/pictures/error.png" />
+      <h1 class="text-2xl font-extrabold text-center text-black md:text-3xl lg:text-4xl mb-4">
+        Zahlung fehlgeschlagen
       </h1>
-      <p class="text-center">
-        Es wurde versucht die Zahlung durchzuführen, aber etwas ist
-        fehlgeschlagen. Das tut uns sehr leid! <br />
-        Bitte versuchen Sie es in ein paar Minuten noch einmal.
+      <p class="text-center mt-2 text-gray-600">
+        Leider ist ein Fehler bei der Verarbeitung Ihrer Zahlung aufgetreten. <br />
+        Wir entschuldigen uns für die Unannehmlichkeiten. <br />
+        Bitte versuchen Sie es in ein paar Minuten noch einmal oder wählen Sie eine andere Zahlungsmethode.
       </p>
       <button
-        class="mt-4 relative z-0 h-12 rounded-full bg-blue-500 px-6 text-neutral-50 after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:rounded-full after:bg-blue-500 hover:after:scale-x-125 hover:after:scale-y-150 hover:after:opacity-0 hover:after:transition hover:after:duration-500"
-        @click="navigateToIndex()"
-      >
-        Ok
+        class="mt-4 bg-blue-500 text-white py-2 px-8 rounded-lg hover:bg-blue-600 transition-all"
+        @click="navigateToIndex()">
+        Zurück zur Startseite
       </button>
     </div>
   </div>
   <div v-else>
-
+    <!-- Your other content here -->
   </div>
 </template>
 
