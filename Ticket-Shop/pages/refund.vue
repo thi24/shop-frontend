@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex h-screen w-full items-center justify-center">
+    <div class="relative flex h-screen w-full items-start justify-center pt-10">
         <div
             v-if="errorMessage"
             id="alert-1"
