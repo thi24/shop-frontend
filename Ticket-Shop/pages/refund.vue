@@ -60,15 +60,15 @@
                 <table class="w-full text-left table-fixed">
                     <thead>
                         <tr>
-                            <th class="w-3/4 py-2">Tickets</th>
-                            <th class="">Preis in €</th>
-                            <th class="w-1/4 py-2 text-center">test</th>
+                            <th class="w-4/6 py-2">Tickets</th>
+                            <th class="w-1/6 py-2">Preis</th>
+                            <th class="w-1/6 py-2 text-center">Anzahl</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="ticket in tickets" :key="ticket.id">
                             <td class="py-1">{{ ticket.name }}</td>
-                            <td class="py-1">{{ ticket.price }}</td>
+                            <td class="py-1">{{ ticket.price }} €</td>
                             <td class="py-1 text-center">
                                 <input
                                     type="checkbox"
@@ -108,9 +108,11 @@ const bookingId = ref("");
 const selectedTickets = ref<number[]>([]);
 const errorMessage = ref<string | null>(null);
 /*const tickets = ref([
-    { id: 1, name: "Ticket 1" },
-    { id: 2, name: "Ticket 2" },
-    { id: 3, name: "Ticket 3" },
+    { id: 1, name: "Ticket 1", price: 1000},
+    { id: 2, name: "Ticket 2", price: 20},
+    { id: 3, name: "Ticket 3", price: 30},
+    { id: 4, name: "Ticket 4", price: 40},
+
 ]);*/
 
 onMounted(() => {
