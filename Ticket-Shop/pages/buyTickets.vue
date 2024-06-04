@@ -46,13 +46,10 @@
               class="p-1 rounded-lg focus:outline-none w-11 placeholder-gray-400 border-gray-300 border [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
             />
           </div>
-          <div
-            class="flex justify-center p-3"
-            style="display: none"
-            id="messageNotNumericValue"
-          >
-            <p class="text-red-500">Bitte nur Zahlen von 0 bis 9 eingeben!</p>
-          </div>
+          <!--<div v-for="tickettype in tickettypes">
+            <TicketTypeComponent :tickettype="tickettype"></TicketTypeComponent>
+          </div>-->
+
           <div class="flex justify-center">
             <button
               class="w-1/2 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg border border-blue-500 text-blue-500 hover:opacity-75 focus:ring focus:ring-blue-200 active:opacity-[0.85]"
@@ -77,6 +74,7 @@
 import { ref, type Ref } from "vue";
 import { useEventStore } from "~/stores/eventIdStore";
 import EventBuyComponent from "~/components/Events/EventBuyComponent.vue";
+import TicketTypeComponent from "~/components/TicketType/TicketTypeComponent.vue";
 import AlertComponent from "~/components/Alerts/Alert1Component.vue";
 import { Event } from "~/classes/Event";
 import { TicketType } from "~/classes/TicketType";
@@ -181,13 +179,14 @@ function handlePayment() {
     } else {
       paymentPopup.value.openPopup(calculateAmount());
     }
+  } else {
+    errorMessage.value = "Bitte geben Sie nur Zahlen von 0 bis 9 ein!";
   }
 }
 
 function checkInputs() {
   var inputsAreNumeric = true;
   var inputs = document.getElementsByTagName("input");
-  var message = document.getElementById("messageNotNumericValue");
 
   for (var i = 1; i < inputs.length; ++i) {
     var inputValue = inputs[i].value.trim();
@@ -197,15 +196,10 @@ function checkInputs() {
     ) {
       inputsAreNumeric = false;
       inputs[i].style.outline = "2px solid red";
-      message.style.display = "flex";
       console.log("Input " + i + " is not numeric. Value: " + inputValue);
     } else {
       inputs[i].style.outline = "";
     }
-  }
-
-  if (message.style.display === "block" && inputsAreNumeric) {
-    message.style.display = "none";
   }
 
   return inputsAreNumeric;
