@@ -1,15 +1,16 @@
 <template>
     <header
-        class="bg-white bg-[radial-gradient(ellipse_100%_100%_at_10%_10%,rgba(0,152,228,0.42),rgba(255,255,255,0))] shadow py-2 fixed: top-0 start-0"
+        class="bg-blue bg-[radial-gradient(ellipse_100%_100%_at_20%_30%,rgba(112,145,230,0.700),rgba(255,255,255,0))] shadow py-2 fixed: top-0 start-0"
     >
         <div class="flex flex-wrap justify-between items-center mx-auto">
-            <div class="flex items-center space-x-1">
-                <router-link to="/">
-                    <h1 class="px-10 text-4xl font-bold leading-6">
-                        Benevolo-Shop new Auth
+            <nuxt-link to="/">
+                <div class="flex items-center space-x-1">
+
+                    <h1 class="px-10 text-4xl font-bold leading-6 ">
+                        Benevolo-Shop
                     </h1>
-                </router-link>
-            </div>
+                </div>
+            </nuxt-link>
             <div class="p-4 flex justify-center">
                 <form class="max-w-md mx-auto">
                     <label

@@ -7,6 +7,7 @@
                 viewBox="0 0 20 20">
                 <path
                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+
             </svg>
             <span class="sr-only">Info</span>
             <div class="ml-3 text-sm font-medium">
@@ -20,11 +21,13 @@
                     viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+
                 </svg>
             </button>
         </div>
 
         <div
+
             class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded bg-gray-50 px-6 pt-12 pb-8 shadow-lg">
             <div class="text-center">
                 <h1 class="text-2xl font-bold text-blue-600">Rückerstattung</h1>
@@ -34,12 +37,14 @@
                 </p>
             </div>
             <div class="flex flex-col gap-3 py-6 text-xs mt-4">
+
                 <table v-if="tickets.length > 0 "class="w-full text-left table-fixed">
                     <thead>
                         <tr>
                             <th class="w-4/6 py-2">Tickets</th>
                             <th class="w-1/6 py-2">Preis</th>
                             <th class="w-1/6 py-2 text-center">Anzahl</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +53,7 @@
                             <td class="py-1">{{ ticket.price }} €</td>
                             <td class="py-1 text-center">
                                 <input type="checkbox" v-model="selectedTickets" :value="ticket.id" />
+
                             </td>
                         </tr>
                     </tbody>
@@ -61,6 +67,7 @@
                     </button>
                     <button @click="showPopup"
                         class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
+
                         Stornieren
                     </button>
                 </div>
@@ -115,6 +122,7 @@ onMounted(() => {
     fetchTickets();
 });
 
+
 // Laden der Bestellung anhand der ID
 
 const fetchTickets = async () => {
@@ -159,6 +167,7 @@ const processRefund = async () => {
     } catch (error) {
         console.error("Error processing refund:", error);
         router.push("/cancellationError");
+
     }
 };
 
@@ -180,4 +189,5 @@ const parseURL = () => {
 const goToHome = () => {
     router.push("/");
 };
+
 </script>

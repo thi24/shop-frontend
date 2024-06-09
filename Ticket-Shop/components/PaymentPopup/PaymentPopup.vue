@@ -47,14 +47,15 @@
                         v-for="(ticket, index) in selectedTickets"
                         :key="index"
                       >
-                        {{ ticket.name }} - {{ ticket.quantity }} -
-                        {{ ticket.price }}€
+                        {{ ticket.quantity }}x {{ ticket.name }} 
+                        {{ ticket.price }}€ 
                       </li>
                     </ul>
                     <div class="mt-2">
                       <PaymentStripe
                         :amount="popUpAmount"
                         :products="props.selectedTickets"
+                        :eventId="selectedTickets[0].eventId"
                       />
                     </div>
                   </div>
@@ -93,8 +94,9 @@ import {
 
 const props = defineProps({
   selectedTickets: Array,
-  eventId: String,
+  //eventId: String,
 });
+
 
 let popUpAmount = ref(0);
 const open = ref(false);
@@ -104,7 +106,7 @@ const openPopup = (amount) => {
   if (amount.value > 0) {
     open.value = true;
   } else {
-    alert("Bitte treffen Sie eine Auswahl!");
+    //alert("Bitte treffen Sie eine Auswahl!");
   }
 };
 defineExpose({
