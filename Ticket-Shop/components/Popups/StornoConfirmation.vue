@@ -17,18 +17,12 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+import { Ticket } from "~/classes/Ticket";
 
-const props = defineProps({
-  visible: {
-    type: Boolean,
-    default: false
-  },
-  selectedTicketsDetails: {
-    type: Array,
-    default: () => []
-  }
-});
+const props = defineProps<{
+  visible: boolean;
+  selectedTicketsDetails: Ticket[];
+}>();
 
 const emit = defineEmits(['confirm', 'cancel']);
 
