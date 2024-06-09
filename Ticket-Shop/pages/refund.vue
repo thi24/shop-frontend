@@ -67,7 +67,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="ticket in tickets" :key="ticket.id">
+<<<<<<< HEAD
                             <td class="py-1">{{ ticket.id }}</td>
+=======
+                            <td class="py-1">{{ ticket.name }}</td>
+>>>>>>> 29e66fbb561121195c1ae4ada7f1716abf848d4d
                             <td class="py-1">{{ ticket.price }} €</td>
                             <td class="py-1 text-center">
                                 <input
@@ -107,7 +111,17 @@ const router = useRouter();
 const refundId = ref("");
 const selectedTickets = ref<number[]>([]);
 const errorMessage = ref<string | null>(null);
+<<<<<<< HEAD
 const tickets = ref([]);
+=======
+/*const tickets = ref([
+    { id: 1, name: "Ticket 1", price: 1000},
+    { id: 2, name: "Ticket 2", price: 20},
+    { id: 3, name: "Ticket 3", price: 30},
+    { id: 4, name: "Ticket 4", price: 40},
+
+]);*/
+>>>>>>> 29e66fbb561121195c1ae4ada7f1716abf848d4d
 
 onMounted(() => {
     parseURL();
