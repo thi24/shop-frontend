@@ -34,7 +34,7 @@
                 </p>
             </div>
             <div class="flex flex-col gap-3 py-6 text-xs mt-4">
-                <table class="w-full text-left table-fixed">
+                <table v-if="tickets.length > 0 "class="w-full text-left table-fixed">
                     <thead>
                         <tr>
                             <th class="w-4/6 py-2">Tickets</th>
@@ -52,7 +52,7 @@
                         </tr>
                     </tbody>
                 </table>
-
+                <p v-else class="text-center text-gray-500">Keine Tickets verfügbar.</p>
                 <div class="border-b border border-dashed"></div>
                 <div class="py-4 flex justify-center items-center gap-20">
                     <button @click="goToHome"
@@ -120,7 +120,7 @@ onMounted(() => {
 const fetchTickets = async () => {
     try {
         const response = await fetch(
-            `https://dev.benevolo.de/api/ticket-service/tickets/public/093d3023-2b42-4523-940f-e971c392522b`,
+            `https://dev.benevolo.de/api/ticket-service/tickets/public/${refundId.value}`,
             {
                 method: "GET",
                 headers: {
@@ -140,7 +140,7 @@ const fetchTickets = async () => {
 const processRefund = async () => {
     try {
         const response = await fetch(
-            `https://dev.benevolo.de/api/ticket-service/cancellations/093d3023-2b42-4523-940f-e971c392522b`,
+            `https://dev.benevolo.de/api/ticket-service/cancellations/${refundId.value}`,
             {
                 method: "POST",
                 headers: {
