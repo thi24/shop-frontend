@@ -60,15 +60,15 @@
                 <table class="w-full text-left table-fixed">
                     <thead>
                         <tr>
-                            <th class="w-3/4 py-2">Tickets</th>
-                            <th class="">Preis in €</th>
-                            <th class="w-1/4 py-2 text-center">test</th>
+                            <th class="w-4/6 py-2">Tickets</th>
+                            <th class="w-1/6 py-2">Preis</th>
+                            <th class="w-1/6 py-2 text-center">Anzahl</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="ticket in tickets" :key="ticket.id">
-                            <td class="py-1">{{ ticket.name }}</td>
-                            <td class="py-1">{{ ticket.price }}</td>
+                            <td class="py-1">{{ ticket.id }}</td>
+                            <td class="py-1">{{ ticket.price }} €</td>
                             <td class="py-1 text-center">
                                 <input
                                     type="checkbox"
@@ -99,55 +99,61 @@
         </div>
     </div>
 </template>
-
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+
 const router = useRouter();
-const bookingId = ref("");
+const refundId = ref("");
 const selectedTickets = ref<number[]>([]);
 const errorMessage = ref<string | null>(null);
-/*const tickets = ref([
-    { id: 1, name: "Ticket 1" },
-    { id: 2, name: "Ticket 2" },
-    { id: 3, name: "Ticket 3" },
-]);*/
+const tickets = ref([]);
 
 onMounted(() => {
     parseURL();
     fetchTickets();
+    console.log(tickets.value);
 });
-const tickets = ref([]);
+
+// Laden der Bestellung anhand der ID
 const fetchTickets = async () => {
-    const response = await fetch(
-        `https://dev.benevolo.de/api/ticket-service/bookings/${bookingId.value}`,
-        {
-            method: "GET",
-            headers: {
-                Authorization: "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
-                "Content-Type": "application/json",
+    try {
+        const response = await fetch(
+            `https://dev.benevolo.de/api/ticket-service/tickets/public/${refundId.value}`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
+                },
             },
-        },
-    );
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder("utf-8");
-    let result = "";
-    while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        result += decoder.decode(value);
+        );
+        const data = await response.json();
+        tickets.value = data;
+    } catch (error) {
+        console.error("Error fetching tickets:", error);
+        errorMessage.value = "Fehler beim Laden der Tickets.";
     }
-    const data = JSON.parse(result);
-    tickets.value = data;
 };
-const refundTicket = async (ticketId: number) => {
-    await fetch(`http://benevolo.de/api/ticket-service/refund/${ticketId}`, {
-        method: "UPDATE",
-    });
-    fetchTickets();
-};
-const processRefund = () => {
-    selectedTickets.value.forEach(refundTicket);
+
+const processRefund = async () => {
+    console.log(selectedTickets.value);
+    try {
+        await fetch(
+            `https://dev.benevolo.de/api/ticket-service/cancellations/${refundId.value}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
+                },
+                body: JSON.stringify(selectedTickets.value),
+            },
+        );
+    } catch (error) {
+        console.error("Error processing refund:", error);
+        errorMessage.value = "Fehler bei der Rückerstattung.";
+    }
 };
 
 const validateAndProcessRefund = () => {
@@ -166,20 +172,18 @@ const closeAlert = () => {
     errorMessage.value = null;
 };
 
+// Extrahieren der Buchungs-ID aus der URL
 const parseURL = () => {
+    const regex = /([0-9a-fA-F-]{36})/; // Corrected regex to match UUID
     const url = window.location.href;
-    const regex = /\?\{([0-9a-fA-F-]+)\}/;
     const match = url.match(regex);
-    if (match && match[1]) {
-        bookingId.value = match[1];
-        return bookingId;
-    } else {
-        console.log("bookingId not found in the URL");
-
-        return null;
-    }
+    const id = match ? match[0] : null;
+    console.log("Extracted ID:", id);
+    refundId.value = id;
 };
-function goToHome() {
+
+// Zurück zur Startseite
+const goToHome = () => {
     router.push("/");
-}
+};
 </script>

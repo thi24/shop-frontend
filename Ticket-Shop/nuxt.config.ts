@@ -12,6 +12,7 @@ export default defineNuxtConfig({
       returnUrl: process.env.INDEX_URL,
       processEngineStart: process.env.PROCESS_ENGINE_START,
       processToken: process.env.PROCESS_TOKEN,
+      authToken: process.env.VITE_AUTH_TOKEN,
     },
   },
 });
