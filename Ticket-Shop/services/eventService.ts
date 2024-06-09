@@ -4,6 +4,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const fetchEvents = async () => {
   try {
+
     const response = await $fetch(`${API_BASE_URL}/events/public`);
     return response;
   } catch (error) {
@@ -23,6 +24,7 @@ export const fetchEventById = async (eventId: string) => {
 };
 
 export const fetchEventImage = async (eventId: string) => {
+
   try {
     const response = await fetch(`${API_BASE_URL}/events/public/${eventId}/image`);
     if (!response.ok) {
