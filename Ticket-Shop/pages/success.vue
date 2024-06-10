@@ -76,8 +76,11 @@ const router = useRouter();
 const config = useRuntimeConfig();
 import { usePaymentStore } from "~/stores/paymentStore";
 
+
+
 const paymentStore = usePaymentStore();
 const { orderNumber, eventName, amount, products } = storeToRefs(paymentStore);
+
 
 onMounted(async () => {
     //Abgleich ob Engine aufruf erfolgt ist
