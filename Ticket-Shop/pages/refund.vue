@@ -81,18 +81,20 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import Popup from "@/components/Popups/StornoConfirmation.vue";
+import Popup from "~/components/Popups/StornoConfirmation.vue";
+import { Ticket } from "~/classes/Ticket";
 
 const router = useRouter();
-const refundId = ref("");
-const selectedTickets = ref<number[]>([]);
+const refundId = ref<string>("");
+const selectedTickets = ref<string[]>([]);
 const errorMessage = ref<string | null>(null);
-const tickets = ref([]);
+const tickets = ref<Ticket[]>([]);
 const isPopupVisible = ref(false);
 
 const selectedTicketsDetails = computed(() => {
-    return tickets.value.filter(ticket => selectedTickets.value.includes(ticket.id));
+    return tickets.value.filter(ticket => selectedTickets.value.includes(ticket.id!));
 });
+
 
 const showPopup = () => {
     if (selectedTickets.value.length === 0) {
@@ -180,8 +182,7 @@ const parseURL = () => {
     const regex = /([0-9a-fA-F-]{36})/; // Corrected regex to match UUID
     const url = window.location.href;
     const match = url.match(regex);
-    const id = match ? match[0] : null;
-    //    console.log("Extracted ID:", id);
+    const id = match ? match[0] : "";
     refundId.value = id;
 };
 

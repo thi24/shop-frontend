@@ -4,7 +4,7 @@
 <template>
   <div class="flex flex-col min-h-screen ">
     <HeaderComponent/>
-    <div class="flex-grow bg-blue-100">
+    <div class="flex-grow bg-stone-100">
       <slot/>
     </div>
     <FooterComponent/>
