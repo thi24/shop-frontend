@@ -18,9 +18,6 @@
       </button>
     </div>
   </div>
-  <div v-else>
-    <!-- Your other content here -->
-  </div>
 </template>
 
 <script lang="ts" setup>
