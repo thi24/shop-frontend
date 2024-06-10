@@ -128,7 +128,7 @@ onMounted(() => {
 const fetchTickets = async () => {
     try {
         const response = await fetch(
-            `https://dev.benevolo.de/api/ticket-service/tickets/public/ab292b6d-40de-40d5-9124-a28fc4c53cd0`,
+            `https://dev.benevolo.de/api/ticket-service/tickets/public/${refundId.value}`,
             {
                 method: "GET",
                 headers: {
@@ -148,7 +148,7 @@ const fetchTickets = async () => {
 const processRefund = async () => {
     try {
         const response = await fetch(
-            `https://dev.benevolo.de/api/ticket-service/cancellations/ab292b6d-40de-40d5-9124-a28fc4c53cd0`,
+            `https://dev.benevolo.de/api/ticket-service/cancellations/${refundId.value}`,
             {
                 method: "POST",
                 headers: {
