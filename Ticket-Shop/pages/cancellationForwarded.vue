@@ -8,7 +8,7 @@
                     Stornierung erfolgreich angestoßen!
                 </h1>
                 <p class="mt-2 text-gray-600 text-sm">
-                    Ihre Stornierung wurde erfolgreich angestoßen. Der Administrator kümmert sich nun um Ihre Bestellung. Dies kann 2-5 Werktage dauern und Sie werden per E-Mail über das Ergebnis informiert. Vielen Dank für Ihr Verständnis.
+                    Ihre Stornierung wurde erfolgreich angestoßen. Unser Team kümmert sich nun um Ihre Bestellung. Dies kann 2-5 Werktage dauern und Sie werden per E-Mail über das Ergebnis informiert. Vielen Dank für Ihr Verständnis.
                 </p>
             </div>
             <div class="py-4 flex justify-center items-center flex-col gap-2">
