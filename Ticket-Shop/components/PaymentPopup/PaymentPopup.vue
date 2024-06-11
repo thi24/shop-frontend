@@ -47,8 +47,14 @@
                         v-for="(ticket, index) in selectedTickets"
                         :key="index"
                       >
-                        {{ ticket.quantity }}x {{ ticket.name }} 
-                        {{ ticket.price }}€ 
+                        {{ ticket.quantity }}x
+                        {{ ticket.name }}
+                        {{
+                          (ticket.price / 100).toLocaleString("de-DE", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })
+                        }}€
                       </li>
                     </ul>
                     <div class="mt-2">
@@ -96,7 +102,6 @@ const props = defineProps({
   selectedTickets: Array,
   //eventId: String,
 });
-
 
 let popUpAmount = ref(0);
 const open = ref(false);

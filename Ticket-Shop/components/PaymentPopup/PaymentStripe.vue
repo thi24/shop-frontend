@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from "vue";
 import {
   type Stripe,
   type StripeElements,
   loadStripe,
-} from '@stripe/stripe-js';
-import { useRouter } from 'vue-router';
-import { usePaymentStore } from '~/stores/paymentStore'; // Import the store
-import { Sale } from '~/classes/Sale';
-import { Booking } from '~/classes/Booking';
-import { Customer } from '~/classes/Customer';
+} from "@stripe/stripe-js";
+import { useRouter } from "vue-router";
+import { usePaymentStore } from "~/stores/paymentStore"; // Import the store
+import { Sale } from "~/classes/Sale";
+import { Booking } from "~/classes/Booking";
+import { Customer } from "~/classes/Customer";
 
 const router = useRouter();
 const config = useRuntimeConfig();
@@ -30,18 +30,18 @@ const paymentStore = usePaymentStore();
 onMounted(async () => {
   const apiKey = import.meta.env.VITE_STRIPE_KEY;
   if (!apiKey) {
-    console.error('Stripe key is missing!');
+    console.error("Stripe key is missing!");
     return;
   }
   stripe = await loadStripe(apiKey);
 
   elements = stripe!.elements({
-    mode: 'payment',
+    mode: "payment",
     amount: paymentAmount,
-    currency: 'eur',
+    currency: "eur",
   });
-  const paymentElement = elements.create('payment');
-  paymentElement.mount('#payment-element');
+  const paymentElement = elements.create("payment");
+  paymentElement.mount("#payment-element");
 
   loading.value = false;
 });
@@ -54,15 +54,17 @@ const handleSubmit = async (e: Event) => {
 
   loading.value = true;
 
-  const formData = Object.fromEntries(new FormData(e.target as HTMLFormElement));
+  const formData = Object.fromEntries(
+    new FormData(e.target as HTMLFormElement)
+  );
   const email = formData.email.toString();
 
   const bookingItems: Sale[] = [];
-  let productString = '';
-  let eventName = '';
+  let productString = "";
+  let eventName = "";
 
   props.products.forEach((item: any) => {
-    const ticket = new Sale(item.id, item.quantity, );
+    const ticket = new Sale(item.id, item.quantity);
     bookingItems.push(ticket);
     productString += `${item.name} (${item.quantity}),`;
     eventName = item.eventName;
@@ -70,13 +72,13 @@ const handleSubmit = async (e: Event) => {
 
   try {
     const response = await fetch(config.public.apiPaymentIntent, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         amount: paymentAmount,
-        currency: 'eur',
+        currency: "eur",
         product: productString,
       }),
     });
@@ -90,19 +92,25 @@ const handleSubmit = async (e: Event) => {
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
     // für online
-    const returnUrl = `${useRuntimeConfig().public.returnUrl}/success?${queryString}`;
+    const returnUrl = `${
+      useRuntimeConfig().public.returnUrl
+    }/success?${queryString}`;
     //für lokal testen
     //const returnUrl = `http://localhost:3000/success/?${queryString}`;
-    
 
     // Save the payment details in the store
-    paymentStore.setPaymentDetails(paymentIntent.id, eventName, props.amount, props.products);
+    paymentStore.setPaymentDetails(
+      paymentIntent.id,
+      eventName,
+      props.amount,
+      props.products
+    );
 
-    // das die Process Engine nicht aufgerufen wird bei wiederholtem laden der success seite 
-    localStorage.setItem('processEngineCalled', 'false');
+    // das die Process Engine nicht aufgerufen wird bei wiederholtem laden der success seite
+    localStorage.setItem("processEngineCalled", "false");
 
     if (submitError) {
-      console.log('error submit');
+      console.log("error submit");
       loading.value = false;
       return;
     }
@@ -121,11 +129,11 @@ const handleSubmit = async (e: Event) => {
       const paymentError = true;
       router.push(`/error/?${paymentError}`);
     } else {
-      router.push('/success'); // Ensure navigation to success page
+      router.push("/success"); // Ensure navigation to success page
     }
   } catch (err) {
-    console.log('error', err);
-    router.push('/error');
+    console.log("error", err);
+    router.push("/error");
     loading.value = false;
   }
 };
@@ -164,14 +172,22 @@ function handleLoadingArrow() {
       </fieldset>
 
       <div class="">
-        <p class="m-2 font-medium">Summe: {{ props.amount }}€</p>
+        <p class="m-2 font-medium">
+          Summe:
+          {{
+            props.amount.toLocaleString("de-DE", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })
+          }}€
+        </p>
         <div class="flex items-center">
           <button
             type="submit"
             @click="handleLoadingArrow"
             class="mt-3 inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0"
           >
-            {{ loading ? 'Loading...' : 'Hier Bezahlen!' }}
+            {{ loading ? "Loading..." : "Hier Bezahlen!" }}
           </button>
           <div v-if="arrow && loading" class="ml-3">
             <svg
@@ -197,4 +213,3 @@ function handleLoadingArrow() {
     </form>
   </div>
 </template>
-
