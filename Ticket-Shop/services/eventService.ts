@@ -44,7 +44,7 @@ export const fetchEventImage = async (eventId: string) => {
 export const fetchTicketTypesByEventId = async (eventId: string) => {
   try {
     const response = await $fetch(
-      `${API_BASE_URL}/ticket-types/public/?eventId=${eventId}`,
+      `${API_BASE_URL}/ticket-types/public/valid/${eventId}`,
     );
     return response;
   } catch (error) {
