@@ -131,6 +131,8 @@ function calculateAmount() {
       amount.value +
       selectedTickets.value[i].price * selectedTickets.value[i].quantity;
   }
+  amount.value = amount.value / 100;
+
   return amount;
 }
 //new Alert/Fehler nachricht
@@ -138,7 +140,6 @@ function handlePayment() {
   var inputsAreNumeric = checkInputs(); // Pruefen ob die Eingaben Zahlen sind
 
   if (inputsAreNumeric) {
-    console.log("handlePayment" + calculateAmount().value);
     if (calculateAmount().value <= 0) {
       errorMessage.value = "Bitte wählen Sie mindestens ein Ticket aus.";
       setTimeout(() => {

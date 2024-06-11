@@ -18,7 +18,12 @@
         ticketType.name
       }}</label>
       <label :for="'number-input-' + ticketType.id" class="flex-1"
-        >{{ ticketType.price }}€</label
+        >{{
+          (ticketType.price / 100).toLocaleString("de-DE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })
+        }}€</label
       >
       <input
         :id="'number-input-' + ticketType.id"
