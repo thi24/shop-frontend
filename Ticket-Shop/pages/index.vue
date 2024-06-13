@@ -1,12 +1,8 @@
 <template>
     <div class="mx-auto">
         <div
-            class="pt-4 px-4 hover:rounded-lg rounded-3xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6 gap-4"
-        >
-            <EventComponent
-                v-for="event in events"
-                :event="event"
-            ></EventComponent>
+            class="pt-4 px-4 hover:rounded-lg rounded-3xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6 gap-4">
+            <EventComponent v-for="event in events" :event="event"></EventComponent>
         </div>
     </div>
 </template>
@@ -22,6 +18,7 @@ const events = ref<Event[]>([]);
 onMounted(async () => {
     try {
         events.value = await fetchEvents();
+
     } catch (error) {
         console.error("Failed to load events:", error);
     }
