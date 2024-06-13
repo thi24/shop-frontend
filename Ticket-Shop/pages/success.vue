@@ -112,7 +112,7 @@ onMounted(async () => {
                         headers: {
                             accept: "application/json",
                             Authorization:
-                                "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
+                                "Bearer " + import.meta.env.VITE_PROCESS_TOKEN,
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(parsedData),
