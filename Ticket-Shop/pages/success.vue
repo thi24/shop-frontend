@@ -39,9 +39,10 @@
                             </td>
                             <td class="py-1 text-right">
                                 {{
-                                    (product.price * product.quantity).toFixed(
-                                        2,
-                                    )
+                                    (
+                                        (product.price / 100) *
+                                        product.quantity
+                                    ).toFixed(2)
                                 }}
                                 €
                             </td>
@@ -95,8 +96,7 @@ onMounted(async () => {
             //Manche Zeichen werden nicht richtig decodiert
             const replacedString = decodeURIComponent(jsonString);
             const parsedData = JSON.parse(replacedString);
-            //Die bereinigten Daten für die Engine aufbereiten
-            console.log(parsedData);
+
             //Window Title bereinigen
             window.history.replaceState(
                 {},
@@ -112,11 +112,10 @@ onMounted(async () => {
                         headers: {
                             accept: "application/json",
                             Authorization:
-                                "Bearer " +
-                                useRuntimeConfig().public.processToken,
+                                "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
                             "Content-Type": "application/json",
                         },
-                        body: parsedData,
+                        body: JSON.stringify(parsedData),
                     },
                 );
                 // bekommen wir nicht mehr zurück
