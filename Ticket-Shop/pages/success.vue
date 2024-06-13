@@ -1,8 +1,7 @@
 <template>
     <div class="flex h-screen w-full items-start justify-center pt-10">
         <div
-            class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded bg-gray-50 px-6 pt-12 pb-8 shadow-lg"
-        >
+            class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded bg-gray-50 px-6 pt-12 pb-8 shadow-lg">
             <div class="text-center">
                 <h1 class="text-2xl font-bold text-green-600">
                     Zahlung erfolgreich!
@@ -39,9 +38,10 @@
                             </td>
                             <td class="py-1 text-right">
                                 {{
-                                    (product.price * product.quantity).toFixed(
-                                        2,
-                                    )
+                                    (
+                                        (product.price / 100) *
+                                        product.quantity
+                                    ).toFixed(2)
                                 }}
                                 €
                             </td>
@@ -54,13 +54,9 @@
                     <span>Bezahlt:</span>
                     <span>{{ amount.toFixed(2) }} €</span>
                 </p>
-                <div
-                    class="py-4 flex justify-center items-center flex-col gap-2"
-                >
-                    <button
-                        @click="goToHome"
-                        class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-                    >
+                <div class="py-4 flex justify-center items-center flex-col gap-2">
+                    <button @click="goToHome"
+                        class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
                         Zur Startseite
                     </button>
                 </div>
@@ -95,8 +91,7 @@ onMounted(async () => {
             //Manche Zeichen werden nicht richtig decodiert
             const replacedString = decodeURIComponent(jsonString);
             const parsedData = JSON.parse(replacedString);
-            //Die bereinigten Daten für die Engine aufbereiten
-            console.log(parsedData);
+
             //Window Title bereinigen
             window.history.replaceState(
                 {},
@@ -112,11 +107,10 @@ onMounted(async () => {
                         headers: {
                             accept: "application/json",
                             Authorization:
-                                "Bearer " +
-                                useRuntimeConfig().public.processToken,
+                                "Bearer " + config.public.processToken,
                             "Content-Type": "application/json",
                         },
-                        body: parsedData,
+                        body: JSON.stringify(parsedData),
                     },
                 );
                 // bekommen wir nicht mehr zurück
