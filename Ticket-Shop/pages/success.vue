@@ -76,11 +76,8 @@ const router = useRouter();
 const config = useRuntimeConfig();
 import { usePaymentStore } from "~/stores/paymentStore";
 
-
-
 const paymentStore = usePaymentStore();
 const { orderNumber, eventName, amount, products } = storeToRefs(paymentStore);
-
 
 onMounted(async () => {
     //Abgleich ob Engine aufruf erfolgt ist
@@ -98,8 +95,8 @@ onMounted(async () => {
             //Manche Zeichen werden nicht richtig decodiert
             const replacedString = decodeURIComponent(jsonString);
             const parsedData = JSON.parse(replacedString);
-            //Die bereinigten Daten für die Engine aufbereitet
-            const newData = JSON.stringify(parsedData);
+            //Die bereinigten Daten für die Engine aufbereiten
+            console.log(parsedData);
             //Window Title bereinigen
             window.history.replaceState(
                 {},
@@ -119,12 +116,11 @@ onMounted(async () => {
                                 useRuntimeConfig().public.processToken,
                             "Content-Type": "application/json",
                         },
-                        body: newData,
+                        body: parsedData,
                     },
                 );
                 // bekommen wir nicht mehr zurück
                 localStorage.setItem("processEngineCalled", "true");
-
             } catch (error) {
                 console.error("Error:", error);
                 router.push("../error");
