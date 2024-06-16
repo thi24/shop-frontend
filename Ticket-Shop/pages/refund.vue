@@ -59,15 +59,33 @@
         <table v-if="tickets.length > 0" class="w-full text-left table-fixed">
           <thead>
             <tr>
-              <th class="w-4/6 py-2">Tickets</th>
-              <th class="w-1/6 py-2">Preis</th>
-              <th class="w-1/6 py-2 text-center">Auswahl</th>
+              <th
+                class="w-0 sm:w-0 md:w-0 lg:w-1/2 xl:w-5/8 2xl:w-1/2 py-2 hidden lg:table-cell"
+              >
+                Tickets
+              </th>
+              <th
+                class="w-1/2 sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/8 2xl:w-1/4 py-2"
+              >
+                Ticketart
+              </th>
+              <th
+                class="w-1/4 sm:w-1/4 md:w-1/4 lg:w-1/8 xl:w-1/8 2xl:w-1/8 py-2 text-center"
+              >
+                Preis
+              </th>
+              <th
+                class="w-1/4 sm:w-1/4 md:w-1/4 lg:w-1/8 xl:w-1/8 2xl:w-1/8 py-2 text-center"
+              >
+                Auswahl
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="ticket in tickets" :key="ticket.id">
-              <td class="py-1">{{ ticket.id }}</td>
-              <td class="py-1">
+              <td class="py-1 hidden lg:table-cell pr-4">{{ ticket.id }}</td>
+              <td class="py-1">{{ ticket.bookingItem?.ticketType?.name }}</td>
+              <td class="py-1 text-center">
                 {{
                   (ticket.price / 100).toLocaleString("de-DE", {
                     minimumFractionDigits: 2,
@@ -171,7 +189,7 @@ const fetchTickets = async () => {
         },
       }
     );
-    const data = await response.json();
+    const data: Ticket[] = await response.json();
     tickets.value = data;
   } catch (error) {
     console.error("Error fetching tickets:", error);
