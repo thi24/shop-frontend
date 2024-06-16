@@ -15,7 +15,7 @@
             class="mb-2text-sm font-medium text-black sr-only dark:text-white"
             >Search-Bar</label
           >
-          <div class="relative">
+          <div class="relative" v-if="showInput">
             <div
               class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
             >
@@ -62,4 +62,8 @@ function setInputIntoStore() {
 
   searchStore.setEventName(value);
 }
+
+defineProps<{
+  showInput: boolean;
+}>();
 </script>
