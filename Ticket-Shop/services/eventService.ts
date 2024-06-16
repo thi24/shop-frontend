@@ -52,3 +52,15 @@ export const fetchTicketTypesByEventId = async (eventId: string) => {
     throw error;
   }
 };
+
+export const fetchEventsByEventName = async (name: string) => {
+  try {
+    const response = await $fetch(
+      `${API_BASE_URL}/event-service/events/search?name=${name}`,
+    );
+    return response;
+  } catch (error) {
+    //console.error('Failed to load ticket types:', error);
+    throw error;
+  }
+};
