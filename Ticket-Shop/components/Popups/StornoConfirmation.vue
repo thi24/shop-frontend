@@ -14,9 +14,9 @@
         <li
           v-for="ticket in selectedTicketsDetails"
           :key="ticket.id"
-          class="mb-2"
+          class="mb-2 text-center"
         >
-          {{ ticket.id }} -
+          {{ ticket.bookingItem?.ticketType?.name }} -
           {{
             (ticket.price / 100).toLocaleString("de-DE", {
               minimumFractionDigits: 2,

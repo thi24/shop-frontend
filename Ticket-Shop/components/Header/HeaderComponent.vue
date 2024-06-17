@@ -43,6 +43,7 @@
               @input="setInputIntoStore"
             />
           </div>
+          <div v-else class=" h-9"></div>
         </form>
       </div>
     </div>

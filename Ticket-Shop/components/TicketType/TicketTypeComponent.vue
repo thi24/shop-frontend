@@ -9,31 +9,35 @@
     </h5>
   </div>
   <div class="p-6 border-t border-blue-gray-50">
-    <div
-      v-for="ticketType in tickettypes"
-      :key="ticketType.id"
-      class="p-3 m-3 flex bg-white border-b"
-    >
-      <label :for="'number-input-' + ticketType.id" class="flex-1">{{
-        ticketType.name
-      }}</label>
-      <label :for="'number-input-' + ticketType.id" class="flex-1"
-        >{{
-          (ticketType.price / 100).toLocaleString("de-DE", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-        }}€</label
-      >
-      <input
-        :id="'number-input-' + ticketType.id"
-        type="text"
-        min="0"
-        max="999"
-        placeholder="0"
-        class="p-1 rounded-lg focus:outline-none w-11 placeholder-gray-400 border-gray-300 border [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-      />
-    </div>
+    <table class="min-w-full ">
+      <tbody>
+        <tr
+          v-for="ticketType in tickettypes"
+          :key="ticketType.id"
+          class="border-b"
+        >
+          <td class="py-2 ">{{ ticketType.name }}</td>
+          <td class="py-2 ">
+            {{
+              (ticketType.price / 100).toLocaleString("de-DE", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+            }}€
+          </td>
+          <td class="py-2">
+            <input
+              :id="'number-input-' + ticketType.id"
+              type="text"
+              min="0"
+              max="999"
+              placeholder="0"
+              class="p-1 rounded-lg focus:outline-none w-11 placeholder-gray-400 border-gray-300 border [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
