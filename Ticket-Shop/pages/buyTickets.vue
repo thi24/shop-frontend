@@ -18,6 +18,13 @@
         class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md mb-4 mt-1 mr-4 ml-4 sm:mt-4 sm:mr-0 sm:ml-0 md:mt-4 md:mr-0 md:ml-2 lg:ml-8 lg:mr-0 xl:mr-10 xl:ml-10 2xl:mr-5 2xl:ml-20"
       >
         <TicketTypeComponent :tickettypes="tickettypes" />
+        <div
+          class="flex justify-center my-10"
+          id="no-tickets"
+          style="display: none"
+        >
+          <p class="flex justify-center">Aktuell keine Tickets verfügbar</p>
+        </div>
 
         <div class="flex justify-center">
           <button
@@ -28,6 +35,7 @@
           </button>
         </div>
       </div>
+
       <PaymentPopup ref="paymentPopup" :selectedTickets="selectedTickets" />
     </div>
     <AlertComponent
@@ -101,7 +109,17 @@ onMounted(async () => {
   } catch (error) {
     console.error("Failed to load data:", error);
   }
+
+  checkTicketTypes();
 });
+
+function checkTicketTypes() {
+  if (tickettypes.value.length == 0) {
+    document.getElementById("no-tickets").style.display = "block";
+  } else {
+    document.getElementById("no-tickets").style.display = "none";
+  }
+}
 
 function getUserInputs() {
   selectedTickets.value = [];
