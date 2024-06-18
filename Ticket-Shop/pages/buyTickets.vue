@@ -15,7 +15,7 @@
     >
       <div
         v-if="tickettypes"
-        class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md  mb-4 mt-1 mr-4 ml-4 sm:mt-4 sm:mr-0 sm:ml-0 md:mt-4 md:mr-0 md:ml-2 lg:ml-8 lg:mr-0 xl:mr-10 xl:ml-10 2xl:mr-5 2xl:ml-20"
+        class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md mb-4 mt-1 mr-4 ml-4 sm:mt-4 sm:mr-0 sm:ml-0 md:mt-4 md:mr-0 md:ml-2 lg:ml-8 lg:mr-0 xl:mr-10 xl:ml-10 2xl:mr-5 2xl:ml-20"
       >
         <TicketTypeComponent :tickettypes="tickettypes" />
 
@@ -157,7 +157,7 @@ function checkInputs() {
   var inputsAreNumeric = true;
   var inputs = document.getElementsByTagName("input");
 
-  for (var i = 1; i < inputs.length; ++i) {
+  for (var i = 0; i < inputs.length; ++i) {
     var inputValue = inputs[i].value.trim();
 
     if (
