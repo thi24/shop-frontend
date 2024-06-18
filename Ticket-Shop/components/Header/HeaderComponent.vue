@@ -39,11 +39,11 @@
               type="search"
               id="search-events"
               class="px-8 block w-full p-2 ps-10 text-sm border focus:outline-none rounded-full bg-white dark:bg-white-700 dark:border-white-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search Events"
+              placeholder="Events suchen"
               @input="setInputIntoStore"
             />
           </div>
-          <div v-else class=" h-9"></div>
+          <div v-else class="h-9"></div>
         </form>
       </div>
     </div>
