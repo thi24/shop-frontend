@@ -56,7 +56,14 @@ export const fetchTicketTypesByEventId = async (eventId: string) => {
 export const fetchEventsByEventName = async (name: string) => {
   try {
     const response = await $fetch(
-      `${API_BASE_URL}/event-service/events/search?name=${name}`,
+      `${API_BASE_URL}/api/event-service/events/public/search?name=${name}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
+        },
+      }
     );
     return response;
   } catch (error) {
