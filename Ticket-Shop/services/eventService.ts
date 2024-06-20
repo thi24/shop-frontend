@@ -56,7 +56,7 @@ export const fetchTicketTypesByEventId = async (eventId: string) => {
 export const fetchEventsByEventName = async (name: string) => {
   try {
     const response = await $fetch(
-      `${API_BASE_URL}/api/event-service/events/public/search?name=${name}`,
+      `${API_BASE_URL}/events/public/search?name=${name}`,
       {
         method: "GET",
         headers: {
