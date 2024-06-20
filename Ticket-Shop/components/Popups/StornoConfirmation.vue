@@ -18,10 +18,10 @@
         >
           {{ ticket.bookingItem?.ticketType?.name }} -
           {{
-            (ticket.price / 100).toLocaleString("de-DE", {
+            ticket.price ? (ticket.price / 100).toLocaleString("de-DE", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
-            })
+            }) : "0,00"
           }}
           €
         </li>
@@ -62,3 +62,4 @@ const cancel = () => {
   emit("cancel");
 };
 </script>
+

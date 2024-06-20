@@ -33,14 +33,18 @@ onMounted(async () => {
       try {
         events.value = await fetchEvents();
       } catch (error) { }
-      document.getElementById("no-results").style.display =
-        events.value.length === 0 ? "block" : "none";
+      const noResultsElement = document.getElementById("no-results");
+      if (noResultsElement) {
+        noResultsElement.style.display = events.value.length === 0 ? "block" : "none";
+      }
     } else {
       try {
         events.value = await fetchEventsByEventName(eventName);
       } catch (error) { }
-      document.getElementById("no-results").style.display =
-        events.value.length === 0 ? "block" : "none";
+      const noResultsElement = document.getElementById("no-results");
+      if (noResultsElement) {
+        noResultsElement.style.display = events.value.length === 0 ? "block" : "none";
+      }
     }
   } catch (error) {
     console.error("Failed to load events:", error);

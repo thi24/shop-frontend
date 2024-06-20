@@ -33,12 +33,12 @@
               <td class="py-1">{{ ticket.bookingItem?.ticketType?.name }}</td>
               <td class="py-1 text-center">
                 {{
+                  ticket.price ? 
                   (ticket.price / 100).toLocaleString("de-DE", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
-                  })
+                  }) + ' €' : 'N/A'
                 }}
-                €
               </td>
               <td class="py-1 text-center">
                 <input type="checkbox" v-model="selectedTickets" :value="ticket.id" />
@@ -173,3 +173,4 @@ const goToHome = () => {
   router.push("/");
 };
 </script>
+

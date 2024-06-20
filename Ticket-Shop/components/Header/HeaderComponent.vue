@@ -57,11 +57,15 @@ const searchStore = useSearchStore();
 
 function setInputIntoStore() {
   var inputElement = document.getElementById("search-events");
-  var value = inputElement.value;
-  searchStore.setEventName(value);
+  if (inputElement) { 
+    var value = (inputElement as HTMLInputElement).value; 
+    searchStore.setEventName(value);
+  }
 }
 
 defineProps<{
   showInput: boolean;
 }>();
 </script>
+
+
