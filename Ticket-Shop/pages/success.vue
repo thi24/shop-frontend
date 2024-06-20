@@ -67,6 +67,7 @@
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
+import { Product } from "~/classes/Product"; 
 import { onMounted } from "vue";
 const router = useRouter();
 const config = useRuntimeConfig();

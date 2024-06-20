@@ -1,11 +1,11 @@
 <template>
   <header
-    class="bg-[radial-gradient(ellipse_100%_100%_at_50%_30%,rgba(241,238,220,1.000),rgba(255,255,255,0))] shadow py-2 fixed: top-0 start-0"
+    class="bg-[radial-gradient(ellipse_100%_100%_at_50%_30%,rgba(241,238,220,1.000),rgba(255,255,255,1))] shadow py-2 sticky"
   >
     <div class="flex flex-wrap justify-between items-center mx-auto">
       <nuxt-link to="/">
         <div class="flex items-center space-x-1">
-          <h1 class="px-10 text-4xl font-bold leading-6">TicketWave</h1>
+          <h1 class="px-10 text-4xl font-bold leading-6">Show-Pass</h1>
         </div>
       </nuxt-link>
       <div class="p-4 flex justify-center">
