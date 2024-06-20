@@ -1,7 +1,7 @@
 <template>
   <div class="relative flex h-screen w-full items-start justify-center pt-10" v-if="error">
     <div
-      class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-slate-100 flex flex-col items-center rounded-lg overflow-hidden shadow-xl p-6 m-4">
+      class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl  flex flex-col items-center rounded-lg overflow-hidden shadow-xl p-6 m-4">
       <img class="w-24 h-24 mb-4" src="../utils/pictures/error.png" />
       <h1 class="text-2xl font-extrabold text-center text-black md:text-3xl lg:text-4xl mb-4">
         Zahlung fehlgeschlagen
