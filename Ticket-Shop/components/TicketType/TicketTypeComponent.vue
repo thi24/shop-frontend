@@ -3,21 +3,23 @@
     class="relative bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-transparent text-gray-700 shadow-none !m-0 p-6"
   >
     <h5
-      class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 capitalize"
+      class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-black capitalize font-bold"
     >
       Tickets
     </h5>
   </div>
   <div class="p-6 border-t border-blue-gray-50">
-    <table class="min-w-full ">
+    <table class="min-w-full">
       <tbody>
         <tr
           v-for="ticketType in tickettypes"
           :key="ticketType.id"
           class="border-b"
         >
-          <td class="py-2 ">{{ ticketType.name }}</td>
-          <td class="py-2 ">
+          <td class="py-2 text-gray-900 font-bold">
+            {{ ticketType.name }}
+          </td>
+          <td class="py-2 text-sm text-gray-700 font-bold">
             {{
               (ticketType.price / 100).toLocaleString("de-DE", {
                 minimumFractionDigits: 2,
