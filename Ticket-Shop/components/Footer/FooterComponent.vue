@@ -4,10 +4,16 @@
       <div
         class="flex flex-1 justify-center md:justify-center space-x-8 text-gray-500 mb-4 md:mb-0"
       >
-        <a href="#" class="hover:text-black">About</a>
-        <a href="#" class="hover:text-black">Kontakt</a>
-        <a href="#" class="hover:text-black">Lizenz</a>
-        <a href="#" class="hover:text-black">Privatsphäre</a>
+        <nuxt-link to="/footer/about" class="hover:text-black">About</nuxt-link>
+        <nuxt-link to="/footer/contact" class="hover:text-black"
+          >Kontakt</nuxt-link
+        >
+        <nuxt-link to="/footer/licence" class="hover:text-black"
+          >Lizenz</nuxt-link
+        >
+        <nuxt-link to="/footer/privacy" class="hover:text-black"
+          >Privatsphäre</nuxt-link
+        >
       </div>
       <div class="flex justify-center md:justify-end w-full md:w-auto">
         <a
