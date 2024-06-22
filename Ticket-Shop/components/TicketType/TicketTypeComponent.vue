@@ -3,13 +3,15 @@
     class="relative bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-transparent text-gray-700 shadow-none !m-0 p-6"
   >
     <h5
-      class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-black capitalize font-bold"
+      class="block antialiased tracking-normal font-sans text-xl leading-snug text-black capitalize font-bold"
     >
       Tickets
     </h5>
   </div>
   <div class="p-6 border-t border-blue-gray-50">
     <table class="min-w-full">
+      <thead class="">
+      </thead>
       <tbody>
         <tr
           v-for="ticketType in tickettypes"
@@ -52,4 +54,5 @@ const props = defineProps<{
 
 const { tickettypes } = toRefs(props);
 </script>
+
 

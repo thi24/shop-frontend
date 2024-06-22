@@ -100,7 +100,7 @@ onMounted(async () => {
             );
             //Aufruf der Engine
             try {
-                const response = await fetch(
+                await fetch(
                     useRuntimeConfig().public.processEngineStart,
                     {
                         method: "POST",

@@ -90,7 +90,6 @@ const handleSubmit = async (e: Event) => {
 
   
 
-    //const eventId = "testEventId";
     const bookings = new Booking(customer, bookingItems, props.eventId);
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
@@ -157,6 +156,7 @@ function handleLoadingArrow() {
   <div class="nes-container with-title is-centered">
     <form @submit.prevent="handleSubmit">
       <fieldset :class="{ dis: loading }" class="fields">
+        <legend class="text-lg "></legend>
         <div class="nes-field py-2">
           <label for="email_field">E-Mail: </label>
           <input

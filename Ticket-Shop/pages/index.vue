@@ -28,33 +28,32 @@ onMounted(async () => {
   try {
     const eventName = searchStore.eventName;
     writeStoreInInput(eventName);
-
-    if (eventName == null || eventName == "") {
-      try {
-        events.value = await fetchEvents();
-      } catch (error) { }
-      const noResultsElement = document.getElementById("no-results");
-      if (noResultsElement) {
-        noResultsElement.style.display = events.value.length === 0 ? "block" : "none";
-      }
-    } else {
-      try {
-        events.value = await fetchEventsByEventName(eventName);
-      } catch (error) { }
-      const noResultsElement = document.getElementById("no-results");
-      if (noResultsElement) {
-        noResultsElement.style.display = events.value.length === 0 ? "block" : "none";
-      }
-    }
+    await loadEventsBasedOnName(eventName);
+    updateNoResultsDisplay();
   } catch (error) {
     console.error("Failed to load events:", error);
   }
 });
 
-function writeStoreInInput(eventName: string) {
-  var inputs = document.getElementsByTagName("input");
+async function loadEventsBasedOnName(eventName: string) {
+  if (!eventName) {
+    events.value = await fetchEvents().catch(() => {});
+  } else {
+    events.value = await fetchEventsByEventName(eventName).catch(() => {});
+  }
+}
 
-  for (var i = 0; i < inputs.length; ++i) {
+function updateNoResultsDisplay() {
+  const noResultsElement = document.getElementById("no-results");
+  if (noResultsElement) {
+    noResultsElement.style.display = events.value.length === 0 ? "block" : "none";
+  }
+}
+
+function writeStoreInInput(eventName: string) {
+  let inputs = document.getElementsByTagName("input");
+
+  for (let i = 0; i < inputs.length; ++i) {
     inputs[i].value = eventName;
   }
 }
