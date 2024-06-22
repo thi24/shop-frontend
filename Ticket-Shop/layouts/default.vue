@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <HeaderComponent :showInput="isIndexPage" />
+    <HeaderComponent :showInput="isIndexPage"/>
     <div class="flex-grow bg-stone-100">
       <slot />
     </div>

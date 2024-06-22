@@ -21,16 +21,16 @@
           </td>
           <td class="py-2 text-sm text-gray-700 font-bold">
             {{
-              (ticketType.price / 100).toLocaleString("de-DE", {
+              ticketType.price ? (ticketType.price / 100).toLocaleString("de-DE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              })
+              }) : ""
             }}€
           </td>
           <td class="py-2">
             <input
               :id="'number-input-' + ticketType.id"
-              type="text"
+              type="number"
               min="0"
               max="999"
               placeholder="0"
@@ -52,3 +52,4 @@ const props = defineProps<{
 
 const { tickettypes } = toRefs(props);
 </script>
+

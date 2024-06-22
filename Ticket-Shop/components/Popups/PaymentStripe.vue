@@ -87,12 +87,14 @@ const handleSubmit = async (e: Event) => {
     const customer = new Customer(email, undefined, paymentIntent.id);
     const clientSecret = paymentIntent.client_secret;
 
+  
+
     //const eventId = "testEventId";
     const bookings = new Booking(customer, bookingItems, props.eventId);
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
     // für online
-    const returnUrl = `${
+   const returnUrl = `${
       useRuntimeConfig().public.returnUrl
     }/success?${queryString}`;
     //für lokal testen
@@ -114,6 +116,7 @@ const handleSubmit = async (e: Event) => {
       loading.value = false;
       return;
     }
+
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
