@@ -56,9 +56,9 @@ import { useSearchStore } from "~/stores/searchStore";
 const searchStore = useSearchStore();
 
 function setInputIntoStore() {
-  var inputElement = document.getElementById("search-events");
+  let inputElement = document.getElementById("search-events");
   if (inputElement) { 
-    var value = (inputElement as HTMLInputElement).value; 
+    let value = (inputElement as HTMLInputElement).value; 
     searchStore.setEventName(value);
   }
 }

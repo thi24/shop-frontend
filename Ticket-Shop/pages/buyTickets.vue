@@ -72,7 +72,7 @@ let amount = ref(0);
 
 onMounted(async () => {
   const eventId = eventStore.eventId;
-  const response = await fetch(
+  await fetch(
     `https://dev.benevolo.de/api/analytics-service/events/${eventId}/event-views`,
     {
       method: "PATCH",
@@ -104,8 +104,8 @@ function checkTicketTypes() {
   const noTicketsElement = document.getElementById("no-tickets");
   if (tickettypes.value.length == 0) {
     if (noTicketsElement) noTicketsElement.style.display = "block";
-  } else {
-    if (noTicketsElement) noTicketsElement.style.display = "none";
+  } else if (noTicketsElement) { 
+    noTicketsElement.style.display = "none";
   }
 }
 
@@ -132,17 +132,15 @@ function getUserInputs() {
 function calculateAmount() {
   getUserInputs();
   amount.value = 0;
-  for (let i = 0; i < selectedTickets.value.length; i++) {
-    amount.value =
-      amount.value +
-      selectedTickets.value[i].price * selectedTickets.value[i].quantity;
+  for (const ticket of selectedTickets.value) { 
+    amount.value += ticket.price * ticket.quantity;
   }
-  amount.value = amount.value / 100;
+  amount.value /= 100; 
   return amount;
 }
 //new Alert/Fehler nachricht
 function handlePayment() {
-  var inputsAreNumeric = checkInputs(); // Pruefen ob die Eingaben Zahlen sind
+  let inputsAreNumeric = checkInputs(); // Pruefen ob die Eingaben Zahlen sind
 
   if (inputsAreNumeric) {
     if (calculateAmount().value <= 0) {
@@ -159,11 +157,11 @@ function handlePayment() {
 }
 
 function checkInputs() {
-  var inputsAreNumeric = true;
-  var inputs = document.getElementsByTagName("input");
+  let inputsAreNumeric = true;
+  let inputs = document.getElementsByTagName("input");
 
-  for (var i = 0; i < inputs.length; ++i) {
-    var inputValue = inputs[i].value.trim();
+  for (let i = 0; i < inputs.length; ++i) {
+    let inputValue = inputs[i].value.trim();
 
     if (
       !(/^(\d+)$/.test(inputValue) || inputValue == "" || inputValue == null)
@@ -179,5 +177,6 @@ function checkInputs() {
   return inputsAreNumeric;
 }
 </script>
+
 
 
