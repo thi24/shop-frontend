@@ -1,5 +1,5 @@
 <template>
-<div v-if="showBanner" class="flex items-center justify-between bg-blue-400 text-white px-6 py-3.5 rounded">
+<div v-if="showBanner" class="flex items-center justify-between bg-stone-200 text-black px-6 py-3.5 rounded">
   <p class="text-base flex-1 hidden md:block text-center">
       Finden Sie Ihr nächstes Erlebnis – Ihr Ticketshop für Konzerte, Events und mehr
     </p>
@@ -8,7 +8,7 @@
     </p>
     <div @click="closeBanner">
       <svg xmlns="http://www.w3.org/2000/svg"
-        class="w-3.5 cursor-pointer fill-white inline-block ml-4" viewBox="0 0 320.591 320.591">
+        class="w-3.5 cursor-pointer fill-black inline-block ml-4" viewBox="0 0 320.591 320.591">
         <path
           d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
           data-original="#000000" />

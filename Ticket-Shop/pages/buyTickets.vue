@@ -138,7 +138,6 @@ function calculateAmount() {
       selectedTickets.value[i].price * selectedTickets.value[i].quantity;
   }
   amount.value = amount.value / 100;
-
   return amount;
 }
 //new Alert/Fehler nachricht

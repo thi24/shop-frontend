@@ -12,7 +12,7 @@
         <form class="max-w-md mx-auto">
           <label
             for="search-events"
-            class="mb-2text-sm font-medium text-black sr-only dark:text-white"
+            class="mb-2 font-medium text-black sr-only dark:text-white"
             >Search-Bar</label
           >
           <div class="relative" v-if="showInput">

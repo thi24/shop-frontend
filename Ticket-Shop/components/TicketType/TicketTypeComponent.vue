@@ -22,7 +22,7 @@
               ticketType.price ? (ticketType.price / 100).toLocaleString("de-DE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              }) : "0.00"
+              }) : ""
             }}€
           </td>
           <td class="py-2">

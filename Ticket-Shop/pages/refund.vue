@@ -1,8 +1,8 @@
 <template>
-  <div class="relative flex h-screen w-full items-start justify-center pt-20">
+  <div class="relative flex  w-full items-start justify-center pt-20">
     <Alert1Component v-if="errorMessage" :message="errorMessage" @close="errorMessage = null" />
     <div
-      class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded bg-gray-50 px-6 pt-12 pb-8 shadow-lg">
+      class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-2xl bg-white px-6 pt-12 pb-8 shadow-lg">
       <div class="text-center">
         <h1 class="text-2xl font-bold text-blue-600">Rückerstattung</h1>
         <p class="mt-2 text-gray-600 text-sm">

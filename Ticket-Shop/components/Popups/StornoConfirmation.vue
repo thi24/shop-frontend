@@ -1,16 +1,16 @@
 <template>
   <div
     v-if="visible"
-    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"
+    class="fixed inset-0 flex items-start justify-center bg-black bg-opacity-50 p-4"
   >
     <div
-      class="bg-white p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3"
+      class="mt-[20vh] bg-white p-6 rounded-2xl shadow-lg  sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3"
     >
-      <h2 class="text-lg font-bold mb-4">Bestätigung</h2>
+      <h2 class="text-lg font-bold mb-4 text-center">Bestätigung</h2>
       <p class="mb-4">
         Sind Sie sicher, dass Sie die folgenden Tickets stornieren möchten?
       </p>
-      <ul class="mb-4">
+      <ul class="my-5">
         <li
           v-for="ticket in selectedTicketsDetails"
           :key="ticket.id"

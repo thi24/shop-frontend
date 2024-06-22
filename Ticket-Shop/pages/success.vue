@@ -1,7 +1,7 @@
 <template>
-    <div class="flex h-screen w-full items-start justify-center pt-10">
+    <div class="flex  w-full items-start justify-center pt-10">
         <div
-            class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded bg-gray-50 px-6 pt-12 pb-8 shadow-lg">
+            class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-2xl bg-white px-6 pt-12 pb-8 shadow-lg">
             <div class="text-center">
                 <h1 class="text-2xl font-bold text-green-600">
                     Zahlung erfolgreich!
