@@ -10,12 +10,13 @@ import { usePaymentStore } from "~/stores/paymentStore"; // Import the store
 import { Sale } from "~/classes/Sale";
 import { Booking } from "~/classes/Booking";
 import { Customer } from "~/classes/Customer";
+import type { Product } from "~/stores/paymentStore";  
 
 const router = useRouter();
 const config = useRuntimeConfig();
 const props = defineProps({
   amount: { type: Number, required: true },
-  products: { type: Array, required: true },
+  products: { type: Array as PropType<Product[]>, required: true },
   eventId: { type: String, required: true },
 });
 
@@ -94,11 +95,11 @@ const handleSubmit = async (e: Event) => {
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
     // für online
-   const returnUrl = `${
+   /*const returnUrl = `${
       useRuntimeConfig().public.returnUrl
-    }/success?${queryString}`;
+    }/success?${queryString}`;*/
     //für lokal testen
-    //const returnUrl = `http://localhost:3000/success/?${queryString}`;
+    const returnUrl = `http://localhost:3000/success/?${queryString}`;
 
     // Save the payment details in the store
     paymentStore.setPaymentDetails(
