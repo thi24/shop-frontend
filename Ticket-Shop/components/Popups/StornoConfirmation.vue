@@ -6,7 +6,7 @@
     <div
       class="mt-[20vh] bg-white p-6 rounded-2xl shadow-lg  sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3"
     >
-      <h2 class="text-lg font-bold mb-4 text-center">Bestätigung</h2>
+      <h2 class="text-lg font-bold mb-4 text-center text-blue-500">Bestätigung</h2>
       <p class="mb-4">
         Sind Sie sicher, dass Sie die folgenden Tickets stornieren möchten?
       </p>
