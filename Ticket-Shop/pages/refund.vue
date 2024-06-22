@@ -1,13 +1,8 @@
 <template>
-  <div class="relative flex h-screen w-full items-start justify-center pt-20">
-    <Alert1Component
-      v-if="errorMessage"
-      :message="errorMessage"
-      @close="errorMessage = null"
-    />
+  <div class="relative flex  w-full items-start justify-center pt-20">
+    <Alert1Component v-if="errorMessage" :message="errorMessage" @close="errorMessage = null" />
     <div
-      class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded bg-gray-50 px-6 pt-12 pb-8 shadow-lg"
-    >
+      class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl rounded-2xl bg-white px-6 pt-12 pb-8 shadow-lg">
       <div class="text-center">
         <h1 class="text-2xl font-bold text-blue-600">Rückerstattung</h1>
         <p class="mt-2 text-gray-600 text-sm">
@@ -18,24 +13,16 @@
         <table v-if="tickets.length > 0" class="w-full text-left table-fixed">
           <thead>
             <tr>
-              <th
-                class="w-0 sm:w-0 md:w-0 lg:w-1/2 xl:w-5/8 2xl:w-1/2 py-2 hidden lg:table-cell"
-              >
+              <th class="w-0 sm:w-0 md:w-0 lg:w-1/2 xl:w-5/8 2xl:w-1/2 py-2 hidden lg:table-cell">
                 Tickets
               </th>
-              <th
-                class="w-1/2 sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/8 2xl:w-1/4 py-2"
-              >
+              <th class="w-1/2 sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/8 2xl:w-1/4 py-2">
                 Ticketart
               </th>
-              <th
-                class="w-1/4 sm:w-1/4 md:w-1/4 lg:w-1/8 xl:w-1/8 2xl:w-1/8 py-2 text-center"
-              >
+              <th class="w-1/4 sm:w-1/4 md:w-1/4 lg:w-1/8 xl:w-1/8 2xl:w-1/8 py-2 text-center">
                 Preis
               </th>
-              <th
-                class="w-1/4 sm:w-1/4 md:w-1/4 lg:w-1/8 xl:w-1/8 2xl:w-1/8 py-2 text-center"
-              >
+              <th class="w-1/4 sm:w-1/4 md:w-1/4 lg:w-1/8 xl:w-1/8 2xl:w-1/8 py-2 text-center">
                 Auswahl
               </th>
             </tr>
@@ -46,19 +33,15 @@
               <td class="py-1">{{ ticket.bookingItem?.ticketType?.name }}</td>
               <td class="py-1 text-center">
                 {{
+                  ticket.price ? 
                   (ticket.price / 100).toLocaleString("de-DE", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
-                  })
+                  }) + ' €' : 'N/A'
                 }}
-                €
               </td>
               <td class="py-1 text-center">
-                <input
-                  type="checkbox"
-                  v-model="selectedTickets"
-                  :value="ticket.id"
-                />
+                <input type="checkbox" v-model="selectedTickets" :value="ticket.id" />
               </td>
             </tr>
           </tbody>
@@ -66,28 +49,18 @@
         <p v-else class="text-center text-gray-500">Keine Tickets verfügbar.</p>
         <div class="border-b border border-dashed"></div>
         <div class="py-4 flex justify-center items-center gap-20">
-          <button
-            @click="goToHome"
-            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-          >
+          <button @click="goToHome" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
             Zurück
           </button>
-          <button
-            @click="showPopup"
-            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-          >
+          <button @click="showPopup" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
             Stornieren
           </button>
         </div>
       </div>
     </div>
 
-    <Popup
-      :visible="isPopupVisible"
-      :selectedTicketsDetails="selectedTicketsDetails"
-      @confirm="confirmCancellation"
-      @cancel="hidePopup"
-    />
+    <Popup :visible="isPopupVisible" :selectedTicketsDetails="selectedTicketsDetails" @confirm="confirmCancellation"
+      @cancel="hidePopup" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -200,3 +173,4 @@ const goToHome = () => {
   router.push("/");
 };
 </script>
+

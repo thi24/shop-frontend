@@ -1,25 +1,17 @@
 import { defineStore } from 'pinia';
 
-
 export const useEventStore = defineStore('event', {
     state: () => ({
-      eventId: '',
-      eventName: '',
+      eventId: '' as string,
+      eventName: '' as string,
     }),
     persist: true,
     actions: {
-      setEventId(id) {
+      setEventId(id: string) {
         this.eventId = id;
       },
-      setEventName(name) {
+      setEventName(name: string) {
         this.eventName = name;
       },
-
     },  
   });
-
-
-
-
-
-  
