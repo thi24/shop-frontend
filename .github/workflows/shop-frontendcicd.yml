@@ -40,6 +40,13 @@ jobs:
           PROCESS_ENGINE_START=${{ secrets.PROCESS_ENGINE_START }}
           PROCESS_TOKEN=${{ secrets.PROCESS_TOKEN }}
           INDEX_URL=${{ secrets.INDEX_URL }}
+
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: http://37.27.45.27:9000
+
           
     - name: Call a webhook for Portainer
       uses: distributhor/workflow-webhook@v3
