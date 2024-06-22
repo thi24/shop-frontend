@@ -11,8 +11,7 @@
       </div>
       <div class="flex flex-col gap-3 py-6 text-xs mt-4">
         <table v-if="tickets.length > 0" class="w-full text-left table-fixed">
-          <caption class="text-lg font-semibold text-gray-700 py-2">
-            Übersicht der auswählbaren Tickets für die Stornierung
+          <caption class="">
           </caption>
           <thead>
             <tr>
