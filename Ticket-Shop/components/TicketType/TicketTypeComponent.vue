@@ -9,9 +9,7 @@
     </h5>
   </div>
   <div class="p-6 border-t border-blue-gray-50">
-    <table class="min-w-full">
-      <thead class="">
-      </thead>
+    <table class="min-w-full" aria-label="Ticket Types" role="presentation">
       <tbody>
         <tr
           v-for="ticketType in tickettypes"
@@ -54,5 +52,3 @@ const props = defineProps<{
 
 const { tickettypes } = toRefs(props);
 </script>
-
-

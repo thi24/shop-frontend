@@ -111,6 +111,7 @@ const openPopup = (amount) => {
   if (amount.value > 0) {
     open.value = true;
   } else {
+    open.value = false;
   }
 };
 defineExpose({

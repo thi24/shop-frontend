@@ -22,7 +22,7 @@
                 </p>
             </div>
             <div class="flex flex-col gap-3 pb-6 pt-2 text-xs">
-                <table class="w-full text-left table-fixed">
+                <table class="w-full text-left table-fixed" aria-label="Bought Tickets">
                     <thead>
                         <tr>
                             <th class="w-1/2 py-2">Tickets</th>
