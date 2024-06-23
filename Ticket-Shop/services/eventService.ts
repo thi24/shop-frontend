@@ -2,13 +2,19 @@ import { $fetch } from "ohmyfetch";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+
+function handleError(error: any) {
+  console.error("API call failed:", error);
+  // 
+  throw new Error("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+}
+
 export const fetchEvents = async () => {
   try {
     const response = await $fetch(`${API_BASE_URL}/events/public`);
     return response;
   } catch (error) {
-    //console.error('Failed to load events:', error);
-    throw error;
+    handleError(error);
   }
 };
 
@@ -17,16 +23,13 @@ export const fetchEventById = async (eventId: string) => {
     const response = await $fetch(`${API_BASE_URL}/events/public/${eventId}`);
     return response;
   } catch (error) {
-    //console.error('Failed to load event details:', error);
-    throw error;
+    handleError(error);
   }
 };
 
 export const fetchEventImage = async (eventId: string) => {
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/events/public/${eventId}/image`,
-    );
+    const response = await fetch(`${API_BASE_URL}/events/public/${eventId}/image`);
     if (!response.ok) {
       throw new Error("Image not found");
     }
@@ -36,20 +39,16 @@ export const fetchEventImage = async (eventId: string) => {
     }
     return URL.createObjectURL(blob);
   } catch (error) {
-    //console.error('Failed to load event image:', error);
-    throw error;
+    handleError(error);
   }
 };
 
 export const fetchTicketTypesByEventId = async (eventId: string) => {
   try {
-    const response = await $fetch(
-      `${API_BASE_URL}/ticket-types/public/valid/${eventId}`,
-    );
+    const response = await $fetch(`${API_BASE_URL}/ticket-types/public/valid/${eventId}`);
     return response;
   } catch (error) {
-    //console.error('Failed to load ticket types:', error);
-    throw error;
+    handleError(error);
   }
 };
 
@@ -67,7 +66,6 @@ export const fetchEventsByEventName = async (name: string) => {
     );
     return response;
   } catch (error) {
-    //console.error('Failed to load ticket types:', error);
-    throw error;
+    handleError(error);
   }
 };
