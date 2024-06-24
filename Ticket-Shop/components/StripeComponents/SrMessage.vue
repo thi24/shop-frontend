@@ -43,6 +43,8 @@ const sanitizeUrl = (url) => {
       }}<a
         v-if="message.paymentIntent"
         :href="addDashboardLinks(message.paymentIntent)"
+        target="_blank"
+        rel="noopener noreferrer"
         >{{ message.paymentIntent }}</a
       >
       <br />

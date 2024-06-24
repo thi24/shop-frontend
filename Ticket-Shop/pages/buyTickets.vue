@@ -20,7 +20,7 @@
 
           <div class="flex justify-center">
             <button
-              class="mb-8 w-1/2 max-w-xs align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg border border-blue-500 text-blue-500 hover:opacity-75 focus:ring focus:ring-blue-200 active:opacity-[0.85]"
+              class="mb-8 mt-2 w-1/2 max-w-xs align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg border border-blue-500 text-blue-500 hover:opacity-75 focus:ring focus:ring-blue-200 active:opacity-[0.85]"
               @click="handlePayment">
               Jetzt bezahlen    
             </button>
