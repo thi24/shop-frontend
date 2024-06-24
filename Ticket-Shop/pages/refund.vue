@@ -175,4 +175,3 @@ const goToHome = () => {
   router.push("/");
 };
 </script>
-
