@@ -10,6 +10,13 @@
   </div>
   <div class="p-6 border-t border-blue-gray-50">
     <table class="min-w-full" aria-label="Tickettypes">
+      <thead>
+        <tr>
+          <th class="sr-only">Name</th>
+          <th class="sr-only">Price</th>
+          <th class="sr-only">Quantity</th>
+        </tr>
+      </thead>
       <tbody>
         <tr
           v-for="ticketType in tickettypes"
