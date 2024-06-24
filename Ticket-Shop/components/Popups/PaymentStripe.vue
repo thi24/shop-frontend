@@ -132,7 +132,7 @@ const handleSubmit = async (e: Event) => {
       const paymentError = true;
       router.push(`/error/?${paymentError}`);
     } else {
-      router.push("/success"); // Ensure navigation to success page
+      router.push("/success"); 
     }
   } catch (err) {
     console.log("error", err);

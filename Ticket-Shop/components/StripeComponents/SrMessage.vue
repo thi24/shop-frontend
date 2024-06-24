@@ -22,7 +22,18 @@ const splitMessages = computed(() => {
 });
 
 const addDashboardLinks = (paymentIntent) => {
-  return `https://dashboard.stripe.com/test/payments/${paymentIntent}`;
+  const url = `https://dashboard.stripe.com/test/payments/${paymentIntent}`;
+  return sanitizeUrl(url);
+};
+
+const sanitizeUrl = (url) => {
+  try {
+    const parsedUrl = new URL(url);
+    return parsedUrl.href;
+  } catch (e) {
+    console.error("Invalid URL:", url);
+    return "";
+  }
 };
 </script>
 <template>

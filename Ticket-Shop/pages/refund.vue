@@ -66,7 +66,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed} from "vue";
 import { useRouter } from "vue-router";
 import Popup from "~/components/Popups/StornoConfirmation.vue";
 import { Ticket } from "~/classes/Ticket";

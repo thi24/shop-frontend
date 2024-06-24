@@ -100,7 +100,6 @@ import {
 
 const props = defineProps({
   selectedTickets: Array,
-  //eventId: String,
 });
 
 let popUpAmount = ref(0);
