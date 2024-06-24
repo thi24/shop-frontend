@@ -9,7 +9,7 @@
     </h5>
   </div>
   <div class="p-6 border-t border-blue-gray-50">
-    <table class="min-w-full" aria-label="Ticket Types" role="presentation">
+    <table class="min-w-full" role="presentation">
       <tbody>
         <tr
           v-for="ticketType in tickettypes"
@@ -31,8 +31,9 @@
             <input
               :id="'number-input-' + ticketType.id"
               type="number"
+              pattern="[0-9]*"
               min="0"
-              max="999"
+              max="99"
               placeholder="0"
               class="p-1 rounded-lg focus:outline-none w-11 placeholder-gray-400 border-gray-300 border [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
             />
