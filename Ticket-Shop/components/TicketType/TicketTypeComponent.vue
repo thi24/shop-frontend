@@ -9,7 +9,7 @@
     </h5>
   </div>
   <div class="p-6 border-t border-blue-gray-50">
-    <table class="min-w-full" role="presentation">
+    <table class="min-w-full" aria-label="Tickettypes">
       <tbody>
         <tr
           v-for="ticketType in tickettypes"
@@ -31,7 +31,6 @@
             <input
               :id="'number-input-' + ticketType.id"
               type="number"
-              pattern="[0-9]*"
               min="0"
               max="99"
               placeholder="0"
