@@ -3,11 +3,11 @@
     class="bg-[radial-gradient(ellipse_100%_100%_at_50%_30%,rgba(241,238,220,1.000),rgba(255,255,255,1))] shadow py-2 sticky"
   >
     <div class="flex flex-wrap justify-between items-center mx-auto">
-      <nuxt-link to="/">
+      <div @click="navigateHome" class="cursor-pointer">
         <div class="flex items-center space-x-1">
           <h1 class="px-10 text-4xl font-bold leading-6">Show-Pass</h1>
         </div>
-      </nuxt-link>
+      </div>
       <div class="p-4 flex justify-center">
         <form class="max-w-md mx-auto">
           <label
@@ -51,8 +51,10 @@
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
 import { useSearchStore } from "~/stores/searchStore";
 
+const router = useRouter();
 const searchStore = useSearchStore();
 
 function setInputIntoStore() {
@@ -63,9 +65,11 @@ function setInputIntoStore() {
   }
 }
 
+function navigateHome() {
+  router.push('/');
+}
+
 defineProps<{
   showInput: boolean;
 }>();
 </script>
-
-
