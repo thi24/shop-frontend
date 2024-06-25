@@ -1,11 +1,10 @@
 import { $fetch } from "ohmyfetch";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
+const imageCache = new Map<string, string>();
 
 function handleError(error: any) {
   console.error("API call failed:", error);
-  // 
   throw new Error("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
 }
 
@@ -28,16 +27,20 @@ export const fetchEventById = async (eventId: string) => {
 };
 
 export const fetchEventImage = async (eventId: string) => {
+  if (imageCache.has(eventId)) {
+    return imageCache.get(eventId);
+  }
+
   try {
-    const response = await fetch(`${API_BASE_URL}/events/public/${eventId}/image`);
-    if (!response.ok) {
-      throw new Error("Image not found");
+    const response = await $fetch(`${API_BASE_URL}/events/public/${eventId}/image`, {
+      responseType: 'blob'
+    });
+    if (!response || response.size === 0) {
+      throw new Error("Image not found or empty image blob");
     }
-    const blob = await response.blob();
-    if (blob.size === 0) {
-      throw new Error("Empty image blob");
-    }
-    return URL.createObjectURL(blob);
+    const imageUrl = URL.createObjectURL(response);
+    imageCache.set(eventId, imageUrl);
+    return imageUrl;
   } catch (error) {
     handleError(error);
   }
