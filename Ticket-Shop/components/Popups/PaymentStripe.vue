@@ -28,12 +28,7 @@
       <div class="">
         <p class="m-2 font-medium">
           Summe:
-          {{
-            props.amount.toLocaleString("de-DE", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })
-          }}€
+          {{ formatPrice(props.amount) }}
         </p>
         <div class="flex items-center">
           <button
@@ -66,6 +61,7 @@ import { Sale } from "~/classes/Sale";
 import { Booking } from "~/classes/Booking";
 import { Customer } from "~/classes/Customer";
 import type { Product } from "~/stores/paymentStore";
+import { formatPrice } from "~/utils/formatPrice";
 
 import LoadingSign from "~/components/svg/loading-sign.vue";
 

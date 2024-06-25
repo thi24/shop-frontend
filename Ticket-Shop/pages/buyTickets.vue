@@ -49,14 +49,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, type Ref, computed } from "vue";
+import { ref, type Ref, computed, onMounted } from "vue";
 import { useEventStore } from "~/stores/eventIdStore";
 import { Event } from "~/classes/Event";
 import { TicketType } from "~/classes/TicketType";
-import {
-  fetchTicketTypesByEventId,
-  fetchEventById,
-} from "~/services/eventService";
+import { fetchTicketTypesByEventId, fetchEventById } from "~/services/eventService";
+import { checkInputs } from "~/utils/checkInputs";
+import { trackEventView } from "~/services/analyticsService";
 
 import EventBuyComponent from "~/components/events/EventBuyComponent.vue";
 import TicketTypeComponent from "~/components/ticketType/TicketTypeComponent.vue";
@@ -74,10 +73,6 @@ const selectedTickets = ref<
   }[]
 >([]);
 
-const popupTriggers: Ref<{ buttonTrigger: boolean }> = ref({
-  buttonTrigger: false,
-});
-
 const tickettypes = ref<TicketType[]>([]);
 const event = ref<Event | null>(null);
 const eventStore = useEventStore();
@@ -89,12 +84,7 @@ const hasTicketTypes = computed(() => tickettypes.value.length > 0);
 
 onMounted(async () => {
   const eventId = eventStore.eventId;
-  await fetch(
-    `https://dev.benevolo.de/api/analytics-service/events/${eventId}/event-views`,
-    {
-      method: "PATCH",
-    }
-  );
+  await trackEventView(eventId);
   if (!eventId) {
     console.error("No event ID found in store");
     return;
@@ -128,7 +118,6 @@ function checkTicketTypes() {
 
 function getUserInputs() {
   selectedTickets.value = [];
-
   tickettypes.value.forEach((ticketType) => {
     const inputElement = document.querySelector(
       `#number-input-${ticketType.id}`
@@ -157,8 +146,7 @@ function calculateAmount() {
 }
 //new Alert/Fehler nachricht
 function handlePayment() {
-  let inputsAreNumeric = checkInputs(); // Pruefen ob die Eingaben Zahlen sind
-
+  let inputsAreNumeric = checkInputs(); 
   if (inputsAreNumeric) {
     if (calculateAmount().value <= 0) {
       errorMessage.value = "Bitte wählen Sie mindestens ein Ticket aus.";
@@ -173,24 +161,4 @@ function handlePayment() {
   }
 }
 
-function checkInputs() {
-  let inputsAreNumeric = true;
-  let inputs = document.getElementsByTagName("input");
-
-  for (let i = 0; i < inputs.length; ++i) {
-    let inputValue = inputs[i].value.trim();
-
-    if (
-      !(/^(\d+)$/.test(inputValue) || inputValue == "" || inputValue == null)
-    ) {
-      inputsAreNumeric = false;
-      inputs[i].style.outline = "2px solid red";
-      console.log("Input " + i + " is not numeric. Value: " + inputValue);
-    } else {
-      inputs[i].style.outline = "";
-    }
-  }
-
-  return inputsAreNumeric;
-}
 </script>

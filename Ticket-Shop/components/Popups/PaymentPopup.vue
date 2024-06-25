@@ -49,12 +49,7 @@
                       >
                         {{ ticket.quantity }}x
                         {{ ticket.name }}
-                        {{
-                          (ticket.price / 100).toLocaleString("de-DE", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })
-                        }}€
+                        {{ formatPrice(ticket.price) }}
                       </li>
                     </ul>
                     <div class="mt-2">
@@ -89,7 +84,6 @@
 
 <script setup>
 import { ref } from "vue";
-import PaymentStripe from "./PaymentStripe.vue";
 import {
   Dialog,
   DialogPanel,
@@ -97,6 +91,9 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
+import { formatPrice } from "~/utils/formatPrice";
+
+import PaymentStripe from "~/components/popups/PaymentStripe.vue";
 
 const props = defineProps({
   selectedTickets: Array,

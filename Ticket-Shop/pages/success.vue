@@ -35,8 +35,7 @@
                 {{ product.quantity }}
               </td>
               <td class="py-1 text-right">
-                {{ ((product.price / 100) * product.quantity).toFixed(2) }}
-                €
+                {{ formatPrice(product.price * product.quantity) }}
               </td>
             </tr>
           </tbody>
@@ -64,6 +63,8 @@
 import { useRouter } from "vue-router";
 import { onMounted } from "vue";
 import { usePaymentStore } from "~/stores/paymentStore";
+import { formatPrice } from "~/utils/formatPrice"; 
+import { getParameterByName } from "~/utils/getParameterByName";
 
 const router = useRouter();
 const config = useRuntimeConfig();
@@ -113,14 +114,6 @@ onMounted(async () => {
   }
 });
 
-function getParameterByName(name: string, url: string) {
-  name = name.replace(/[[\]]/g, "\\$&");
-  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
-  const results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return "";
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
 function goToHome() {
   router.push("/");
 }

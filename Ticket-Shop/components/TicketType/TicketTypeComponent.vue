@@ -26,13 +26,8 @@
           <td class="py-2 text-gray-900 font-bold">
             {{ ticketType.name }}
           </td>
-          <td class="py-2 text-sm text-gray-700 font-bold">
-            {{
-              ticketType.price ? (ticketType.price / 100).toLocaleString("de-DE", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }) : ""
-            }}€
+          <td class="py-2 text-sm text-gray-7000 font-bold">
+            {{ formatPrice(ticketType.price ?? null) }}
           </td>
           <td class="py-2">
             <input
@@ -52,6 +47,7 @@
 
 <script setup lang="ts">
 import { TicketType } from "~/classes/TicketType";
+import { formatPrice } from "~/utils/formatPrice";
 
 const props = defineProps<{
   tickettypes: TicketType[];

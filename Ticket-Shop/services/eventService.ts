@@ -74,4 +74,3 @@ export const fetchEventsByEventName = async (name: string) => {
     handleError(error);
   }
 };
-
