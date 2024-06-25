@@ -17,7 +17,6 @@
           <div class="flex justify-center my-10" id="no-tickets" style="display: none">
             <p class="flex justify-center mb-10">Aktuell keine Tickets verfügbar</p>
           </div>
-
           <div class="flex justify-center" >
             <button v-if="hasTicketTypes"
               class="mb-8 mt-2 w-1/2 max-w-xs align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg border border-blue-500 text-blue-500 hover:opacity-75 focus:ring focus:ring-blue-200 active:opacity-[0.85]"

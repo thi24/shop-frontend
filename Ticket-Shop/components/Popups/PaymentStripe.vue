@@ -6,7 +6,7 @@ import {
   loadStripe,
 } from "@stripe/stripe-js";
 import { useRouter } from "vue-router";
-import { usePaymentStore } from "~/stores/paymentStore"; // Import the store
+import { usePaymentStore } from "~/stores/paymentStore"; 
 import { Sale } from "~/classes/Sale";
 import { Booking } from "~/classes/Booking";
 import { Customer } from "~/classes/Customer";
