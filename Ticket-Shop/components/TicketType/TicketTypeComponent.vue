@@ -47,23 +47,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs } from 'vue';
+import { toRefs } from 'vue';
 import { TicketType } from "~/classes/TicketType";
 import { formatPrice } from "~/utils/formatPrice";
+import { filterInput } from "~/utils/filterInput";
 
 const props = defineProps<{
   tickettypes: TicketType[];
 }>();
 
 const { tickettypes } = toRefs(props);
-
-function filterInput(event: Event) {
-  const inputElement = event.target as HTMLInputElement;
-  let inputValue = inputElement.value;
-  inputValue = inputValue.replace(/[^0-9]/g, '');
-  if (parseInt(inputValue) > 99) {
-    inputValue = '99';
-  }
-  inputElement.value = inputValue;
-}
 </script>

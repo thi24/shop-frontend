@@ -1,7 +1,8 @@
 {
-  "name": "nuxt-app",
+  "name": "ticket-shop",
   "private": true,
   "type": "module",
+  "description": "A ticket shop application built with Nuxt 3 and styled using Tailwind CSS.",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -34,3 +35,4 @@
     "vitest": "^1.6.0"
   }
 }
+
