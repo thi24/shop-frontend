@@ -6,7 +6,7 @@ import {
   loadStripe,
 } from "@stripe/stripe-js";
 import { useRouter } from "vue-router";
-import { usePaymentStore } from "~/stores/paymentStore"; // Import the store
+import { usePaymentStore } from "~/stores/paymentStore"; 
 import { Sale } from "~/classes/Sale";
 import { Booking } from "~/classes/Booking";
 import { Customer } from "~/classes/Customer";
@@ -94,11 +94,11 @@ const handleSubmit = async (e: Event) => {
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
     // für online
-   /*const returnUrl = `${
+   const returnUrl = `${
       useRuntimeConfig().public.returnUrl
-    }/success?${queryString}`;*/
+    }/success?${queryString}`;
     //für lokal testen
-    const returnUrl = `http://localhost:3000/success/?${queryString}`;
+    //const returnUrl = `http://localhost:3000/success/?${queryString}`;
 
     // Save the payment details in the store
     paymentStore.setPaymentDetails(
