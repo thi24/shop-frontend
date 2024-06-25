@@ -37,6 +37,7 @@
               max="99"
               placeholder="0"
               class="p-1 rounded-lg focus:outline-none w-11 placeholder-gray-400 border-gray-300 border [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+              @input="filterInput($event)"
             />
           </td>
         </tr>
@@ -46,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, toRefs } from 'vue';
 import { TicketType } from "~/classes/TicketType";
 import { formatPrice } from "~/utils/formatPrice";
 
@@ -54,4 +56,14 @@ const props = defineProps<{
 }>();
 
 const { tickettypes } = toRefs(props);
+
+function filterInput(event: Event) {
+  const inputElement = event.target as HTMLInputElement;
+  let inputValue = inputElement.value;
+  inputValue = inputValue.replace(/[^0-9]/g, '');
+  if (parseInt(inputValue) > 99) {
+    inputValue = '99';
+  }
+  inputElement.value = inputValue;
+}
 </script>

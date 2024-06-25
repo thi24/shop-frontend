@@ -28,7 +28,7 @@
       <div class="">
         <p class="m-2 font-medium">
           Summe:
-          {{ formatPrice(props.amount) }}
+          {{ formatPrice(props.amount * 100) }}
         </p>
         <div class="flex items-center">
           <button

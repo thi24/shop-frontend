@@ -146,7 +146,8 @@ function calculateAmount() {
 }
 //new Alert/Fehler nachricht
 function handlePayment() {
-  let inputsAreNumeric = checkInputs(); 
+  const inputElements = Array.from(document.querySelectorAll('input[type="number"]')) as HTMLInputElement[];
+  let inputsAreNumeric = checkInputs(inputElements); 
   if (inputsAreNumeric) {
     if (calculateAmount().value <= 0) {
       errorMessage.value = "Bitte wählen Sie mindestens ein Ticket aus.";
