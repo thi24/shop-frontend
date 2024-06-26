@@ -41,6 +41,7 @@ jobs:
           PROCESS_TOKEN=${{ secrets.PROCESS_TOKEN }}
           INDEX_URL=${{ secrets.INDEX_URL }}
           BASE_URL=${{ secrets.BASE_URL }}
+        no-cache: true
 
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
