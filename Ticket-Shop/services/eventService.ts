@@ -1,5 +1,4 @@
 import { $fetch } from "ohmyfetch";
-import noImage from "~/assets/image/no_image.png";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const imageCache = new Map<string, string>();
 
@@ -43,8 +42,6 @@ export const fetchEventImage = async (eventId: string) => {
     return imageUrl;
   } catch (error) {
     handleError(error);
-    imageCache.set(eventId, noImage);
-    return noImage;
   }
 };
 
