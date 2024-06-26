@@ -29,7 +29,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./Ticket-Shop
-        file: ./Ticket-Shop/dockerfile
+        file: ./Ticket-Shop/Dockerfile
         push: true
         tags: ghcr.io/thi24/shop-frontend:latest
         build-args: |
