@@ -21,13 +21,7 @@
             -
           </span>
           <span class="font-normal">
-            {{
-              ticket.price ? (ticket.price / 100).toLocaleString("de-DE", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }) : "0,00"
-            }}
-            €
+            {{ formatPrice(ticket.price ?? null) }}
           </span>
         </li>
       </ul>
@@ -51,6 +45,7 @@
 
 <script setup lang="ts">
 import { Ticket } from "~/classes/Ticket";
+import { formatPrice } from "~/utils/formatPrice";
 
 const props = defineProps<{
   visible: boolean;

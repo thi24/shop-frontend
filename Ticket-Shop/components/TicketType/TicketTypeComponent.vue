@@ -26,13 +26,8 @@
           <td class="py-2 text-gray-900 font-bold">
             {{ ticketType.name }}
           </td>
-          <td class="py-2 text-sm text-gray-700 font-bold">
-            {{
-              ticketType.price ? (ticketType.price / 100).toLocaleString("de-DE", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }) : ""
-            }}€
+          <td class="py-2 text-sm text-gray-7000 font-bold">
+            {{ formatPrice(ticketType.price ?? null) }}
           </td>
           <td class="py-2">
             <input
@@ -42,6 +37,7 @@
               max="99"
               placeholder="0"
               class="p-1 rounded-lg focus:outline-none w-11 placeholder-gray-400 border-gray-300 border [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+              @input="filterInput($event)"
             />
           </td>
         </tr>
@@ -51,7 +47,10 @@
 </template>
 
 <script setup lang="ts">
+import { toRefs } from 'vue';
 import { TicketType } from "~/classes/TicketType";
+import { formatPrice } from "~/utils/formatPrice";
+import { filterInput } from "~/utils/filterInput";
 
 const props = defineProps<{
   tickettypes: TicketType[];

@@ -40,6 +40,7 @@ jobs:
           PROCESS_ENGINE_START=${{ secrets.PROCESS_ENGINE_START }}
           PROCESS_TOKEN=${{ secrets.PROCESS_TOKEN }}
           INDEX_URL=${{ secrets.INDEX_URL }}
+          BASE_URL=${{ secrets.BASE_URL }}
 
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master

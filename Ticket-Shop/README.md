@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Ticket-Shop
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This project is built with Nuxt 3 and styled using Tailwind CSS.
 
 ## Setup
 
@@ -38,6 +38,12 @@ yarn dev
 bun run dev
 ```
 
+If you encounter any issues starting the server, try the following steps:
+
+1. Delete the `node_modules` folder and `package-lock.json` file.
+2. Run `npm install`.
+3. Start the development server with `npm run dev`.
+
 ## Production
 
 Build the application for production:
@@ -72,4 +78,10 @@ yarn preview
 bun run preview
 ```
 
+## Deployment
+
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for details.

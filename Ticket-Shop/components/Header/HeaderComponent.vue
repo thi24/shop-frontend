@@ -19,21 +19,7 @@
             <div
               class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
             >
-              <svg
-                class="w-4 h-4 text-white-500 dark:text-white-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
+              <SearchSign />
             </div>
             <input
               type="search"
@@ -51,22 +37,24 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 import { useSearchStore } from "~/stores/searchStore";
+
+import SearchSign from "~/components/svg/search-sign.vue";
 
 const router = useRouter();
 const searchStore = useSearchStore();
 
 function setInputIntoStore() {
   let inputElement = document.getElementById("search-events");
-  if (inputElement) { 
-    let value = (inputElement as HTMLInputElement).value; 
+  if (inputElement) {
+    let value = (inputElement as HTMLInputElement).value;
     searchStore.setEventName(value);
   }
 }
 
 function navigateHome() {
-  router.push('/');
+  router.push("/");
 }
 
 defineProps<{
