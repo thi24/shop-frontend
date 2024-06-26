@@ -29,6 +29,7 @@ RUN apt-get install -y git
 
 # copy the app, note .dockerignore
 COPY . /usr/src/nuxt-app/
+RUN ls -la /usr/src/nuxt-app/assets/image
 RUN npm install
 RUN npm run build
 
