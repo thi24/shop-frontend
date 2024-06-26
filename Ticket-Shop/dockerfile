@@ -1,5 +1,4 @@
-# Build stage
-FROM node:20-slim AS build
+FROM node:20-slim AS base
 
 ARG VITE_STRIPE_KEY
 ARG VITE_API_BASE_URL
@@ -29,19 +28,8 @@ RUN apt-get install -y git
 
 # copy the app, note .dockerignore
 COPY . /usr/src/nuxt-app/
-RUN ls -la /usr/src/nuxt-app/assets/image
 RUN npm install
 RUN npm run build
-
-# Runtime stage
-FROM node:20-slim AS runtime
-
-# create destination directory
-RUN mkdir -p /usr/src/nuxt-app
-WORKDIR /usr/src/nuxt-app
-
-# copy build artifacts from build stage
-COPY --from=build /usr/src/nuxt-app /usr/src/nuxt-app
 
 EXPOSE 3000
 
