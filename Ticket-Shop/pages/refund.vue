@@ -1,6 +1,6 @@
 <template>
   <div class="relative flex w-full items-start justify-center pt-20">
-    <Alert1Component
+    <InfoAlertComponent
       v-if="errorMessage"
       :message="errorMessage"
       @close="errorMessage = null"
@@ -95,7 +95,7 @@ import { formatPrice } from "~/utils/formatPrice";
 import { fetchTickets } from "~/services/ticketService";
 import { processRefund } from "~/services/ticketService";
 
-import Alert1Component from "~/components/alerts/Alert1Component.vue";
+import InfoAlertComponent from "~/components/alerts/InfoAlertComponent.vue";
 import Popup from "~/components/popups/StornoConfirmation.vue";
 
 const router = useRouter();
@@ -128,11 +128,12 @@ const hidePopup = () => {
 
 
 onMounted(() => {
-  refundId.value = parseUrl();
+  const url = window.location.href;
+  refundId.value = parseUrl(url);
   loadTickets();
 });
 
-// Laden der Bestellung anhand der ID
+// Load the order based on the ID
 const loadTickets = async () => {
   try {
     tickets.value = await fetchTickets(refundId.value);
@@ -152,7 +153,7 @@ const confirmCancellation = async () => {
   hidePopup();
 };
 
-// Zurück zur Startseite
+// Back to home
 const goToHome = () => {
   router.push("/");
 };

@@ -6,7 +6,7 @@
       @close="errorMessage = null"
     />
     <div class="flex flex-wrap">
-      <!-- ab hier EventBuyComponent -->
+      <!-- EventBuyComponent starts here -->
       <div
         class="w-full rounded-lg sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-1/2 p-1 mb-1 mt-2 mr-2 ml-2 sm:mr-6 sm:ml-5 md:mr-2 md:ml-8 lg:ml-7 lg:mr-8 xl:mr-5 xl:ml-20 2xl:mr-10 2xl:ml-30"
       >
@@ -14,7 +14,7 @@
           <EventBuyComponent :event="event" />
         </div>
       </div>
-      <!-- ab hier Ticket auswahl Component -->
+      <!-- Ticket selection component starts here -->
       <div
         class="w-full rounded-lg sm:w-2/5 md:w-2/5 lg:w-2/5 xl:w-2/5 2xl:w-2/5"
       >
@@ -59,7 +59,7 @@ import { trackEventView } from "~/services/analyticsService";
 
 import EventBuyComponent from "~/components/events/EventBuyComponent.vue";
 import TicketTypeComponent from "~/components/ticketType/TicketTypeComponent.vue";
-import AlertComponent from "~/components/alerts/Alert1Component.vue";
+import AlertComponent from "~/components/alerts/InfoAlertComponent.vue";
 import PaymentPopup from "~/components/popups/PaymentPopup.vue";
 
 const selectedTickets = ref<
@@ -144,7 +144,7 @@ function calculateAmount() {
   amount.value /= 100;
   return amount;
 }
-//new Alert/Fehler nachricht
+// new alert/error message
 function handlePayment() {
   const inputElements = Array.from(document.querySelectorAll('input[type="number"]')) as HTMLInputElement[];
   let inputsAreNumeric = checkInputs(inputElements); 

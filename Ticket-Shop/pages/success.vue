@@ -72,7 +72,7 @@ const paymentStore = usePaymentStore();
 const { orderNumber, eventName, amount, products } = storeToRefs(paymentStore);
 
 onMounted(async () => {
-  //Abgleich ob Engine aufruf erfolgt ist
+  // Check if engine call was made
   const url = window.location.href;
   const processEngineCalled = localStorage.getItem("processEngineCalled");
 
@@ -84,13 +84,13 @@ onMounted(async () => {
     if (redirectStatus === "succeeded") {
       const jsonString = url.split("?")[1].split("=")[0];
 
-      //Manche Zeichen werden nicht richtig decodiert
+      // Some characters are not decoded correctly
       const replacedString = decodeURIComponent(jsonString);
       const parsedData = JSON.parse(replacedString);
 
-      //Window Title bereinigen
+      // Clear window title
       window.history.replaceState({}, document.title, window.location.pathname);
-      //Aufruf der Engine
+      // Call the engine
       try {
         await fetch(useRuntimeConfig().public.processEngineStart, {
           method: "POST",
@@ -101,7 +101,7 @@ onMounted(async () => {
           },
           body: JSON.stringify(parsedData),
         });
-        // bekommen wir nicht mehr zurück
+        // We don't get back
         localStorage.setItem("processEngineCalled", "true");
       } catch (error) {
         console.error("Error:", error);
@@ -118,3 +118,5 @@ function goToHome() {
   router.push("/");
 }
 </script>
+
+

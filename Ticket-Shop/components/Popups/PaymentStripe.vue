@@ -144,11 +144,11 @@ const handleSubmit = async (e: Event) => {
     const bookings = new Booking(customer, bookingItems, props.eventId);
     const { error: submitError } = await elements.submit();
     const queryString = new URLSearchParams(bookings.toJSON());
-    // für online
+    // for online
     const returnUrl = `${
       useRuntimeConfig().public.returnUrl
     }/success?${queryString}`;
-    //für lokal testen
+    //for lokal testing
     //const returnUrl = `http://localhost:3000/success/?${queryString}`;
 
     // Save the payment details in the store
@@ -159,7 +159,7 @@ const handleSubmit = async (e: Event) => {
       props.products
     );
 
-    // das die Process Engine nicht aufgerufen wird bei wiederholtem laden der success seite
+    // to ensure the Process Engine is not called when the success page is reloaded
     localStorage.setItem("processEngineCalled", "false");
 
     if (submitError) {
