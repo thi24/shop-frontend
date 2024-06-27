@@ -92,8 +92,7 @@ import { useRouter } from "vue-router";
 import { Ticket } from "~/classes/Ticket";
 import { parseUrl } from "~/utils/parseUrl";
 import { formatPrice } from "~/utils/formatPrice"; 
-import { fetchTickets } from "~/services/ticketService";
-import { processRefund } from "~/services/ticketService";
+import { fetchTickets, processRefund } from "~/services/ticketService";
 
 import InfoAlertComponent from "~/components/alerts/InfoAlertComponent.vue";
 import Popup from "~/components/popups/StornoConfirmation.vue";
