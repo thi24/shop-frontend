@@ -25,10 +25,9 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.4",
-    "@stripe/stripe-js": "^3.3.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
+    "@stripe/stripe-js": "^3.3.0",
     "@vue/test-utils": "^2.4.6",
     "vitest": "^1.6.0"
   }
 }
-

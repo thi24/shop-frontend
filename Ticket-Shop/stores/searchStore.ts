@@ -6,10 +6,10 @@ export const useSearchStore = defineStore('search', {
     }),
     persist: true,
     actions: {
-      searchEventName(eventName) {
+      searchEventName(eventName: string) {
         this.eventName = eventName;
       },
-      setEventName(eventName) {
+      setEventName(eventName: string) {
         this.eventName = eventName;
       }
     },  

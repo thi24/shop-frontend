@@ -29,7 +29,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./Ticket-Shop
-        file: ./Ticket-Shop/dockerfile
+        file: ./Ticket-Shop/Dockerfile
         push: true
         tags: ghcr.io/thi24/shop-frontend:latest
         build-args: |
@@ -41,7 +41,6 @@ jobs:
           PROCESS_TOKEN=${{ secrets.PROCESS_TOKEN }}
           INDEX_URL=${{ secrets.INDEX_URL }}
           BASE_URL=${{ secrets.BASE_URL }}
-        no-cache: true
 
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master

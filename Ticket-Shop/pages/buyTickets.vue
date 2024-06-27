@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, type Ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useEventStore } from "~/stores/eventIdStore";
 import { Event } from "~/classes/Event";
 import { TicketType } from "~/classes/TicketType";
