@@ -46,6 +46,7 @@ export const fetchEventImage = async (eventId: string) => {
     const noImageUrl = noImage;
     imageCache.set(eventId, noImageUrl);
     return noImageUrl;
+
   }
 };
 
