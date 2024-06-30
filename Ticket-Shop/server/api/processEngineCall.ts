@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
       method: 'POST',
       headers: {
         accept: 'application/json',
-        Authorization: "Bearer " +  config.public.processtoken,
+        Authorization: "Bearer " +  processtoken,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
