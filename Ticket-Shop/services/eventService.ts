@@ -43,8 +43,9 @@ export const fetchEventImage = async (eventId: string) => {
     return imageUrl;
   } catch (error) {
     handleError(error);
-    imageCache.set(eventId, noImage);
-    return noImage;
+    const noImageUrl = noImage;
+    imageCache.set(eventId, noImageUrl);
+    return noImageUrl;
   }
 };
 
@@ -59,16 +60,7 @@ export const fetchTicketTypesByEventId = async (eventId: string) => {
 
 export const fetchEventsByEventName = async (name: string) => {
   try {
-    const response = await $fetch(
-      `${API_BASE_URL}/events/public/search?name=${name}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
-        },
-      }
-    );
+    const response = await $fetch(`/api/searchEvents?name=${name}`)
     return response;
   } catch (error) {
     handleError(error);
