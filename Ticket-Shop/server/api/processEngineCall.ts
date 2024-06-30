@@ -3,13 +3,14 @@ import { defineEventHandler, readBody } from 'h3';
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const body = await readBody(event);
+  const processtoken = config.public.processToken;
 
   try {
     const response = await fetch(config.public.processEngineStart, {
       method: 'POST',
       headers: {
         accept: 'application/json',
-        Authorization: "Bearer " +  config.public.processToken,
+        Authorization: "Bearer " +  config.public.processtoken,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
