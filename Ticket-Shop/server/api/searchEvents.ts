@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
   const { name } = getQuery(event);
   const config = useRuntimeConfig();
   const apibaseUrl = config.public.apiBaseUrl;
+  const token = config.public.authToken;
 
   if (!name) {
     throw new Error('Der Name-Parameter fehlt.');
@@ -15,7 +16,7 @@ export default defineEventHandler(async (event) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: "Bearer " + process.env.VITE_AUTH_TOKEN,
+        Authorization: "Bearer " + token,
       },
     });
     return response;

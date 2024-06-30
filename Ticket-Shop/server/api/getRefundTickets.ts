@@ -4,6 +4,7 @@ export default defineEventHandler(async (event) => {
   const { refundId } = getQuery(event);
   const config = useRuntimeConfig();
   const baseUrl = config.public.baseUrl;
+  const token = config.public.authToken;
 
   try {
     const response = await fetch(
@@ -12,7 +13,7 @@ export default defineEventHandler(async (event) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + process.env.VITE_AUTH_TOKEN,
+          Authorization: "Bearer " + token,
         },
       }
     );

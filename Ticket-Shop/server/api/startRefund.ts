@@ -4,6 +4,7 @@ export default defineEventHandler(async (event) => {
   const { refundId } = getQuery(event);
   const config = useRuntimeConfig();
   const baseUrl = config.public.baseUrl;
+  const token = config.public.authToken;
 
   if (!refundId) {
     return { success: false, message: "Refund ID is missing." };
@@ -18,7 +19,7 @@ export default defineEventHandler(async (event) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + process.env.VITE_AUTH_TOKEN,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify(selectedTickets),
       }
