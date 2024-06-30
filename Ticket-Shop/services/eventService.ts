@@ -1,4 +1,5 @@
 import { $fetch } from "ohmyfetch";
+import noImage from "~/assets/image/no_image.png";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const imageCache = new Map<string, string>();
 
@@ -42,6 +43,10 @@ export const fetchEventImage = async (eventId: string) => {
     return imageUrl;
   } catch (error) {
     handleError(error);
+    const noImageUrl = noImage;
+    imageCache.set(eventId, noImageUrl);
+    return noImageUrl;
+
   }
 };
 
@@ -56,16 +61,7 @@ export const fetchTicketTypesByEventId = async (eventId: string) => {
 
 export const fetchEventsByEventName = async (name: string) => {
   try {
-    const response = await $fetch(
-      `${API_BASE_URL}/events/public/search?name=${name}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
-        },
-      }
-    );
+    const response = await $fetch(`/api/searchEvents?name=${name}`)
     return response;
   } catch (error) {
     handleError(error);

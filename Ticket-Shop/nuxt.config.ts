@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     public: {
       apiPaymentIntent: process.env.API_PAYMENT_INTENT,
       baseUrl: process.env.BASE_URL,
+      apiBaseUrl: process.env.VITE_API_BASE_URL,
       returnUrl: process.env.INDEX_URL,
       processEngineStart: process.env.PROCESS_ENGINE_START,
       processToken: process.env.PROCESS_TOKEN,

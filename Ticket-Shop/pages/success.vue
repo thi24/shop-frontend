@@ -92,17 +92,20 @@ onMounted(async () => {
       window.history.replaceState({}, document.title, window.location.pathname);
       // Call the engine
       try {
-        await fetch(useRuntimeConfig().public.processEngineStart, {
-          method: "POST",
+        const response = await fetch('/api/processEngineCall', {
+          method: 'POST',
           headers: {
-            accept: "application/json",
-            Authorization: "Bearer " + config.public.processToken,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(parsedData),
         });
-        // We don't get back
-        localStorage.setItem("processEngineCalled", "true");
+
+        const result = await response.json();
+        if (result.success) {
+          localStorage.setItem("processEngineCalled", "true");
+        } else {
+          throw new Error(result.error);
+        }
       } catch (error) {
         console.error("Error:", error);
         router.push("../error");
