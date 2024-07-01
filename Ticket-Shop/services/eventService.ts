@@ -42,11 +42,9 @@ export const fetchEventImage = async (eventId: string) => {
     imageCache.set(eventId, imageUrl);
     return imageUrl;
   } catch (error) {
-    handleError(error);
-    const noImageUrl = noImage;
-    imageCache.set(eventId, noImageUrl);
-    return noImageUrl;
-
+    console.error("Error fetching image:", error);
+    imageCache.set(eventId, noImage);
+    return noImage;
   }
 };
 

@@ -104,7 +104,8 @@ const thumbnail = ref<string | undefined>(undefined);
 const showFullDescription = ref<boolean>(false);
 
 const truncatedDescription = computed(() => {
-  const words = props.event.description.split(" ");
+  const description = props.event.description || "";
+  const words = description.split(" ");
   if (words.length <= 20) return props.event.description;
   return words.slice(0, 20).join(" ");
 });
@@ -114,7 +115,7 @@ const toggleDescription = () => {
 };
 
 const shouldShowButton = computed(() => {
-  return props.event.description.split(" ").length > 20;
+  return (props.event.description || "").split(" ").length > 20;
 });
 
 const formatTime = (date: Date) => {
