@@ -72,6 +72,7 @@ const props = defineProps({
   products: { type: Array as PropType<Product[]>, required: true },
   eventId: { type: String, required: true },
 });
+const paymentStore = usePaymentStore();
 
 let stripe: Stripe | null;
 let loading = ref(true);
@@ -79,7 +80,7 @@ let arrow = ref(false);
 let elements: StripeElements;
 let paymentAmount = Math.ceil(props.amount * 100);
 
-const paymentStore = usePaymentStore();
+
 
 onMounted(async () => {
   const apiKey = import.meta.env.VITE_STRIPE_KEY;
