@@ -5,34 +5,39 @@ const getConfig = () => {
       baseUrl: config.public.baseUrl,
     };
   };
-  export const fetchTickets = async (refundId: string): Promise<Ticket[]> => {
-    try {
-      const response = await fetch(`/api/getRefundTickets?refundId=${refundId}`, {
+export const fetchTickets = async (refundId: string): Promise<Ticket[]> => {
+    const { baseUrl} = getConfig();
+  try {
+    const response = await fetch(
+      `${baseUrl}/api/ticket-service/tickets/public/${refundId}`,
+      {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
         },
-      });
-  
-      if (!response.ok) {
-        throw new Error("Fehler beim Laden der Tickets.");
       }
-  
-      return await response.json();
-    } catch (error) {
-      console.error("Error fetching tickets:", error);
+    );
+    if (!response.ok) {
       throw new Error("Fehler beim Laden der Tickets.");
     }
-  };
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching tickets:", error);
+    throw new Error("Fehler beim Laden der Tickets.");
+  }
+};
 
-  export const processRefund = async (refundId: string, selectedTickets: string[]): Promise<{ success: boolean, message?: string }> => {
+export const processRefund = async (refundId: string, selectedTickets: string[]): Promise<{ success: boolean, message?: string }> => {
+    const { baseUrl} = getConfig();
     try {
       const response = await fetch(
-        `/api/startRefund?refundId=${refundId}`,
+        `${baseUrl}/api/ticket-service/cancellations/${refundId}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + import.meta.env.VITE_AUTH_TOKEN,
           },
           body: JSON.stringify(selectedTickets),
         }
